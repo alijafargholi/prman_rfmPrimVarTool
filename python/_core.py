@@ -12,7 +12,6 @@ The core functionality for Primvar tool.
 """
 
 # IMPORT STANDARD MODULES
-import os
 import logging
 import random
 
@@ -26,6 +25,10 @@ except ImportError as e:
                   "Contact info: ali.jafargholi@gmail.com\n\n" + (100 * "*") +
                   "\n" + str(e) + "\n" + (100 * "*") + "\n")
 
+# Global Variables
+EXISTING_ATTR = {"rmanF": {}, "rmanP": {}, "rmanV": {}, "rmanN": {},
+                 "rmanC": {}, "rmanS": {}, "rmanM": {}}
+
 
 def add_attr(node, attr_name, debug=False, **kwargs):
     """
@@ -33,10 +36,11 @@ def add_attr(node, attr_name, debug=False, **kwargs):
 
     >>> import pymel.core as pm
     >>> FOO = pm.sphere()
-    # Result: [nt.Transform(u'nurbsSphere1'), t.MakeNurbSphere(u'makeNurbSphere2')] #
+    # Result: [nt.Transform(u'nurbsSphere1'),
+               t.MakeNurbSphere(u'makeNurbSphere2')] #
     >>> shapeNode = FOO[-1]
     # Get the shape of the FOO
-    >>> assign_attr(shapeNode, "newAttributeName", attributeType='float')
+    >>> add_attr(shapeNode, "newAttributeName", attributeType='float')
     # Create a new attribute called "newAttributeName", type float
 
     :param node: (PyMel nodes) Object to assign new attributes to.
@@ -56,15 +60,24 @@ def add_attr(node, attr_name, debug=False, **kwargs):
                                                                      node))
 
 
-def get_random_vector(minimum=0, maximum=1, kind="float"):
+def get_random_vector(minimum=0, maximum=1, uniform_value=False, kind="float"):
     """
     Returns list of three numbers, vector, integer of float.
 
     :param minimum: (float or int) Minimum range
     :param maximum: (float or int) Maximum range
     :param kind: (String) Kind of vector, integer or float. Default is float.
+    :param uniform_value: (Boolean) If True, result in uniform result.
     :return vector: (List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]
     """
+    if uniform_value:
+        if kind == "float":
+            random_value = random.uniform(minimum, maximum)
+            return [random_value, random_value, random_value]
+        else:
+            random_value = random.randint(minimum, maximum)
+            return [random_value, random_value, random_value]
+
     if kind == "float":
         return random.sample([random.uniform(minimum, maximum),
                               random.uniform(minimum, maximum),
@@ -73,6 +86,34 @@ def get_random_vector(minimum=0, maximum=1, kind="float"):
         return random.sample([random.randint(minimum, maximum),
                               random.randint(minimum, maximum),
                               random.randint(0, maximum)], 3)
+
+
+def get_rman_attr(nodes, debug=True):
+    """
+    Returns the dictionary of primvar attribute found on the given nodes.
+
+    :param nodes: (List of PyMel nodes) Nodes to query their primvar attributes.
+    :param debug: (Boolean) Set True if you want to print out the result.
+    """
+    for node in nodes:
+        # Go through all attributes of the current node
+        for attr in pm.listAttr(node):
+            # Check for existance of each primvar attributes
+            for attr_type in EXISTING_ATTR.keys():
+                if attr_type in attr:
+                    # If current attribute doesn't exist in the database
+                    # create a list for it
+                    if attr not in EXISTING_ATTR[attr_type]:
+                        EXISTING_ATTR[attr_type][attr] = []
+                        if debug:
+                            logging.info("Created the '{}' list on '{}' "
+                                         "primvar database".format(attr,
+                                                                   attr_type))
+                    # Add the founded attribute to the list
+                    EXISTING_ATTR[attr_type][attr].append(node)
+                    if debug:
+                        logging.info("Found '{}' on '{}'".format(attr, node))
+    return EXISTING_ATTR
 
 
 def get_shapes(nodes, debug=False):
@@ -97,6 +138,24 @@ def get_shapes(nodes, debug=False):
             except Exception as e:
                 logging.warning("can't find a shape node for {}.\n{}".format(
                     node, e))
+
+
+def remove_attr(node, attr_name, debug=False):
+    """
+    Remove the given attribute from the given node
+
+    :param node: (PyMel Node) The object that needs to be its attribute deleted.
+    :param attr_name: (Str) Name of the attribute to be deleted from the object.
+    :param debug: (Boolean) Set True if you want to print out the result.
+    """
+    if node.hasAttr(attr_name):
+        pm.deleteAttr(node, at=attr_name)
+        if debug:
+            logging.info("'{}' attribute was deleted from {}".format(
+                attr_name, node))
+    else:
+        logging.warning("'{}' has no attribute called '{}'".format(node,
+                                                                   attr_name))
 
 
 def set_attr(node, attr_name, value, debug=False):
@@ -143,7 +202,8 @@ def main():
     import __main__
     help(__main__)
 
-__all__ = ['add_attr', 'get_random_vector', 'get_shapes', 'set_attr', 'unpack']
+__all__ = ['add_attr', 'get_random_vector', 'get_rman_attr', 'get_shapes',
+           'remove_attr', 'set_attr', 'unpack']
 
 if __name__ == '__main__':
     main()
