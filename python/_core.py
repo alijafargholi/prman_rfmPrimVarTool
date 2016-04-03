@@ -14,6 +14,7 @@ The core functionality for Primvar tool.
 # IMPORT STANDARD MODULES
 import logging
 import random
+import colorsys
 
 # IMPORT LOCAL MODULES
 try:
@@ -60,6 +61,26 @@ def add_attr(node, attr_name, debug=False, **kwargs):
                                                                      node))
 
 
+def get_random_color_shade(min_s=0, max_s=1, min_v=0, max_v=1, hue=360,
+                           debug=True):
+    """
+    Return a random shade of the given hue in RGB. The default is a random
+    shade of color red.
+
+    :param min_s: (Float) Minimum saturation of the color. Between 0 and 1.
+    :param max_s: (Float) Maximum saturation of the color. Between 0 and 1.
+    :param min_v: (Float) Minimum value of the color. Between 0 and 1.
+    :param max_v: (Float) Maximum value of the color. Between 0 and 1.
+    :param hue: (Float) Spectrum on the color. Between 1 and 360
+    :param debug: (Boolean) Set True if you want to print out the result.
+    """
+    random_color = colorsys.hsv_to_rgb(hue, random.uniform(min_s, max_s),
+                                       random.uniform(min_v, max_v))
+    if debug:
+        logging.info("Generated a random color <<{}>>".format(random_color))
+    return random_color
+
+
 def get_random_vector(minimum=0, maximum=1, uniform_value=False, kind="float"):
     """
     Returns list of three numbers, vector, integer of float.
@@ -95,6 +116,7 @@ def get_rman_attr(nodes, debug=True):
     :param nodes: (List of PyMel nodes) Nodes to query their primvar attributes.
     :param debug: (Boolean) Set True if you want to print out the result.
     """
+    global EXISTING_ATTR
     for node in nodes:
         # Go through all attributes of the current node
         for attr in pm.listAttr(node):
