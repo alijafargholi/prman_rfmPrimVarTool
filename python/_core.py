@@ -62,7 +62,7 @@ def add_attr(node, attr_name, debug=False, **kwargs):
 
 
 def get_random_color_shade(min_s=0, max_s=1, min_v=0, max_v=1, hue=360,
-                           debug=True):
+                           debug=False):
     """
     Return a random shade of the given hue in RGB. The default is a random
     shade of color red.
@@ -109,7 +109,7 @@ def get_random_vector(minimum=0, maximum=1, uniform_value=False, kind="float"):
                               random.randint(0, maximum)], 3)
 
 
-def get_rman_attr(nodes, debug=True):
+def get_rman_attr(nodes, debug=False):
     """
     Returns the dictionary of primvar attribute found on the given nodes.
 
