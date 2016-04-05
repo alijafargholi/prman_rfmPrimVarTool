@@ -14,6 +14,9 @@ User interface for the PrimVar tool.
 
 # IMPORT STANDARD MODULES
 import logging
+import struct
+import colorsys
+import colorama
 
 # IMPORT LOCAL MODULES
 import PySide.QtCore as QtCore
@@ -46,7 +49,7 @@ class PrimVarUi(QtGui.QMainWindow):
         self.setWindowTitle("Primitive Variables(primVar) Manager - v{"
                             "}".format(__version__))
         self.setObjectName("primVarManager")
-        self.setFixedWidth(400)
+        self.setFixedWidth(430)
         self.setMinimumHeight(500)
         central_widget = QtGui.QWidget()
         self.central_layout = QtGui.QVBoxLayout()
@@ -134,12 +137,23 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
     def setup_signals(self):
         """
         """
-        self.new_attribute.clicked.connect(self.create_rmanf)
+        self.new_attribute.clicked.connect(self.create_new_attr)
 
-    def create_rmanf(self):
+    def create_new_attr(self):
         """
         """
-        new_rmanf_widget = RmanFPrimVarWidget()
+        if self.primvar_types.currentText() == "rmanF":
+            new_rmanf_widget = PrmanFPrimVarWidget()
+        if self.primvar_types.currentText() == "rmanC":
+            new_rmanf_widget = PrmanCPrimVarWidget()
+        if self.primvar_types.currentText() == "rmanP":
+            new_rmanf_widget = PrmanCPrimVarWidget()
+        if self.primvar_types.currentText() == "rmanV":
+            new_rmanf_widget = PrmanCPrimVarWidget()
+        if self.primvar_types.currentText() == "rmanN":
+            new_rmanf_widget = PrmanCPrimVarWidget()
+        if self.primvar_types.currentText() == "rmanS":
+            new_rmanf_widget = PrmanCPrimVarWidget()
         self.main_layout.addWidget(new_rmanf_widget)
 
     @staticmethod
@@ -152,12 +166,121 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         pm.launch(web=link_page)
 
 
-class RmanFPrimVarWidget(QtGui.QFrame):
+class PrmanCPrimVarWidget(QtGui.QFrame):
     def __init__(self, *args, **kwargs):
-        super(RmanFPrimVarWidget, self).__init__(*args, **kwargs)
+        super(PrmanCPrimVarWidget, self).__init__(*args, **kwargs)
+        self.widget_height = 200
+        self.setFixedHeight(self.widget_height)
+        self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
+
+        # Widgets --------------------------------------------------------------
+        widget_label = QtGui.QLabel("rmanC primVar")
+        self.delete_this = QtGui.QPushButton("X")
+        attr_name_label = QtGui.QLabel("Attribute Name:")
+        self.attr_name = QtGui.QLineEdit()
+        color_type_label = QtGui.QLabel("Color Type")
+        self.random_color = QtGui.QRadioButton("Random Color")
+        self.random_color_shades = QtGui.QRadioButton("Random Color Shades")
+        self.color_picker = QtGui.QPushButton()
+        self.color_picker.setStyleSheet("background-color: black")
+        self.random_grayscale = QtGui.QRadioButton("Random Grayscale")
+
+        min_s_value_label = QtGui.QLabel("Min Saturation:")
+        self.min_s_value = QtGui.QSpinBox()
+        max_s_value_label = QtGui.QLabel("Max Saturation:")
+        self.max_s_value = QtGui.QSpinBox()
+        self.max_s_value.setValue(1)
+        min_v_value_label = QtGui.QLabel("Min Brightness:")
+        self.min_v_value = QtGui.QSpinBox()
+        max_v_value_label = QtGui.QLabel("Max Brightness:")
+        self.max_v_value = QtGui.QSpinBox()
+        self.max_v_value.setValue(1)
+        primvar_node_label = QtGui.QLabel("PrimVar Node Name:")
+        self.primvar_node_name = QtGui.QLineEdit()
+        self.get_node_name = QtGui.QPushButton("Get It")
+        self.get_node_name.setToolTip("Select the PrimVar node and click this "
+                                      "to get the name")
+        self.create_node = QtGui.QPushButton("Create PrimVar Node")
+        self.create_node.setToolTip("Create a new PrimVar node")
+
+        # Layouts --------------------------------------------------------------
+        main_layout = QtGui.QVBoxLayout()
+        layout1 = QtGui.QHBoxLayout()
+        layout2 = QtGui.QHBoxLayout()
+        layout3 = QtGui.QGridLayout()
+        layout4 = QtGui.QHBoxLayout()
+        for layout in [main_layout, layout1, layout2, layout3, layout4]:
+            layout.setContentsMargins(2, 2, 2, 2)
+            layout.setSpacing(1)
+            layout.setAlignment(QtCore.Qt.AlignTop)
+            layout.setAlignment(QtCore.Qt.AlignLeft)
+
+        for layout in [layout1, layout2, layout3, layout4]:
+            main_layout.addLayout(layout)
+
+        self.setLayout(main_layout)
+
+        # Assign widgets to layout ---------------------------------------------
+        layout1.addWidget(widget_label)
+        layout1.addSpacerItem(QtGui.QSpacerItem(2, 2,
+                                                QtGui.QSizePolicy.Expanding))
+        layout1.addWidget(self.delete_this)
+        layout2.addWidget(attr_name_label)
+        layout2.addWidget(self.attr_name)
+        layout3.addWidget(color_type_label, 0, 0)
+        layout3.addWidget(self.random_color, 0, 1)
+        layout3.addWidget(self.random_color_shades, 1, 1)
+        layout3.addWidget(self.color_picker, 1, 2)
+        layout3.addWidget(self.random_grayscale, 2, 1)
+        layout3.addWidget(min_s_value_label, 3, 1)
+        layout3.addWidget(self.min_s_value, 3, 2)
+        layout3.addWidget(max_s_value_label, 3, 3)
+        layout3.addWidget(self.max_s_value, 3, 4)
+        layout3.addWidget(min_v_value_label, 4, 1)
+        layout3.addWidget(self.min_v_value, 4, 2)
+        layout3.addWidget(max_v_value_label, 4, 3)
+        layout3.addWidget(self.max_v_value, 4, 4)
+        layout4.addWidget(primvar_node_label)
+        layout4.addWidget(self.primvar_node_name)
+        layout4.addWidget(self.get_node_name)
+        layout4.addWidget(self.create_node)
+
+        # Ui Setup -------------------------------------------------------------
+        self.setup_signals()
+
+    def setup_signals(self):
+        """
+        """
+        self.delete_this.clicked.connect(self.delete_widget)
+        self.color_picker.clicked.connect(self.pick_color)
+
+    def delete_widget(self):
+        """
+        """
+        self.deleteLater()
+
+    def pick_color(self):
+        """
+        """
+        new_color = QtGui.QColorDialog.getColor()
+        self.color_picker.setStyleSheet("background-color: {}".format(
+            new_color.name()))
+        # rgb_str = new_color.name().split("#")[-1]
+        # hsl_color = struct.unpack('BBB', rgb_str.decode('hex'))
+        # print hsl_color
+        # print colorsys.hls_to_rgb(hsl_color[0], hsl_color[1], hsl_color[2])
+
+
+class PrmanFPrimVarWidget(QtGui.QFrame):
+    def __init__(self, *args, **kwargs):
+        super(PrmanFPrimVarWidget, self).__init__(*args, **kwargs)
+        self.widget_height = 130
+        self.setFixedHeight(self.widget_height)
+        self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
 
         # Widgets --------------------------------------------------------------
         widget_label = QtGui.QLabel("rmanF primVar")
+        self.delete_this = QtGui.QPushButton("X")
         attr_name_label = QtGui.QLabel("Attribute Name:")
         self.attr_name = QtGui.QLineEdit()
         attr_type_label = QtGui.QLabel("Value Type")
@@ -174,7 +297,6 @@ class RmanFPrimVarWidget(QtGui.QFrame):
                                       "to get the name")
         self.create_node = QtGui.QPushButton("Create PrimVar Node")
         self.create_node.setToolTip("Create a new PrimVar node")
-        self.delete_this = QtGui.QPushButton("Delete This")
 
         # Layouts --------------------------------------------------------------
         main_layout = QtGui.QVBoxLayout()
@@ -183,23 +305,23 @@ class RmanFPrimVarWidget(QtGui.QFrame):
         layout3 = QtGui.QHBoxLayout()
         layout4 = QtGui.QHBoxLayout()
         layout5 = QtGui.QHBoxLayout()
-        layout6 = QtGui.QHBoxLayout()
         for layout in [main_layout, layout1, layout2, layout3, layout4,
-                       layout5, layout6]:
+                       layout5]:
             layout.setContentsMargins(2, 2, 2, 2)
             layout.setSpacing(1)
             layout.setAlignment(QtCore.Qt.AlignTop)
             layout.setAlignment(QtCore.Qt.AlignLeft)
 
-        layout6.setAlignment(QtCore.Qt.AlignRight)
-
-        for layout in [layout1, layout2, layout3, layout4, layout5, layout6]:
+        for layout in [layout1, layout2, layout3, layout4, layout5]:
             main_layout.addLayout(layout)
 
         self.setLayout(main_layout)
 
         # Assign widgets to layout ---------------------------------------------
         layout1.addWidget(widget_label)
+        layout1.addSpacerItem(QtGui.QSpacerItem(2, 2,
+                                                QtGui.QSizePolicy.Expanding))
+        layout1.addWidget(self.delete_this)
         layout2.addWidget(attr_name_label)
         layout2.addWidget(self.attr_name)
         layout3.addWidget(attr_type_label)
@@ -213,7 +335,6 @@ class RmanFPrimVarWidget(QtGui.QFrame):
         layout5.addWidget(self.primvar_node_name)
         layout5.addWidget(self.get_node_name)
         layout5.addWidget(self.create_node)
-        layout6.addWidget(self.delete_this)
 
         # Ui Setup -------------------------------------------------------------
         self.setup_signals()
@@ -221,7 +342,12 @@ class RmanFPrimVarWidget(QtGui.QFrame):
     def setup_signals(self):
         """
         """
-        self.delete_this.clicked.connect(self.close)
+        self.delete_this.clicked.connect(self.delete_widget)
+
+    def delete_widget(self):
+        """
+        """
+        self.deleteLater()
 
 
 def create_ui():
@@ -232,7 +358,7 @@ def create_ui():
     global primVarUi
     if not primVarUi:
         primVarUi = PrimVarUi()
-        # primVarUi = RmanFPrimVarWidget()
+        # primVarUi = PrmanFPrimVarWidget()
 
     primVarUi.show()
 
