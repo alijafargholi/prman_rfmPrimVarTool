@@ -45,18 +45,19 @@ class PrimVarUi(QtGui.QMainWindow):
     """
     def __init__(self, *args, **kwargs):
         super(PrimVarUi, self).__init__(*args, **kwargs)
-        self.init_ui()
+        self.setup_ui()
         self.setup_stylesheet()
         self.setup_signals()
 
-    def init_ui(self):
+    def setup_ui(self):
         # Window Settings
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.setWindowIcon(QtGui.QIcon(":/icons/windowIcon"))
         self.setWindowTitle("Primitive Variables(primVar) Manager - v{"
                             "}".format(__version__))
         self.setObjectName("primVarManager")
-        self.setMinimumWidth(480)
-        self.setMinimumHeight(500)
+        self.setMinimumWidth(550)
+        self.resize(550, 700)
         central_widget = QtGui.QWidget()
         self.central_layout = QtGui.QVBoxLayout()
         central_widget.setLayout(self.central_layout)
@@ -79,7 +80,7 @@ class PrimVarUi(QtGui.QMainWindow):
         # Layout ---------------------------------------------------------------
         self.setLayout(QtGui.QVBoxLayout())
         self.central_layout.setContentsMargins(0, 0, 0, 0)
-        self.central_layout.setSpacing(0)
+        self.central_layout.setSpacing(1)
 
         # Main widgets ---------------------------------------------------------
         # Widgets
@@ -88,7 +89,9 @@ class PrimVarUi(QtGui.QMainWindow):
         self.manage_widget_button = QtGui.QPushButton("Manage PrimVars")
         label_type = QtGui.QLabel("PrimVar Type:")
         self.primvar_types = QtGui.QComboBox()
-        self.primvar_types.addItems(_core.EXISTING_ATTR.keys())
+        self.primvar_types.setMinimumWidth(150)
+        self.primvar_types.setMinimumHeight(30)
+        self.primvar_types.addItems(list(reversed(_core.EXISTING_ATTR.keys())))
         self.primvar_types.setToolTip("""rmanF - constant or vertex floats\n
 rmanP - constant or vertex points\n
 rmanV - constant or vertex vectors\n
@@ -99,6 +102,7 @@ rmanM - vertex mpoint (for blobs)\n
 Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         self.new_attribute = QtGui.QPushButton("New")
         self.assign_attributes = QtGui.QPushButton("Assign")
+        self.assign_attributes.setObjectName("assign")
         self.assign_attributes.setMinimumHeight(40)
         # Layouts
         layout1 = QtGui.QHBoxLayout()
@@ -107,12 +111,16 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         for layout in [layout1, layout2, layout3]:
             layout.setContentsMargins(2, 2, 2, 2)
             layout.setSpacing(1)
-            layout1.setAlignment(QtCore.Qt.AlignCenter)
 
+        layout1.setAlignment(QtCore.Qt.AlignCenter)
         layout1.addWidget(self.create_widget_button)
+        layout1.addSpacerItem(QtGui.QSpacerItem(2, 2,
+                                                QtGui.QSizePolicy.Expanding))
         layout1.addWidget(self.manage_widget_button)
         layout2.addWidget(label_type)
         layout2.addWidget(self.primvar_types)
+        layout2.addSpacerItem(QtGui.QSpacerItem(2, 2,
+                                                QtGui.QSizePolicy.Expanding))
         layout2.addWidget(self.new_attribute)
         layout3.addWidget(self.assign_attributes)
 
@@ -142,22 +150,31 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         """
         self.new_attribute.clicked.connect(self.create_new_attr)
 
+    def setup_stylesheet(self):
+        """
+        """
+        css = QtCore.QFile('./gui/styleSheets/styleSheet.css')
+        css.open(QtCore.QIODevice.ReadOnly)
+        if css.isOpen():
+            self.setStyleSheet(QtCore.QVariant(css.readAll()).toString())
+        css.close()
+
     def create_new_attr(self):
         """
         """
         if self.primvar_types.currentText() == "rmanF":
-            new_rmanf_widget = FprimVarWidgets()
+            new_primvar_widget = FprimVarWidgets()
         if self.primvar_types.currentText() == "rmanC":
-            new_rmanf_widget = CprimVarWidgets()
+            new_primvar_widget = CprimVarWidgets()
         if self.primvar_types.currentText() == "rmanP":
-            new_rmanf_widget = CprimVarWidgets()
+            new_primvar_widget = CprimVarWidgets()
         if self.primvar_types.currentText() == "rmanV":
-            new_rmanf_widget = CprimVarWidgets()
+            new_primvar_widget = CprimVarWidgets()
         if self.primvar_types.currentText() == "rmanN":
-            new_rmanf_widget = CprimVarWidgets()
+            new_primvar_widget = CprimVarWidgets()
         if self.primvar_types.currentText() == "rmanS":
-            new_rmanf_widget = CprimVarWidgets()
-        self.main_layout.addWidget(new_rmanf_widget)
+            new_primvar_widget = CprimVarWidgets()
+        self.main_layout.addWidget(new_primvar_widget)
 
     @staticmethod
     def go_to_wiki():
@@ -168,14 +185,6 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
                     "-variables "
         pm.launch(web=link_page)
 
-    def setup_stylesheet(self):
-        """
-        """
-        css = QtCore.QFile('./gui/styleSheets/widgetStyleSheet.css')
-        css.open(QtCore.QIODevice.ReadOnly)
-        if css.isOpen():
-            self.setStyleSheet(QtCore.QVariant(css.readAll()).toString())
-        css.close()
 
 def create_ui():
     """

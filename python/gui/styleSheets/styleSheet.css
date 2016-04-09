@@ -1,3 +1,59 @@
-*{
-    background-color:red;
+* {
+    background-color: rgb(60, 63, 65);
+}
+QLabel {
+    color: rgb(180, 180, 180);
+    font-size: 17px;
+}
+QLabel#widgetTitle {
+    color: rgb(113, 167, 199);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+QPushButton{
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+}
+
+QPushButton:hover{
+    background-color: #33ccff;
+}
+
+QPushButton#close{
+    background-image: url(:/icons/exit);
+    border-style: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+QPushButton#assign{
+    background-color:#248f24;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+QRadioButton{
+    color: rgb(98, 151, 85);
+}
+
+QLineEdit {
+    background-color: white;
+}
+QDoubleSpinBox {
+    background-color: white;
+}
+
+QComboBox{
+    background-color: #7A7A7A;
+    border: 1px solid black;
+    color: rgb(113, 167, 199);
+    font-weight: bold;
+    font-size:19px;
+
+}
+QToolTip {
+    background-color: gray;
+    color: white;
+    font-size: 12px;
 }
