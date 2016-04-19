@@ -36,10 +36,11 @@ _core.add_attr(shapeNode, "x", attributeType='float', parent="rmanNtangant")
 _core.add_attr(shapeNode, "y", attributeType='float', parent="rmanNtangant")
 _core.add_attr(shapeNode, "z", attributeType='float', parent="rmanNtangant")
 
-# create sting attribute -------------------------------------------------------
+# create string attribute
+# -------------------------------------------------------
 _core.add_attr(shapeNode, "rmanSbaseColor", dataType="string")
 
-# Assing random color ----------------------------------------------------------
+# Assign random color ----------------------------------------------------------
 for node in shapes:
     _core.add_attr(node, "rmanFbaseColor", attributeType='float3',
                    usedAsColor=True)

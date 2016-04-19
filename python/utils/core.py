@@ -28,7 +28,7 @@ except ImportError as e:
 
 # Global Variables
 EXISTING_ATTR = {"rmanF": {}, "rmanP": {}, "rmanV": {}, "rmanN": {},
-                 "rmanC": {}, "rmanS": {}, "rmanM": {}}
+                 "rmanC": {}, "rmanS": {}}
 
 
 def add_attr(node, attr_name, debug=False, **kwargs):
@@ -219,7 +219,7 @@ def unpack(nodes, debug=False):
 
 def main():
     """
-    Simply run help if called directly.
+    Run help if called directly.
     """
     import __main__
     help(__main__)

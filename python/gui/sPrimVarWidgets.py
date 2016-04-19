@@ -2,38 +2,39 @@
 # This free software incorporates by reference the text of the WTFPL, Version 2
 
 """
-Primitive Variable F Widget.
+Primitive Variable Normal Widget.
 
-.. module:: `FprimVarWidgets`
+.. module:: `SprimVarWidgets`
    :platform: Unix, Windows,
-   :synopsis: This is the widget for Primitive Variable F.
+   :synopsis: This is the widget for Primitive Variable N.
 
 .. moduleauthor:: Ali Jafargholi <ali.jafargholi@gmail.com>
 """
 
 # IMPORT STANDARD MODULES
 import sys
+import os
 
 # IMPORT LOCAL MODULES
 import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 from images import images_rc
 
+# GLOBAL VARIABLE
+SELECTED_FILES = []
 
-class FprimVarWidgets(QtGui.QFrame):
+class SprimVarWidgets(QtGui.QFrame):
     def __init__(self, *args, **kwargs):
-        super(FprimVarWidgets, self).__init__(*args, **kwargs)
-        self.attr_type = "rmanF"
-        self.init_ui()
+        super(SprimVarWidgets, self).__init__(*args, **kwargs)
+        self.attr_type = "rmanS"
+        self.setup_ui()
         self.setup_signals()
 
-    def init_ui(self):
-        """
-        """
+    def setup_ui(self):
         self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
 
         # Widgets --------------------------------------------------------------
-        widget_label = QtGui.QLabel("rmanF primVar")
+        widget_label = QtGui.QLabel("rmanS primVar")
         widget_label.setObjectName("widgetTitle")
         self.delete_this = QtGui.QPushButton()
         self.delete_this.setFixedHeight(25)
@@ -41,13 +42,10 @@ class FprimVarWidgets(QtGui.QFrame):
         self.delete_this.setObjectName("close")
         attr_name_label = QtGui.QLabel("Attribute Name:")
         self.attr_name = QtGui.QLineEdit()
-        attr_type_label = QtGui.QLabel("Value Type:")
-        self.type_int = QtGui.QRadioButton("Integer")
-        self.type_float = QtGui.QRadioButton("Float")
-        min_value_label = QtGui.QLabel("Min:")
-        self.min_value = QtGui.QLineEdit()
-        max_value_label = QtGui.QLabel("Max:")
-        self.max_value = QtGui.QLineEdit()
+
+        self.gather_file = QtGui.QPushButton("Gather Files")
+        self.create_string = QtGui.QPushButton("Add Custom String")
+
         primvar_node_label = QtGui.QLabel("PrimVar Node Name:")
         self.primvar_node_name = QtGui.QLineEdit()
         self.get_node_name = QtGui.QPushButton("Get It")
@@ -61,14 +59,23 @@ class FprimVarWidgets(QtGui.QFrame):
         main_layout = QtGui.QVBoxLayout()
         layout1 = QtGui.QHBoxLayout()
         layout2 = QtGui.QHBoxLayout()
-        layout3 = QtGui.QGridLayout()
-        layout4 = QtGui.QHBoxLayout()
-        for layout in [main_layout, layout1, layout2, layout3, layout4]:
+        layout3 = QtGui.QHBoxLayout()
+        self.layout4 = QtGui.QVBoxLayout()
+        self.layout5 = QtGui.QVBoxLayout()
+        layout6 = QtGui.QHBoxLayout()
+        for layout in [main_layout, layout1, layout2, layout3, self.layout4,
+                       self.layout5, layout6]:
             layout.setContentsMargins(1, 1, 1, 1)
             layout.setSpacing(5)
             layout.setAlignment(QtCore.Qt.AlignTop)
+            layout.setAlignment(QtCore.Qt.AlignLeft)
 
-        for layout in [layout1, layout2, layout3, layout4]:
+        layout3.setAlignment(QtCore.Qt.AlignRight)
+        self.layout4.setAlignment(QtCore.Qt.AlignRight)
+        self.layout5.setAlignment(QtCore.Qt.AlignRight)
+
+        for layout in [layout1, layout2, layout3, self.layout4,
+                       self.layout5, layout6]:
             main_layout.addLayout(layout)
 
         self.setLayout(main_layout)
@@ -80,25 +87,32 @@ class FprimVarWidgets(QtGui.QFrame):
         layout1.addWidget(self.delete_this)
         layout2.addWidget(attr_name_label)
         layout2.addWidget(self.attr_name)
-
-        layout3.addWidget(attr_type_label, 0, 0)
-        layout3.addWidget(self.type_float, 0, 1)
-        layout3.addWidget(self.type_int, 0, 2)
-
-        layout3.addWidget(min_value_label, 1, 1)
-        layout3.addWidget(self.min_value, 1, 2)
-        layout3.addWidget(max_value_label, 1, 3)
-        layout3.addWidget(self.max_value, 1, 4)
-
-        layout4.addWidget(primvar_node_label)
-        layout4.addWidget(self.primvar_node_name)
-        layout4.addWidget(self.get_node_name)
-        layout4.addWidget(self.create_node)
+        layout3.addWidget(self.gather_file)
+        layout3.addWidget(self.create_string)
+        layout6.addWidget(primvar_node_label)
+        layout6.addWidget(self.primvar_node_name)
+        layout6.addWidget(self.get_node_name)
+        layout6.addWidget(self.create_node)
 
     def setup_signals(self):
         """
         """
         self.delete_this.clicked.connect(self.delete_widget)
+        self.create_string.clicked.connect(self.create_custom_string)
+        self.gather_file.clicked.connect(self.get_files)
+
+    def get_files(self):
+        """
+
+        :return:
+        """
+        files = QtGui.QFileDialog.getOpenFileNames(self, "Select Files")
+        SELECTED_FILES.append([f for f in files])
+
+    def create_custom_string(self):
+        """
+        """
+        self.layout4.addWidget(QtGui.QLineEdit())
 
     def delete_widget(self):
         """

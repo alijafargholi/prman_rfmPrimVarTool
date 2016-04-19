@@ -21,7 +21,9 @@ import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 from gui.cPrimVarWidget import CprimVarWidgets
 from gui.fPrimVarWidget import FprimVarWidgets
-from utils import _core
+from gui.nvpmPrimVarWidgets import NVPMprimVarWidgets
+from gui.sPrimVarWidgets import SprimVarWidgets
+from utils import core
 from gui.images import images_rc
 
 # try:
@@ -35,6 +37,7 @@ from gui.images import images_rc
 
 # GLOBAL VARIABLE
 primVarUi = None
+NEW_ATTRS = []
 
 __version__ = "0.1.0"
 
@@ -51,7 +54,7 @@ class PrimVarUi(QtGui.QMainWindow):
 
     def setup_ui(self):
         # Window Settings
-        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.setWindowIcon(QtGui.QIcon(":/icons/windowIcon"))
         self.setWindowTitle("Primitive Variables(primVar) Manager - v{"
                             "}".format(__version__))
@@ -91,7 +94,7 @@ class PrimVarUi(QtGui.QMainWindow):
         self.primvar_types = QtGui.QComboBox()
         self.primvar_types.setMinimumWidth(150)
         self.primvar_types.setMinimumHeight(30)
-        self.primvar_types.addItems(list(reversed(_core.EXISTING_ATTR.keys())))
+        self.primvar_types.addItems(list(reversed(core.EXISTING_ATTR.keys())))
         self.primvar_types.setToolTip("""rmanF - constant or vertex floats\n
 rmanP - constant or vertex points\n
 rmanV - constant or vertex vectors\n
@@ -149,6 +152,15 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         """
         """
         self.new_attribute.clicked.connect(self.create_new_attr)
+        self.assign_attributes.clicked.connect(self.assign_new_attr)
+
+
+    def assign_new_attr(self):
+        """
+
+        :return:
+        """
+        print NEW_ATTRS
 
     def setup_stylesheet(self):
         """
@@ -167,14 +179,15 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         if self.primvar_types.currentText() == "rmanC":
             new_primvar_widget = CprimVarWidgets()
         if self.primvar_types.currentText() == "rmanP":
-            new_primvar_widget = CprimVarWidgets()
+            new_primvar_widget = NVPMprimVarWidgets(attr_type="rmanP")
         if self.primvar_types.currentText() == "rmanV":
-            new_primvar_widget = CprimVarWidgets()
+            new_primvar_widget = NVPMprimVarWidgets(attr_type="rmanV")
         if self.primvar_types.currentText() == "rmanN":
-            new_primvar_widget = CprimVarWidgets()
+            new_primvar_widget = NVPMprimVarWidgets(attr_type="rmanN")
         if self.primvar_types.currentText() == "rmanS":
-            new_primvar_widget = CprimVarWidgets()
+            new_primvar_widget = SprimVarWidgets()
         self.main_layout.addWidget(new_primvar_widget)
+        NEW_ATTRS.append(new_primvar_widget)
 
     @staticmethod
     def go_to_wiki():
