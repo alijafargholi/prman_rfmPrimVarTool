@@ -11,21 +11,26 @@ Primitive Variable F Widget.
 .. moduleauthor:: Ali Jafargholi <ali.jafargholi@gmail.com>
 """
 
-# IMPORT STANDARD MODULES
-import sys
-
 # IMPORT LOCAL MODULES
-import PyQt4.QtCore as QtCore
-import PyQt4.QtGui as QtGui
-from images import images_rc
+import PySide.QtCore as QtCore
+import PySide.QtGui as QtGui
 
 
 class FprimVarWidgets(QtGui.QFrame):
     def __init__(self, *args, **kwargs):
         super(FprimVarWidgets, self).__init__(*args, **kwargs)
-        self.attr_type = "rmanF"
+
+        self._attr_type = "rmanF"
+
         self.init_ui()
-        self.setup_signals()
+
+    @property
+    def attr_type(self):
+        """ Returns the attribute type.
+
+        :return: (string) attribute type. example: rmanf
+        """
+        return self._attr_type
 
     def init_ui(self):
         """
@@ -44,10 +49,15 @@ class FprimVarWidgets(QtGui.QFrame):
         attr_type_label = QtGui.QLabel("Value Type:")
         self.type_int = QtGui.QRadioButton("Integer")
         self.type_float = QtGui.QRadioButton("Float")
+        self.type_float.setChecked(True)
         min_value_label = QtGui.QLabel("Min:")
-        self.min_value = QtGui.QLineEdit()
+        self.min_value = QtGui.QDoubleSpinBox()
+        self.min_value.setSingleStep(0.1)
+        self.min_value.setValue(0)
         max_value_label = QtGui.QLabel("Max:")
-        self.max_value = QtGui.QLineEdit()
+        self.max_value = QtGui.QDoubleSpinBox()
+        self.max_value.setSingleStep(0.1)
+        self.max_value.setValue(1)
         primvar_node_label = QtGui.QLabel("PrimVar Node Name:")
         self.primvar_node_name = QtGui.QLineEdit()
         self.get_node_name = QtGui.QPushButton("Get It")
@@ -94,13 +104,3 @@ class FprimVarWidgets(QtGui.QFrame):
         layout4.addWidget(self.primvar_node_name)
         layout4.addWidget(self.get_node_name)
         layout4.addWidget(self.create_node)
-
-    def setup_signals(self):
-        """
-        """
-        self.delete_this.clicked.connect(self.delete_widget)
-
-    def delete_widget(self):
-        """
-        """
-        self.deleteLater()

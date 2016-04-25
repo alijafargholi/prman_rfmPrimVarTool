@@ -11,21 +11,44 @@ Primitive Variable C Widget.
 .. moduleauthor:: Ali Jafargholi <ali.jafargholi@gmail.com>
 """
 
-# IMPORT STANDARD MODULES
-import sys
-
 # IMPORT LOCAL MODULES
-import PyQt4.QtCore as QtCore
-import PyQt4.QtGui as QtGui
-from images import images_rc
+import PySide.QtCore as QtCore
+import PySide.QtGui as QtGui
 
 
 class CprimVarWidgets(QtGui.QFrame):
     def __init__(self, *args, **kwargs):
         super(CprimVarWidgets, self).__init__(*args, **kwargs)
+
+        self._attr_type = "rmanC"
+        self._selected_hue = 0
+
         self.setup_ui()
         self.setup_signals()
-        self.attr_type = "rmanC"
+
+    @property
+    def attr_type(self):
+        """ Returns the attribute type.
+
+        :return: (string) attribute type. example: rmanF
+        """
+        return self._attr_type
+
+    @property
+    def selected_hue(self):
+        """
+
+        :return:
+        """
+        return self._selected_hue
+
+    @selected_hue.setter
+    def selected_hue(self, hue):
+        """
+
+        :return:
+        """
+        self._selected_hue = hue
 
     def setup_ui(self):
         self.widget_height = 230
@@ -52,17 +75,19 @@ class CprimVarWidgets(QtGui.QFrame):
         min_s_value_label = QtGui.QLabel("Min Saturation:")
         self.min_s_value = QtGui.QDoubleSpinBox()
         self.min_s_value.setSingleStep(0.1)
+        self.min_s_value.setValue(0)
         max_s_value_label = QtGui.QLabel("Max Saturation:")
         self.max_s_value = QtGui.QDoubleSpinBox()
         self.max_s_value.setSingleStep(0.1)
         self.max_s_value.setValue(1)
         min_v_value_label = QtGui.QLabel("Min Brightness:")
         self.min_v_value = QtGui.QDoubleSpinBox()
+        self.min_v_value.setValue(0)
         self.min_v_value.setSingleStep(0.1)
         max_v_value_label = QtGui.QLabel("Max Brightness:")
         self.max_v_value = QtGui.QDoubleSpinBox()
-        self.max_v_value.setSingleStep(0.1)
         self.max_v_value.setValue(1)
+        self.max_v_value.setSingleStep(0.1)
         primvar_node_label = QtGui.QLabel("PrimVar Node Name:")
         self.primvar_node_name = QtGui.QLineEdit()
         self.get_node_name = QtGui.QPushButton("Get It")
@@ -117,7 +142,6 @@ class CprimVarWidgets(QtGui.QFrame):
     def setup_signals(self):
         """
         """
-        self.delete_this.clicked.connect(self.delete_widget)
         self.color_picker.clicked.connect(self.pick_color)
 
     def pick_color(self):
@@ -131,8 +155,4 @@ class CprimVarWidgets(QtGui.QFrame):
         # print hsl_color
         # print colorsys.hls_to_rgb(hsl_color[0], hsl_color[1], hsl_color[2])
 
-    def delete_widget(self):
-        """
-        """
-        self.deleteLater()
 

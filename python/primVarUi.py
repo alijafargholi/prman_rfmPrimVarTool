@@ -14,26 +14,30 @@ User interface for the PrimVar tool.
 
 # IMPORT STANDARD MODULES
 import sys
+import os
+import random
 import logging
+from functools import partial
 
 # IMPORT LOCAL MODULES
-import PyQt4.QtCore as QtCore
-import PyQt4.QtGui as QtGui
+import PySide.QtCore as QtCore
+import PySide.QtGui as QtGui
 from gui.cPrimVarWidget import CprimVarWidgets
 from gui.fPrimVarWidget import FprimVarWidgets
 from gui.nvpmPrimVarWidgets import NVPMprimVarWidgets
 from gui.sPrimVarWidgets import SprimVarWidgets
+
 from utils import core
 from gui.images import images_rc
 
-# try:
-#     import pymel.core as pm
-# except ImportError as e:
-#     logging.error("\n\n\nThis tool was not able to import the 'pymel' "
-#                   "library.\nThat is required for this tool to "
-#                   "function.\nPlease contact the developer for assistant.\n "
-#                   "Contact info: ali.jafargholi@gmail.com\n\n" + (100 * "*") +
-#                   "\n" + str(e) + "\n" + (100 * "*") + "\n")
+try:
+    import pymel.core as pm
+except ImportError as e:
+    logging.error("\n\n\nThis tool was not able to import the 'pymel' "
+                  "library.\nThat is required for this tool to "
+                  "function.\nPlease contact the developer for assistant.\n "
+                  "Contact info: ali.jafargholi@gmail.com\n\n" + (80 * "*") +
+                  "\n" + str(e) + "\n" + (80 * "*") + "\n")
 
 # GLOBAL VARIABLE
 primVarUi = None
@@ -49,12 +53,12 @@ class PrimVarUi(QtGui.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(PrimVarUi, self).__init__(*args, **kwargs)
         self.setup_ui()
-        self.setup_stylesheet()
+        # self.setup_stylesheet()
         self.setup_signals()
 
     def setup_ui(self):
         # Window Settings
-        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.setWindowIcon(QtGui.QIcon(":/icons/windowIcon"))
         self.setWindowTitle("Primitive Variables(primVar) Manager - v{"
                             "}".format(__version__))
@@ -154,22 +158,119 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         self.new_attribute.clicked.connect(self.create_new_attr)
         self.assign_attributes.clicked.connect(self.assign_new_attr)
 
-
     def assign_new_attr(self):
         """
 
         :return:
         """
-        print NEW_ATTRS
+        shapes = list(core.get_shapes(core.unpack(pm.ls(sl=True))))
+        if not shapes:
+            error_message = "\n" + ("*" * 80) + "\n\t\t\tNo Object is " \
+                                                "selected.\n\n" + ("*" * 80) \
+                            + "\n"
+            logging.error(error_message)
+            return
+        for att in NEW_ATTRS:
+            if att.attr_type == "rmanF":
+                attribute_name = "rmanF" + att.attr_name.text()
+                self.assign_f(shapes,
+                              attribute_name,
+                              att.type_float.isChecked(),
+                              att.min_value.value(),
+                              att.max_value.value())
+                if att.primvar_node_name.text():
+                    self.setup_primvar_node(att.primvar_node_name.text(),
+                                            attribute_name,
+                                            "float")
+
+            if att.attr_type == "rmanS":
+                attribute_name = "rmanS" + att.attr_name.text()
+                self.assign_s(shapes, attribute_name, att.new_strings)
+
+            if att.attr_name == "rmanC":
+                pass
+        # Close the UI at the end
+        close_ui()
+
+    @staticmethod
+    def assign_f(shape_nodes, attr_name, is_float, min_value, max_value):
+        """
+
+        :param shape_nodes:
+        :param attr_name:
+        :param is_float:
+        :param min_value:
+        :param max_value:
+        :return:
+        """
+        # create float attribute
+        for shape_node in shape_nodes:
+            core.add_attr(shape_node, attr_name, attributeType='double')
+            if is_float:
+                core.set_attr(shape_node, attr_name, random.uniform(
+                    min_value, max_value))
+            else:
+                core.set_attr(shape_node, attr_name, random.randint(
+                    min_value, max_value))
+
+    @staticmethod
+    def setup_primvar_node(node_name, attr_name, attr_type):
+        """
+
+        :param node_name:
+        :param attr_name:
+        :param attr_type:
+        :return:
+        """
+        try:
+            core.set_attr(pm.PyNode(node_name), "varname", attr_name)
+            core.set_attr(pm.PyNode(node_name), "type", attr_type)
+        except Exception as e:
+            logging.warning(str(e))
+
+    @staticmethod
+    def assign_s(shape_nodes, attr_name, string_list):
+        """
+
+        :param shape_nodes:
+        :param attr_name:
+        :param string_list:
+        :return:
+        """
+        string_values = [str(value) for value in string_list[0]]
+        for shape in shape_nodes:
+            core.add_attr(shape, attr_name, dataType="string")
+            core.set_attr(shape, attr_name, str(random.choice(string_values)))
+
+    @staticmethod
+    def go_to_wiki():
+        """
+        Opens the browser link and direct it to the help page for this tool
+        """
+        link_page = "https://renderman.pixar.com/view/how-to-primitive" \
+                    "-variables "
+        pm.launch(web=link_page)
+
+    @staticmethod
+    def delete_widget(widget):
+        """
+        """
+        NEW_ATTRS.remove(widget)
+        widget.deleteLater()
 
     def setup_stylesheet(self):
         """
         """
-        css = QtCore.QFile('./gui/styleSheets/styleSheet.css')
-        css.open(QtCore.QIODevice.ReadOnly)
-        if css.isOpen():
-            self.setStyleSheet(QtCore.QVariant(css.readAll()).toString())
-        css.close()
+        try:
+            style_sheet = open(os.path.join(
+                os.path.dirname(os.path.realpath(__file__)),
+                'gui/styleSheets/styleSheet.css')).read()
+            self.setStyleSheet(style_sheet)
+        except IOError as e:
+            error_message = "\n" + ("*" * 80) + "\n" + str(e) + \
+                            "\n\t\t\tCan't find the CSS file for style " \
+                            "sheet.\n\n" + ("*" * 80) + "\n"
+            logging.warning(error_message)
 
     def create_new_attr(self):
         """
@@ -187,16 +288,9 @@ Visit: https://renderman.pixar.com/view/how-to-primitive-variables""")
         if self.primvar_types.currentText() == "rmanS":
             new_primvar_widget = SprimVarWidgets()
         self.main_layout.addWidget(new_primvar_widget)
+        new_primvar_widget.delete_this.clicked.connect(partial(
+            self.delete_widget, new_primvar_widget))
         NEW_ATTRS.append(new_primvar_widget)
-
-    @staticmethod
-    def go_to_wiki():
-        """
-        Opens the browser link and direct it to the help page for this tool
-        """
-        link_page = "https://renderman.pixar.com/view/how-to-primitive" \
-                    "-variables "
-        pm.launch(web=link_page)
 
 
 def create_ui():

@@ -11,21 +11,25 @@ Primitive Variable Normal Widget.
 .. moduleauthor:: Ali Jafargholi <ali.jafargholi@gmail.com>
 """
 
-# IMPORT STANDARD MODULES
-import sys
-
 # IMPORT LOCAL MODULES
-import PyQt4.QtCore as QtCore
-import PyQt4.QtGui as QtGui
-from images import images_rc
+import PySide.QtCore as QtCore
+import PySide.QtGui as QtGui
 
 
 class NVPMprimVarWidgets(QtGui.QFrame):
     def __init__(self, attr_type="test", *args, **kwargs):
         super(NVPMprimVarWidgets, self).__init__(*args, **kwargs)
-        self.attr_type = attr_type
+
+        self._attr_type = attr_type
         self.setup_ui()
-        self.setup_signals()
+
+    @property
+    def attr_type(self):
+        """ Returns the attribute type.
+
+        :return: (string) attribute type. example: rmanN
+        """
+        return self._attr_type
 
     def setup_ui(self):
         self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
@@ -44,13 +48,16 @@ class NVPMprimVarWidgets(QtGui.QFrame):
 
         min_x_value_label = QtGui.QLabel("X min:")
         self.min_x_value = QtGui.QDoubleSpinBox()
-        self.min_x_value.setValue(1)
+        self.min_x_value.setSingleStep(0.1)
+        self.min_x_value.setValue(0)
         min_y_value_label = QtGui.QLabel("Y min:")
         self.min_y_value = QtGui.QDoubleSpinBox()
-        self.min_y_value.setValue(1)
+        self.min_y_value.setSingleStep(0.1)
+        self.min_y_value.setValue(0)
         min_z_value_label = QtGui.QLabel("Z min:")
         self.min_z_value = QtGui.QDoubleSpinBox()
-        self.min_z_value.setValue(1)
+        self.min_z_value.setSingleStep(0.1)
+        self.min_z_value.setValue(0)
 
         max_x_value_label = QtGui.QLabel("X max:")
         self.max_x_value = QtGui.QDoubleSpinBox()
@@ -116,13 +123,3 @@ class NVPMprimVarWidgets(QtGui.QFrame):
         layout4.addWidget(self.primvar_node_name)
         layout4.addWidget(self.get_node_name)
         layout4.addWidget(self.create_node)
-
-    def setup_signals(self):
-        """
-        """
-        self.delete_this.clicked.connect(self.delete_widget)
-
-    def delete_widget(self):
-        """
-        """
-        self.deleteLater()
