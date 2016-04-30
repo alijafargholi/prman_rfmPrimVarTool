@@ -39,6 +39,12 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
       <widget class="QWidget" name="create">
        <attribute name="title">
         <string>Create</string>
@@ -53,7 +59,7 @@
         <item>
          <widget class="QToolBox" name="toolBox">
           <property name="currentIndex">
-           <number>0</number>
+           <number>5</number>
           </property>
           <widget class="QWidget" name="rmanc">
            <property name="geometry">
@@ -61,7 +67,7 @@
              <x>0</x>
              <y>0</y>
              <width>532</width>
-             <height>452</height>
+             <height>432</height>
             </rect>
            </property>
            <attribute name="label">
@@ -88,6 +94,12 @@
               <property name="text">
                <string>Create</string>
               </property>
+              <property name="iconSize">
+               <size>
+                <width>18</width>
+                <height>18</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item>
@@ -101,7 +113,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>518</width>
-                 <height>411</height>
+                 <height>391</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanCLayout">
@@ -115,6 +127,14 @@
            </layout>
           </widget>
           <widget class="QWidget" name="rmanf">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>532</width>
+             <height>432</height>
+            </rect>
+           </property>
            <attribute name="label">
             <string>rmanF</string>
            </attribute>
@@ -133,6 +153,12 @@
               <property name="text">
                <string>Create</string>
               </property>
+              <property name="iconSize">
+               <size>
+                <width>18</width>
+                <height>18</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item>
@@ -146,7 +172,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>518</width>
-                 <height>411</height>
+                 <height>391</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanFLayout">
@@ -160,6 +186,14 @@
            </layout>
           </widget>
           <widget class="QWidget" name="rmann">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>532</width>
+             <height>432</height>
+            </rect>
+           </property>
            <attribute name="label">
             <string>rmanN</string>
            </attribute>
@@ -178,6 +212,12 @@
               <property name="text">
                <string>Create</string>
               </property>
+              <property name="iconSize">
+               <size>
+                <width>18</width>
+                <height>18</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item>
@@ -191,7 +231,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>518</width>
-                 <height>411</height>
+                 <height>391</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanNLayout">
@@ -205,6 +245,14 @@
            </layout>
           </widget>
           <widget class="QWidget" name="rmanp">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>532</width>
+             <height>432</height>
+            </rect>
+           </property>
            <attribute name="label">
             <string>rmanP</string>
            </attribute>
@@ -223,6 +271,12 @@
               <property name="text">
                <string>Create</string>
               </property>
+              <property name="iconSize">
+               <size>
+                <width>18</width>
+                <height>18</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item>
@@ -236,7 +290,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>518</width>
-                 <height>411</height>
+                 <height>391</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanPLayout">
@@ -255,7 +309,7 @@
              <x>0</x>
              <y>0</y>
              <width>532</width>
-             <height>452</height>
+             <height>432</height>
             </rect>
            </property>
            <attribute name="label">
@@ -276,6 +330,12 @@
               <property name="text">
                <string>Create</string>
               </property>
+              <property name="iconSize">
+               <size>
+                <width>18</width>
+                <height>18</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item>
@@ -289,7 +349,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>518</width>
-                 <height>411</height>
+                 <height>391</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanSLayout">
@@ -303,6 +363,14 @@
            </layout>
           </widget>
           <widget class="QWidget" name="rmanv">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>532</width>
+             <height>432</height>
+            </rect>
+           </property>
            <attribute name="label">
             <string>rmanV</string>
            </attribute>
@@ -321,6 +389,12 @@
               <property name="text">
                <string>Create</string>
               </property>
+              <property name="iconSize">
+               <size>
+                <width>18</width>
+                <height>18</height>
+               </size>
+              </property>
              </widget>
             </item>
             <item>
@@ -334,7 +408,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>518</width>
-                 <height>411</height>
+                 <height>391</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanVLayout">
@@ -359,6 +433,16 @@
           </property>
           <property name="text">
            <string>Assign</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../images/images.qrc">
+            <normaloff>:/icons/apply</normaloff>:/icons/apply</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -429,11 +513,19 @@
    </property>
   </action>
   <action name="action_email_suggestion">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/icons/suggestions</normaloff>:/icons/suggestions</iconset>
+   </property>
    <property name="text">
     <string>Sugestions</string>
    </property>
   </action>
   <action name="action_email_error">
+   <property name="icon">
+    <iconset resource="../images/images.qrc">
+     <normaloff>:/icons/error</normaloff>:/icons/error</iconset>
+   </property>
    <property name="text">
     <string>Error/Issues</string>
    </property>
@@ -454,6 +546,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

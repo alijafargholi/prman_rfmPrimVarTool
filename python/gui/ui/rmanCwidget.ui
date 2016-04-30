@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>498</width>
-    <height>248</height>
+    <height>250</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -25,20 +25,20 @@
    </property>
    <item>
     <widget class="QPushButton" name="delete_this">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-       <horstretch>20</horstretch>
-       <verstretch>20</verstretch>
-      </sizepolicy>
-     </property>
      <property name="minimumSize">
       <size>
-       <width>20</width>
-       <height>20</height>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
       </size>
      </property>
      <property name="text">
-      <string>X</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -134,19 +134,19 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Min/Max Brightness:</string>
+        <string>Min/Max Value:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="min_b_value">
+      <widget class="QDoubleSpinBox" name="min_v_value">
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QDoubleSpinBox" name="max_b_value">
+      <widget class="QDoubleSpinBox" name="max_v_value">
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>

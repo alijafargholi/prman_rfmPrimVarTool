@@ -12,6 +12,7 @@ The core functionality for Primvar tool.
 """
 
 # IMPORT STANDARD MODULES
+from __future__ import division
 import logging
 import random
 import colorsys
@@ -74,39 +75,51 @@ def get_random_color_shade(min_s=0, max_s=1, min_v=0, max_v=1, hue=360,
     :param hue: (Float) Spectrum on the color. Between 1 and 360
     :param debug: (Boolean) Set True if you want to print out the result.
     """
-    random_color = colorsys.hsv_to_rgb(hue, random.uniform(min_s, max_s),
+    # Since the colorsys library takes value between 0-1, we need to
+    # normalize this value by dividing it by 360
+    normalized_hue = hue / 360
+    random_color = colorsys.hsv_to_rgb(normalized_hue,
+                                       random.uniform(min_s, max_s),
                                        random.uniform(min_v, max_v))
     if debug:
         logging.info("Generated a random color <<{}>>".format(random_color))
     return random_color
 
 
-def get_random_vector(minimum=0, maximum=1, uniform_value=False, kind="float"):
+def get_random_vector(minimum_x=0, maximum_x=1,
+                      minimum_y=0, maximum_y=1,
+                      minimum_z=0, maximum_z=1,
+                      uniform_value=False,
+                      kind="float"):
     """
     Returns list of three numbers, vector, integer of float.
 
-    :param minimum: (float or int) Minimum range
-    :param maximum: (float or int) Maximum range
-    :param kind: (String) Kind of vector, integer or float. Default is float.
+    :param minimum_x: (float or int) Minimum x range
+    :param maximum_x: (float or int) Maximum x range
+    :param minimum_y: (float or int) Minimum y range
+    :param maximum_y: (float or int) Maximum y range
+    :param minimum_z: (float or int) Minimum z range
+    :param maximum_z: (float or int) Maximum z range
     :param uniform_value: (Boolean) If True, result in uniform result.
-    :return vector: (List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]
+    :param kind: (String) Kind of vector, integer or float. Default is float.
+    :return: (List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]
     """
     if uniform_value:
         if kind == "float":
-            random_value = random.uniform(minimum, maximum)
+            random_value = random.uniform(minimum_x, maximum_x)
             return [random_value, random_value, random_value]
         else:
-            random_value = random.randint(minimum, maximum)
+            random_value = random.randint(minimum_x, maximum_x)
             return [random_value, random_value, random_value]
 
     if kind == "float":
-        return random.sample([random.uniform(minimum, maximum),
-                              random.uniform(minimum, maximum),
-                              random.uniform(0, maximum)], 3)
+        return random.sample([random.uniform(minimum_x, maximum_x),
+                              random.uniform(minimum_y, maximum_y),
+                              random.uniform(minimum_z, maximum_z)], 3)
     else:
-        return random.sample([random.randint(minimum, maximum),
-                              random.randint(minimum, maximum),
-                              random.randint(0, maximum)], 3)
+        return random.sample([random.randint(minimum_x, maximum_x),
+                              random.randint(minimum_y, maximum_y),
+                              random.randint(minimum_z, maximum_z)], 3)
 
 
 def get_rman_attr(nodes, debug=False):
@@ -209,10 +222,14 @@ def unpack(nodes, debug=False):
         if not pm.listRelatives(node, shapes=1):
             if debug:
                 logging.info("Unpacking '{}' group node".format(node))
-            inside_nodes = list(unpack(node.getChildren()))
-            if inside_nodes:
-                for inside_node in inside_nodes:
-                    yield inside_node
+            try:
+                inside_nodes = list(unpack(node.getChildren()))
+                if inside_nodes:
+                    for inside_node in inside_nodes:
+                        yield inside_node
+            except AttributeError as errorLog:
+                logging.error("Was not able to gather the 'Shape' of "
+                              "'{}'.".format(node))
         else:
             yield node
 

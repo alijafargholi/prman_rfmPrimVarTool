@@ -25,18 +25,15 @@ except AttributeError:
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
-        Form.resize(498, 129)
+        Form.resize(498, 130)
         Form.setMaximumSize(QtCore.QSize(16777215, 130))
         self.mainLayout = QtGui.QVBoxLayout(Form)
         # self.mainLayout.setMargin(1)
         self.mainLayout.setObjectName(_fromUtf8("mainLayout"))
         self.delete_this = QtGui.QPushButton(Form)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(20)
-        sizePolicy.setVerticalStretch(20)
-        sizePolicy.setHeightForWidth(self.delete_this.sizePolicy().hasHeightForWidth())
-        self.delete_this.setSizePolicy(sizePolicy)
-        self.delete_this.setMinimumSize(QtCore.QSize(20, 20))
+        self.delete_this.setMinimumSize(QtCore.QSize(25, 25))
+        self.delete_this.setMaximumSize(QtCore.QSize(25, 25))
+        self.delete_this.setText(_fromUtf8(""))
         self.delete_this.setObjectName(_fromUtf8("delete_this"))
         self.mainLayout.addWidget(self.delete_this)
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -103,7 +100,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(_translate("Form", "Form", None))
-        self.delete_this.setText(_translate("Form", "X", None))
         self.label.setText(_translate("Form", "Attribute Name:", None))
         self.label_2.setText(_translate("Form", "Value Type:", None))
         self.type_float.setText(_translate("Form", "Float", None))

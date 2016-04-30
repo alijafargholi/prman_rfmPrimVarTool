@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
-        Form.resize(493, 202)
+        Form.resize(493, 211)
         self.mainLayout = QtGui.QVBoxLayout(Form)
         # self.mainLayout.setMargin(0)
         self.mainLayout.setSpacing(1)
@@ -38,12 +38,9 @@ class Ui_Form(object):
         # self.verticalLayout.setMargin(0)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.delete_this = QtGui.QPushButton(self.frame)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(20)
-        sizePolicy.setVerticalStretch(20)
-        sizePolicy.setHeightForWidth(self.delete_this.sizePolicy().hasHeightForWidth())
-        self.delete_this.setSizePolicy(sizePolicy)
-        self.delete_this.setMinimumSize(QtCore.QSize(20, 20))
+        self.delete_this.setMinimumSize(QtCore.QSize(25, 25))
+        self.delete_this.setMaximumSize(QtCore.QSize(25, 25))
+        self.delete_this.setText(_fromUtf8(""))
         self.delete_this.setObjectName(_fromUtf8("delete_this"))
         self.verticalLayout.addWidget(self.delete_this)
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -69,7 +66,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName(_fromUtf8("scrollArea"))
         self.scrollAreaWidgetContents = QtGui.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 477, 89))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 477, 101))
         self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
         self.stringListLayout = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         # self.stringListLayout.setMargin(1)
@@ -83,7 +80,6 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(_translate("Form", "Form", None))
-        self.delete_this.setText(_translate("Form", "X", None))
         self.label.setText(_translate("Form", "Attribute Name:", None))
         self.clear_files.setText(_translate("Form", "Clear", None))
         self.gather_files.setText(_translate("Form", "Gather FIles", None))

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>498</width>
-    <height>129</height>
+    <height>130</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -25,20 +25,20 @@
    </property>
    <item>
     <widget class="QPushButton" name="delete_this">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-       <horstretch>20</horstretch>
-       <verstretch>20</verstretch>
-      </sizepolicy>
-     </property>
      <property name="minimumSize">
       <size>
-       <width>20</width>
-       <height>20</height>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
       </size>
      </property>
      <property name="text">
-      <string>X</string>
+      <string/>
      </property>
     </widget>
    </item>

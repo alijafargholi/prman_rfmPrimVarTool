@@ -1,10 +1,48 @@
 * {
     background-color: rgb(60, 63, 65);
 }
+
 QLabel {
     color: rgb(180, 180, 180);
-    font-size: 17px;
+    font-size: 14px;
 }
+
+QLabel#logo{
+    background-color: transparent;
+    background-image: url(:/icons/logo);
+    border-style: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QLineEdit {
+    background-color: white;
+    color: black;
+}
+
+QPushButton{
+    background-color: rgb(92, 97, 100);
+    color: white;
+}
+
+QPushButton:hover{
+    background-color: #33ccff;
+}
+
+QPushButton#delete_this{
+    background-color: transparent;
+    background-image: url(:/icons/close);
+    border-style: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QPushButton#assign{
+    background-color:#248f24;
+    font-size: 22px;
+    font-weight: bold;
+}
+/*
 QLabel#widgetTitle {
     color: rgb(113, 167, 199);
     font-size: 19px;
@@ -20,17 +58,7 @@ QPushButton{
     border-radius: 4px;
 }
 
-QPushButton:hover{
-    background-color: #33ccff;
-}
 
-QPushButton#close{
-    background-color: transparent;
-    background-image: url(:/icons/exit);
-    border-style: none;
-    background-repeat: no-repeat;
-    background-position: center;
-}
 QPushButton#assign{
     background-color:#248f24;
     font-size: 22px;
