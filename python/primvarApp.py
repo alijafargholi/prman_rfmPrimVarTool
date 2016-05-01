@@ -58,6 +58,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         """
         Setting up some of the UI look and feel
         """
+
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+
         layouts_list = [self.rmanCLayout, self.rmanFLayout,
                         self.rmanSLayout, self.rmanVLayout, self.rmanPLayout,
                         self.rmanNLayout]
@@ -102,21 +105,22 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Go through all the attributes and assign them to the shapes
         for attr_type in self._attributes.keys():
             for new_attr in self._attributes[attr_type]["attrs"]:
+                print type(new_attr)
                 self._attributes[attr_type]["function"](shapes, new_attr)
 
         # If all not attributes are assigned, abort the window closing
-        for attr_type in self._attributes.keys():
-            if not self._attributes[attr_type]["attrs"]:
-                continue
-            else:
-                print self._attributes[attr_type]["attrs"]
-                logging.warning("It seems there was a problem with one of the "
-                                "attributes. Please make sure all the new "
-                                "attributes have name and correct values")
-                return
+        # for attr_type in self._attributes.keys():
+        #     if not self._attributes[attr_type]["attrs"]:
+        #         continue
+        #     else:
+        #         print self._attributes[attr_type]["attrs"]
+        #         logging.warning("It seems there was a problem with one of the "
+        #                         "attributes. Please make sure all the new "
+        #                         "attributes have name and correct values")
+        #         return
 
         # Finally close the UI
-        close_ui()
+        # close_ui()
 
     @staticmethod
     def setup_primvar_node(node_name, attr_name, attr_type):
@@ -226,7 +230,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                           str(random.choice(attr.new_strings)))
 
         # Deleting the UI
-        self.delete_widget(attr, "rmanc")
+        self.delete_widget(attr, "rmans")
 
     def rmanf(self, shapes, attr):
         """
@@ -261,11 +265,11 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         if attr.primvar_node_name.text() and pm.objExists(
                 attr.primvar_node_name.text()):
             self.setup_primvar_node(attr.primvar_node_name.text(),
-                                    attribute_name,
+                                    attr.attr_name.text(),
                                     "float")
 
         # Deleting the UI
-        self.delete_widget(attr, "rmanc")
+        self.delete_widget(attr, "rmanf")
 
     def rmanc(self, shapes, attr):
         """
@@ -327,11 +331,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                   min_v=attr.min_v_value.value(),
                                   max_v=attr.max_v_value.value()))
 
-        # I the Primvar node's name is given, setup it up
-        if attr.primvar_node_name.text():
+        # If a PrimVar node is given and the node exists, setup the values for
+        # that node
+        if attr.primvar_node_name.text() and pm.objExists(
+                attr.primvar_node_name.text()):
             self.setup_primvar_node(attr.primvar_node_name.text(),
-                                    attribute_name,
-                                    "float")
+                                    attr.attr_name.text(),
+                                    "color")
 
         # Deleting the UI
         self.delete_widget(attr, "rmanc")
@@ -366,11 +372,11 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
             core.set_attr(shape,
                           attribute_name,
                           core.get_random_vector(attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
+                                                 attr.max_x_value.value(),
+                                                 attr.min_y_value.value(),
+                                                 attr.max_y_value.value(),
+                                                 attr.min_z_value.value(),
+                                                 attr.max_z_value.value(),
                                                  attr.variation.isChecked(),
                                                  str(attr.type.currentText())))
 
@@ -379,7 +385,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         if attr.primvar_node_name.text() and pm.objExists(
                 attr.primvar_node_name.text()):
             self.setup_primvar_node(attr.primvar_node_name.text(),
-                                    attribute_name,
+                                    attr.attr_name.text(),
                                     "vector")
 
         # Deleting the UI
@@ -402,18 +408,24 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         attribute_name = "rmanP" + attr.attr_name.text()
 
         # Assigning a random vector to the shapes based on the given attributes
-        for shape_node in shapes:
+        for shape in shapes:
             # Create the attribute
-            core.add_attr(shape_node, attribute_name, attributeType='float3')
+            core.add_attr(shape, attribute_name, attributeType='float3')
+            core.add_attr(shape, attr.attr_name.text() + "x",
+                          attributeType='float', parent=attribute_name)
+            core.add_attr(shape, attr.attr_name.text() + "y",
+                          attributeType='float', parent=attribute_name)
+            core.add_attr(shape, attr.attr_name.text() + "z",
+                          attributeType='float', parent=attribute_name)
             # Setting the attribute
-            core.set_attr(shape_node,
+            core.set_attr(shape,
                           attribute_name,
                           core.get_random_vector(attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
+                                                 attr.max_x_value.value(),
+                                                 attr.min_y_value.value(),
+                                                 attr.max_y_value.value(),
+                                                 attr.min_z_value.value(),
+                                                 attr.max_z_value.value(),
                                                  attr.variation.isChecked(),
                                                  str(attr.type.currentText())))
 
@@ -422,7 +434,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         if attr.primvar_node_name.text() and pm.objExists(
                 attr.primvar_node_name.text()):
             self.setup_primvar_node(attr.primvar_node_name.text(),
-                                    attribute_name,
+                                    attr.attr_name.text(),
                                     "point")
 
         # Deleting the UI
@@ -445,18 +457,24 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         attribute_name = "rmann" + attr.attr_name.text()
 
         # Assigning a random vector to the shapes based on the given attributes
-        for shape_node in shapes:
+        for shape in shapes:
             # Create the attribute
-            core.add_attr(shape_node, attribute_name, attributeType='float3')
+            core.add_attr(shape, attribute_name, attributeType='float3')
+            core.add_attr(shape, attr.attr_name.text() + "r",
+                          attributeType='float', parent=attribute_name)
+            core.add_attr(shape, attr.attr_name.text() + "g",
+                          attributeType='float', parent=attribute_name)
+            core.add_attr(shape, attr.attr_name.text() + "b",
+                          attributeType='float', parent=attribute_name)
             # Setting the attribute
-            core.set_attr(shape_node,
+            core.set_attr(shape,
                           attribute_name,
                           core.get_random_vector(attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
-                                                 attr.min_x_value.value(),
+                                                 attr.max_x_value.value(),
+                                                 attr.min_y_value.value(),
+                                                 attr.max_y_value.value(),
+                                                 attr.min_z_value.value(),
+                                                 attr.max_z_value.value(),
                                                  attr.variation.isChecked(),
                                                  str(attr.type.currentText())))
 
@@ -465,7 +483,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         if attr.primvar_node_name.text() and pm.objExists(
                 attr.primvar_node_name.text()):
             self.setup_primvar_node(attr.primvar_node_name.text(),
-                                    attribute_name,
+                                    attr.attr_name.text(),
                                     "normal")
 
         # Deleting the UI
@@ -651,7 +669,11 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         :param attr_type: (str) name of the category that needs to have the
         widgets removed from the list. ex: rmanc, rmans, ....
         """
-        widget.deleteLater()
+        foo = widget.attr_name.text()
+        print "**********************************************"
+        print "Deleting widgets for --> ", foo
+        if widget.deleteLater():
+            print "Deleting the {}".foo
         self._attributes[attr_type]["attrs"].remove(widget)
 
     def clear(self):

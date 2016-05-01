@@ -59,7 +59,7 @@
         <item>
          <widget class="QToolBox" name="toolBox">
           <property name="currentIndex">
-           <number>5</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="rmanc">
            <property name="geometry">
@@ -131,8 +131,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>532</width>
-             <height>432</height>
+             <width>98</width>
+             <height>117</height>
             </rect>
            </property>
            <attribute name="label">
@@ -171,8 +171,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>518</width>
-                 <height>391</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanFLayout">
@@ -190,8 +190,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>532</width>
-             <height>432</height>
+             <width>98</width>
+             <height>117</height>
             </rect>
            </property>
            <attribute name="label">
@@ -230,8 +230,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>518</width>
-                 <height>391</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanNLayout">
@@ -249,8 +249,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>532</width>
-             <height>432</height>
+             <width>98</width>
+             <height>117</height>
             </rect>
            </property>
            <attribute name="label">
@@ -289,8 +289,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>518</width>
-                 <height>391</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanPLayout">
@@ -308,8 +308,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>532</width>
-             <height>432</height>
+             <width>98</width>
+             <height>117</height>
             </rect>
            </property>
            <attribute name="label">
@@ -348,8 +348,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>518</width>
-                 <height>391</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="rmanSLayout">
@@ -486,16 +486,8 @@
      <addaction name="action_pxar_Documenation"/>
      <addaction name="action_tool_Documentation"/>
     </widget>
-    <widget class="QMenu" name="menuEmail_Developer">
-     <property name="title">
-      <string>Email Developer</string>
-     </property>
-     <addaction name="action_email_suggestion"/>
-     <addaction name="action_email_error"/>
-    </widget>
     <addaction name="menuHelp"/>
     <addaction name="action_clear"/>
-    <addaction name="menuEmail_Developer"/>
     <addaction name="separator"/>
     <addaction name="action_close_ui"/>
    </widget>
@@ -514,7 +506,7 @@
   </action>
   <action name="action_email_suggestion">
    <property name="icon">
-    <iconset resource="../images/images.qrc">
+    <iconset>
      <normaloff>:/icons/suggestions</normaloff>:/icons/suggestions</iconset>
    </property>
    <property name="text">
@@ -523,7 +515,7 @@
   </action>
   <action name="action_email_error">
    <property name="icon">
-    <iconset resource="../images/images.qrc">
+    <iconset>
      <normaloff>:/icons/error</normaloff>:/icons/error</iconset>
    </property>
    <property name="text">

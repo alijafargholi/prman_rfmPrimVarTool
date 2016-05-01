@@ -89,7 +89,7 @@ def get_random_color_shade(min_s=0, max_s=1, min_v=0, max_v=1, hue=360,
 def get_random_vector(minimum_x=0, maximum_x=1,
                       minimum_y=0, maximum_y=1,
                       minimum_z=0, maximum_z=1,
-                      uniform_value=False,
+                      variation=False,
                       kind="float"):
     """
     Returns list of three numbers, vector, integer of float.
@@ -100,26 +100,26 @@ def get_random_vector(minimum_x=0, maximum_x=1,
     :param maximum_y: (float or int) Maximum y range
     :param minimum_z: (float or int) Minimum z range
     :param maximum_z: (float or int) Maximum z range
-    :param uniform_value: (Boolean) If True, result in uniform result.
+    :param variation: (Boolean) If True, result in uniform result.
     :param kind: (String) Kind of vector, integer or float. Default is float.
     :return: (List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]
     """
-    if uniform_value:
+    if not variation:
         if kind == "float":
             random_value = random.uniform(minimum_x, maximum_x)
             return [random_value, random_value, random_value]
         else:
-            random_value = random.randint(minimum_x, maximum_x)
+            random_value = random.randint(int(minimum_x), int(maximum_x))
             return [random_value, random_value, random_value]
 
     if kind == "float":
-        return random.sample([random.uniform(minimum_x, maximum_x),
-                              random.uniform(minimum_y, maximum_y),
-                              random.uniform(minimum_z, maximum_z)], 3)
+        return [random.uniform(minimum_x, maximum_x),
+                random.uniform(minimum_y, maximum_y),
+                random.uniform(minimum_z, maximum_z)]
     else:
-        return random.sample([random.randint(minimum_x, maximum_x),
-                              random.randint(minimum_y, maximum_y),
-                              random.randint(minimum_z, maximum_z)], 3)
+        return [random.randint(int(minimum_x), int(maximum_x)),
+                random.randint(int(minimum_y), int(maximum_y)),
+                random.randint(int(minimum_z), int(maximum_z))]
 
 
 def get_rman_attr(nodes, debug=False):
