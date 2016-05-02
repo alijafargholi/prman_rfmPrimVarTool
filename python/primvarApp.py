@@ -31,6 +31,7 @@ except ImportError as e:
 
 # GLOBAL VARIABLE
 primVarAppUi = None
+__version__ = "0.1.0"
 
 
 class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
@@ -40,14 +41,8 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
     def __init__(self, *args, **kwargs):
         super(PrimVarApp, self).__init__(*args, **kwargs)
 
-        # Creating a dictionary to store the new widgets and corresponding
-        # assign functions
-        self._attributes = {"rmanc": {"function": self.rmanc, "attrs": []},
-                            "rmanf": {"function": self.rmanf, "attrs": []},
-                            "rmans": {"function": self.rmans, "attrs": []},
-                            "rmanv": {"function": self.rmanv, "attrs": []},
-                            "rmanp": {"function": self.rmanp, "attrs": []},
-                            "rmann": {"function": self.rmann, "attrs": []}}
+        # Creating a list to store the new widgets and corresponding
+        self.created_attributes = []
 
         self.setupUi(self)
         self.init_ui()
@@ -60,6 +55,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         """
 
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.setWindowTitle("PrimVar Manager - {}".format(__version__))
 
         layouts_list = [self.rmanCLayout, self.rmanFLayout,
                         self.rmanSLayout, self.rmanVLayout, self.rmanPLayout,
@@ -103,24 +99,33 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
             return
 
         # Go through all the attributes and assign them to the shapes
-        for attr_type in self._attributes.keys():
-            for new_attr in self._attributes[attr_type]["attrs"]:
-                print type(new_attr)
-                self._attributes[attr_type]["function"](shapes, new_attr)
+        for new_attr in self.created_attributes:
+            if type(new_attr) == PrimVarCWidget:
+                self.primvar_c(shapes, new_attr)
+            if type(new_attr) == PrimVarSWidget:
+                self.primvar_s(shapes, new_attr)
+            if type(new_attr) == PrimVarFWidget:
+                self.primvar_f(shapes, new_attr)
+            if type(new_attr) == PrimVarVWidget:
+                self.primvar_v(shapes, new_attr)
+            if type(new_attr) == PrimVarPWidget:
+                self.primvar_p(shapes, new_attr)
+            if type(new_attr) == PrimVarNWidget:
+                self.primvar_n(shapes, new_attr)
 
         # If all not attributes are assigned, abort the window closing
-        # for attr_type in self._attributes.keys():
-        #     if not self._attributes[attr_type]["attrs"]:
-        #         continue
-        #     else:
-        #         print self._attributes[attr_type]["attrs"]
-        #         logging.warning("It seems there was a problem with one of the "
-        #                         "attributes. Please make sure all the new "
-        #                         "attributes have name and correct values")
-        #         return
+        if not self.created_attributes:
+            # Finally close the UI
+            close_ui()
 
-        # Finally close the UI
-        # close_ui()
+        # For some reason, when I loop over the list of widgets to create the
+        #  attributes, the loop wouldn't go though all the items. I'm forcing
+        #  here to go through loop as long as it meets the requirements. (I
+        # have look into this later) (The problem happens lines 99-112)
+        if self.created_attributes:
+            for left_over in self.created_attributes:
+                if left_over.attr_name.text():
+                    self.assign_attributes()
 
     @staticmethod
     def setup_primvar_node(node_name, attr_name, attr_type):
@@ -204,7 +209,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         url_page = "https://renderman.pixar.com/view/how-to-primitive-variables"
         webbrowser.open_new(url=url_page)
 
-    def rmans(self, shapes, attr):
+    def primvar_s(self, shapes, attr):
         """
         Assigning the rmans Primvar attributes to the given shape nodes
 
@@ -230,9 +235,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                           str(random.choice(attr.new_strings)))
 
         # Deleting the UI
-        self.delete_widget(attr, "rmans")
+        self.delete_widget(attr)
 
-    def rmanf(self, shapes, attr):
+    def primvar_f(self, shapes, attr):
         """
         Assigning the rmanf Primvar attributes to the given shape nodes
 
@@ -269,9 +274,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                     "float")
 
         # Deleting the UI
-        self.delete_widget(attr, "rmanf")
+        self.delete_widget(attr)
 
-    def rmanc(self, shapes, attr):
+    def primvar_c(self, shapes, attr):
         """
         Assigning the rmanc Primvar attributes to the given shape nodes
 
@@ -340,9 +345,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                     "color")
 
         # Deleting the UI
-        self.delete_widget(attr, "rmanc")
+        self.delete_widget(attr)
 
-    def rmanv(self, shapes, attr):
+    def primvar_v(self, shapes, attr):
         """
         Assigning the rmanv Primvar attributes to the given shape nodes.
 
@@ -389,9 +394,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                     "vector")
 
         # Deleting the UI
-        self.delete_widget(attr, "rmanv")
+        self.delete_widget(attr)
 
-    def rmanp(self, shapes, attr):
+    def primvar_p(self, shapes, attr):
         """
         Assigning the rmanp Primvar attributes to the given shape nodes.
 
@@ -438,9 +443,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                     "point")
 
         # Deleting the UI
-        self.delete_widget(attr, "rmanp")
+        self.delete_widget(attr)
 
-    def rmann(self, shapes, attr):
+    def primvar_n(self, shapes, attr):
         """
         Assigning the rmann Primvar attributes to the given shape nodes.
 
@@ -487,7 +492,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                     "normal")
 
         # Deleting the UI
-        self.delete_widget(attr, "rmann")
+        self.delete_widget(attr)
 
     def create_rman_c(self):
         """
@@ -503,14 +508,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                                     rmanc.primvar_node_name))
         rmanc.create_node.clicked.connect(partial(self.create_primvar_node,
                                                   rmanc.primvar_node_name))
-        rmanc.delete_this.clicked.connect(partial(self.delete_widget, rmanc,
-                                                  "rmanc"))
+        rmanc.delete_this.clicked.connect(partial(self.delete_widget, rmanc))
 
         # Adding the newly created widgets to the rmanc layout
         self.rmanCLayout.addWidget(rmanc)
 
         # Finally store it to the list
-        self._attributes["rmanc"]["attrs"].append(rmanc)
+        self.created_attributes.append(rmanc)
 
     def create_rman_f(self):
         """
@@ -526,14 +530,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                                     rmanf.primvar_node_name))
         rmanf.create_node.clicked.connect(partial(self.create_primvar_node,
                                                   rmanf.primvar_node_name))
-        rmanf.delete_this.clicked.connect(partial(self.delete_widget, rmanf,
-                                                  "rmanf"))
+        rmanf.delete_this.clicked.connect(partial(self.delete_widget, rmanf))
 
         # Adding the newly created widgets to the rmanf layout
         self.rmanFLayout.addWidget(rmanf)
 
         # Finally store it to the list
-        self._attributes["rmanf"]["attrs"].append(rmanf)
+        self.created_attributes.append(rmanf)
 
     def create_rman_s(self):
         """
@@ -547,14 +550,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Connecting the signals to the functions
         rmans.gather_files.clicked.connect(partial(self.get_files, rmans))
         rmans.clear_files.clicked.connect(partial(self.clear_files, rmans))
-        rmans.delete_this.clicked.connect(partial(self.delete_widget, rmans,
-                                                  "rmans"))
+        rmans.delete_this.clicked.connect(partial(self.delete_widget, rmans))
 
         # Adding the newly created widgets to the rmans layout
         self.rmanSLayout.addWidget(rmans)
 
         # Finally store it to the list
-        self._attributes["rmans"]["attrs"].append(rmans)
+        self.created_attributes.append(rmans)
 
     def create_rman_v(self):
         """
@@ -570,14 +572,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                                     rmanv.primvar_node_name))
         rmanv.create_node.clicked.connect(partial(self.create_primvar_node,
                                                   rmanv.primvar_node_name))
-        rmanv.delete_this.clicked.connect(partial(self.delete_widget, rmanv,
-                                                  "rmanv"))
+        rmanv.delete_this.clicked.connect(partial(self.delete_widget, rmanv))
 
         # Adding the newly created widgets to the rmanv layout
         self.rmanVLayout.addWidget(rmanv)
 
         # Finally store it to the list
-        self._attributes["rmanv"]["attrs"].append(rmanv)
+        self.created_attributes.append(rmanv)
 
     def create_rman_p(self):
         """
@@ -593,14 +594,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                                     rmanp.primvar_node_name))
         rmanp.create_node.clicked.connect(partial(self.create_primvar_node,
                                                   rmanp.primvar_node_name))
-        rmanp.delete_this.clicked.connect(partial(self.delete_widget, rmanp,
-                                                  "rmanp"))
+        rmanp.delete_this.clicked.connect(partial(self.delete_widget, rmanp))
 
         # Adding the newly created widgets to the rmanp layout
         self.rmanPLayout.addWidget(rmanp)
 
         # Finally store it to the list
-        self._attributes["rmanp"]["attrs"].append(rmanp)
+        self.created_attributes.append(rmanp)
 
     def create_rman_n(self):
         """
@@ -616,14 +616,13 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                                                     rmann.primvar_node_name))
         rmann.create_node.clicked.connect(partial(self.create_primvar_node,
                                                   rmann.primvar_node_name))
-        rmann.delete_this.clicked.connect(partial(self.delete_widget, rmann,
-                                                  "rmann"))
+        rmann.delete_this.clicked.connect(partial(self.delete_widget, rmann))
 
         # Adding the newly created widgets to the rmann layout
         self.rmanNLayout.addWidget(rmann)
 
         # Finally store it to the list
-        self._attributes["rmann"]["attrs"].append(rmann)
+        self.created_attributes.append(rmann)
 
     def get_files(self, rmans_widget):
         """
@@ -659,22 +658,17 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         except IndexError:
             self.warning(message="It seems no node is selected.\n")
 
-    def delete_widget(self, widget, attr_type):
+    def delete_widget(self, widget):
         """
         Delete the given widgets and remove it from the list of existing
         widgets.
 
         :param widget: (QtGui.QWidget) the widget that needs to be
         deleted/removed
-        :param attr_type: (str) name of the category that needs to have the
-        widgets removed from the list. ex: rmanc, rmans, ....
         """
-        foo = widget.attr_name.text()
-        print "**********************************************"
-        print "Deleting widgets for --> ", foo
-        if widget.deleteLater():
-            print "Deleting the {}".foo
-        self._attributes[attr_type]["attrs"].remove(widget)
+
+        widget.deleteLater()
+        self.created_attributes.remove(widget)
 
     def clear(self):
         """
@@ -682,10 +676,9 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         list
         """
 
-        for attr_type in self._attributes.keys():
-            for attr_widget in self._attributes[attr_type]["attrs"]:
-                attr_widget.deleteLater()
-            self._attributes[attr_type]["attrs"] = []
+        for widget in self.created_attributes:
+            widget.deleteLater()
+            self.created_attributes.remove(widget)
 
     def setup_stylesheet(self):
         """

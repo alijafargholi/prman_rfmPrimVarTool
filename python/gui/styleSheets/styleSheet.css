@@ -1,5 +1,5 @@
 * {
-    background-color: rgb(60, 63, 65);
+    background-color: rgb(51,51,51);
 }
 
 QLabel {
@@ -19,7 +19,11 @@ QLineEdit {
     background-color: white;
     color: black;
 }
-
+QLineEdit#attr_name {
+    background-color: black;
+    color: #66ccff;
+    font-weight: bold;
+}
 QPushButton{
     background-color: rgb(92, 97, 100);
     color: white;
@@ -42,50 +46,7 @@ QPushButton#assign{
     font-size: 22px;
     font-weight: bold;
 }
-/*
-QLabel#widgetTitle {
-    color: rgb(113, 167, 199);
-    font-size: 19px;
-    font-weight: bold;
-}
-
-QPushButton{
-    background-color: rgb(92, 97, 100);
-    color: white;
-    font-size: 15px;
-    padding: 8px 10px;
-    margin:5px;
-    border-radius: 4px;
-}
-
-
-QPushButton#assign{
-    background-color:#248f24;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-QRadioButton{
-    color: rgb(98, 151, 85);
-}
-
-QLineEdit {
-    background-color: white;
-}
 QDoubleSpinBox {
-    background-color: white;
-}
-
-QComboBox{
-    background-color: #7A7A7A;
-    border: 1px solid black;
-    color: rgb(113, 167, 199);
-    font-weight: bold;
-    font-size:19px;
-
-}
-QToolTip {
-    background-color: gray;
-    color: white;
-    font-size: 12px;
+    background-color: #262626;
+    color:white;
 }

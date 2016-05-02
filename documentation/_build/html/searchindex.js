@@ -1,0 +1,1 @@
+Search.setIndex({envversion:47,filenames:["index"],objects:{},objnames:{},objtypes:{},terms:{attribut:0,basic:0,content:0,familiar:0,index:0,modul:0,page:0,primvar:0,purpos:0,search:0,thi:0,tool:0,you:0},titles:["Welcome to Primitive Variables Manager&#8217;s documentation!"],titleterms:{document:0,indic:0,manag:0,primit:0,tabl:0,variabl:0,welcom:0}})
