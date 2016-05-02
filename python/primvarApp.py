@@ -38,6 +38,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
     """
     Main logic for connecting the UI and core functionality
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarApp, self).__init__(*args, **kwargs)
 
@@ -70,9 +71,11 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         """
         Connecting the UI signals to the functions
         """
+
         self.action_close_ui.triggered.connect(close_ui)
         self.action_clear.triggered.connect(self.clear)
         self.action_pxar_Documenation.triggered.connect(self.go_to_wiki)
+        self.action_tool_Documentation.triggered.connect(self.go_to_doc)
         self.assign.clicked.connect(self.assign_attributes)
         self.createRmanC.clicked.connect(self.create_rman_c)
         self.createRmanF.clicked.connect(self.create_rman_f)
@@ -86,6 +89,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         Gathering the selected object(s)'s shape and assigning the PrimVar
         attributes to them
         """
+
         # Getting the shape nodes of selected objects
         shapes = list(core.get_shapes(core.unpack(pm.ls(sl=True))))
 
@@ -167,6 +171,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         :param widget_primvar_name: (QtGui.QLineEdit) Widget to be set once
         the new PxrPrimvar is created
         """
+
         new_node = pm.createNode("PxrPrimvar")
         widget_primvar_name.setText(str(new_node.name()))
 
@@ -204,9 +209,21 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
     @staticmethod
     def go_to_wiki():
         """
-        Opens the browser link and direct it to the help page for this tool
+        Opens the browser link and direct it to the help page on RenderMan.
         """
+
         url_page = "https://renderman.pixar.com/view/how-to-primitive-variables"
+        webbrowser.open_new(url=url_page)
+
+    @staticmethod
+    def go_to_doc():
+        """
+        Opens the browser link and direct it to the local documentation page
+        for this tool.
+        """
+        url_page = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                "_build/html/index.html")
+        print url_page
         webbrowser.open_new(url=url_page)
 
     def primvar_s(self, shapes, attr):
@@ -631,6 +648,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
 
         :param rmans_widget:
         """
+
         string_list = QtGui.QFileDialog.getOpenFileNames()
         string_list = [str(value) for value in string_list[0]]
 
@@ -653,6 +671,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
 
         :widget_primvar_name: the field that the name is going to be set to.
         """
+
         try:
             widget_primvar_name.setText(str(pm.ls(sl=True)[0].name()))
         except IndexError:
@@ -684,6 +703,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         """
         Assign the stylesheet to the UI
         """
+
         try:
             style_sheet = open(os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
@@ -700,6 +720,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
     """
     Create a Primvar C Widgets
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarCWidget, self).__init__(*args, **kwargs)
 
@@ -726,6 +747,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
 
         :return: (int) Integer representing the Hue value of the selected color
         """
+
         return self._core_color
 
     @core_color.setter
@@ -735,6 +757,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
 
         :param value: (int) Hue value for shade of color option
         """
+
         # This is the value coming from QtGui in hex
         value = value.lstrip('#')
         lv = len(value)
@@ -750,6 +773,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
         """
         Connecting signals of the Primvar C widget
         """
+
         self.color_picker.clicked.connect(self.pick_color)
         self.random_color.toggled.connect(self.random_color_selected)
         self.random_color_shades.toggled.connect(
@@ -760,6 +784,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
         """
         Disabling not needed widgets when choosing the random color selected.
         """
+
         if enabled:
             self.color_picker.setDisabled(True)
             self.min_s_value.setDisabled(False)
@@ -770,6 +795,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
         Disabling not needed widgets when choosing the random shade of color
         option.
         """
+
         if enabled:
             self.color_picker.setDisabled(False)
             self.min_v_value.setDisabled(False)
@@ -780,6 +806,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
         Disabling not needed widgets when choosing the random grayscale
         options.
         """
+
         if enabled:
             self.color_picker.setDisabled(True)
             self.min_s_value.setDisabled(True)
@@ -790,6 +817,7 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
         Open up the QtGui.QColorDialog for choosing the color for random
         shade of color option, and storing in core_color variable
         """
+
         new_color = QtGui.QColorDialog.getColor().name()
         self.color_picker.setStyleSheet("background-color: {}".format(
             new_color))
@@ -800,6 +828,7 @@ class PrimVarFWidget(QtGui.QFrame, fWidget):
     """
     Create a Primvar F Widgets
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarFWidget, self).__init__(*args, **kwargs)
 
@@ -816,6 +845,7 @@ class PrimVarFWidget(QtGui.QFrame, fWidget):
 
         :param enabled: (boolean) if the Integer radio is checked.
         """
+
         if enabled:
             self.min_value.setSingleStep(1)
             self.max_value.setSingleStep(1)
@@ -837,6 +867,7 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
     """
     Create a Primvar S Widgets
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarSWidget, self).__init__(*args, **kwargs)
 
@@ -856,6 +887,7 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
 
         :return: (list) returns the value of the existing_labels
         """
+
         return self._existing_labels
 
     @existing_labels.setter
@@ -865,6 +897,7 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
 
         :param value: (list) list of new strings.
         """
+
         self._existing_labels = value
 
     @property
@@ -883,6 +916,7 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
 
         :param value: (list) list of new strings.
         """
+
         self._new_strings = value
 
 
@@ -890,6 +924,7 @@ class PrimVarNWidget(QtGui.QFrame, nWidget):
     """
     Create a Primvar N Widgets
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarNWidget, self).__init__(*args, **kwargs)
 
@@ -902,6 +937,7 @@ class PrimVarNWidget(QtGui.QFrame, nWidget):
         """
         Connecting signals of the Primvar V widget
         """
+
         self.variation.toggled.connect(self.uniform_selected)
         self.uniform.toggled.connect(self.variation_selected)
 
@@ -911,6 +947,7 @@ class PrimVarNWidget(QtGui.QFrame, nWidget):
 
         :param enabled: (boolean) Status of the type
         """
+
         if enabled:
             self.min_y_value.setDisabled(True)
             self.max_y_value.setDisabled(True)
@@ -923,6 +960,7 @@ class PrimVarNWidget(QtGui.QFrame, nWidget):
 
         :param enabled: (boolean) Status of the type
         """
+
         if enabled:
             self.min_y_value.setDisabled(False)
             self.max_y_value.setDisabled(False)
@@ -934,6 +972,7 @@ class PrimVarPWidget(QtGui.QFrame, pWidget):
     """
     Create a Primvar P Widgets
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarPWidget, self).__init__(*args, **kwargs)
 
@@ -946,6 +985,7 @@ class PrimVarPWidget(QtGui.QFrame, pWidget):
         """
         Connecting signals of the Primvar P widget
         """
+
         self.variation.toggled.connect(self.uniform_selected)
         self.uniform.toggled.connect(self.variation_selected)
 
@@ -955,6 +995,7 @@ class PrimVarPWidget(QtGui.QFrame, pWidget):
 
         :param enabled: (boolean) Status of the type
         """
+
         if enabled:
             self.min_y_value.setDisabled(True)
             self.max_y_value.setDisabled(True)
@@ -967,6 +1008,7 @@ class PrimVarPWidget(QtGui.QFrame, pWidget):
 
         :param enabled: (boolean) Status of the type
         """
+
         if enabled:
             self.min_y_value.setDisabled(False)
             self.max_y_value.setDisabled(False)
@@ -978,6 +1020,7 @@ class PrimVarVWidget(QtGui.QFrame, vWidget):
     """
     Create a Primvar V Widgets
     """
+
     def __init__(self, *args, **kwargs):
         super(PrimVarVWidget, self).__init__(*args, **kwargs)
 
@@ -990,6 +1033,7 @@ class PrimVarVWidget(QtGui.QFrame, vWidget):
         """
         Connecting signals of the Primvar V widget
         """
+
         self.variation.toggled.connect(self.uniform_selected)
         self.uniform.toggled.connect(self.variation_selected)
 
@@ -999,6 +1043,7 @@ class PrimVarVWidget(QtGui.QFrame, vWidget):
 
         :param enabled: (boolean) Status of the type
         """
+
         if enabled:
             self.min_y_value.setDisabled(True)
             self.max_y_value.setDisabled(True)
@@ -1011,6 +1056,7 @@ class PrimVarVWidget(QtGui.QFrame, vWidget):
 
         :param enabled: (boolean) Status of the type
         """
+
         if enabled:
             self.min_y_value.setDisabled(False)
             self.max_y_value.setDisabled(False)
@@ -1024,6 +1070,7 @@ def create_ui():
 
     :return: QWidget
     """
+
     global primVarAppUi
 
     if not primVarAppUi:
@@ -1049,6 +1096,7 @@ def main():
 
     :return: (str) help documents of the
     """
+
     import __main__
     print help(__main__)
 if __name__ == '__main__':

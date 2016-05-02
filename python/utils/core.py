@@ -4,7 +4,7 @@
 """
 The core functionality for Primvar tool.
 
-.. module:: `_core`
+.. module:: `core`
    :platform: Unix, Windows
    :synopsis: Provides core functionality of PrimVar tool.
 
@@ -75,6 +75,7 @@ def get_random_color_shade(min_s=0, max_s=1, min_v=0, max_v=1, hue=360,
     :param hue: (Float) Spectrum on the color. Between 1 and 360
     :param debug: (Boolean) Set True if you want to print out the result.
     """
+
     # Since the colorsys library takes value between 0-1, we need to
     # normalize this value by dividing it by 360
     normalized_hue = hue / 360
@@ -104,6 +105,7 @@ def get_random_vector(minimum_x=0, maximum_x=1,
     :param kind: (String) Kind of vector, integer or float. Default is float.
     :return: (List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]
     """
+
     if not variation:
         if kind == "float":
             random_value = random.uniform(minimum_x, maximum_x)
@@ -129,6 +131,7 @@ def get_rman_attr(nodes, debug=False):
     :param nodes: (List of PyMel nodes) Nodes to query their primvar attributes.
     :param debug: (Boolean) Set True if you want to print out the result.
     """
+
     global EXISTING_ATTR
     for node in nodes:
         # Go through all attributes of the current node
@@ -159,6 +162,7 @@ def get_shapes(nodes, debug=False):
     :param debug: (Boolean) If True, it'll output the errors and the process.
     :yield: (PyMel node) shape node of the selected node.
     """
+
     for node in nodes:
         # If the current selection is a shape node, yield it
         if isinstance(node, pm.nodetypes.Shape):
@@ -183,6 +187,7 @@ def remove_attr(node, attr_name, debug=False):
     :param attr_name: (Str) Name of the attribute to be deleted from the object.
     :param debug: (Boolean) Set True if you want to print out the result.
     """
+
     if node.hasAttr(attr_name):
         pm.deleteAttr(node, at=attr_name)
         if debug:
@@ -202,6 +207,7 @@ def set_attr(node, attr_name, value, debug=False):
     :param value: (String, Int, Float) Value of the attribute to set.
     :param debug: (Boolean) Print out the process of setting the attribute
     """
+
     try:
         pm.setAttr("{}.{}".format(node, attr_name), value)
         if debug:
@@ -218,6 +224,7 @@ def unpack(nodes, debug=False):
     :param debug: (Boolean) If True, it'll output the errors and the process.
     :return: True if the node is a group and False otherwise.
     """
+
     for node in nodes:
         if not pm.listRelatives(node, shapes=1):
             if debug:
@@ -238,6 +245,7 @@ def main():
     """
     Run help if called directly.
     """
+
     import __main__
     help(__main__)
 
