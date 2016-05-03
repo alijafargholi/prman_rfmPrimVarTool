@@ -208,6 +208,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">action_close_ui</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">close_ui</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">action_clear</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">action_pxar_Documenation</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_to_wiki</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_tool_Documentation</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_to_doc</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assign</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assign_attributes</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">createRmanC</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_c</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">createRmanF</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_f</span><span class="p">)</span>
@@ -295,16 +296,17 @@
         <span class="n">rmans_widget</span><span class="o">.</span><span class="n">existing_labels</span> <span class="o">=</span> <span class="p">[]</span></div>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="PrimVarApp.create_primvar_node"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_primvar_node">[docs]</a>    <span class="k">def</span> <span class="nf">create_primvar_node</span><span class="p">(</span><span class="n">widget_primvar_name</span><span class="p">):</span>
+<div class="viewcode-block" id="PrimVarApp.create_node"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_node">[docs]</a>    <span class="k">def</span> <span class="nf">create_node</span><span class="p">(</span><span class="n">widget_primvar_name</span><span class="p">,</span> <span class="n">node_type</span><span class="o">=</span><span class="s2">&quot;PxrPrimvar&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new primvar node and set the name of the new node to the</span>
 <span class="sd">        &quot;Node Name&quot; of the widget.</span>
 
 <span class="sd">        :param widget_primvar_name: (QtGui.QLineEdit) Widget to be set once</span>
 <span class="sd">        the new PxrPrimvar is created</span>
+<span class="sd">        :param node_type: (str) Type of nore to be created, ex:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">new_node</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s2">&quot;PxrPrimvar&quot;</span><span class="p">)</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="n">node_type</span><span class="p">)</span>
         <span class="n">widget_primvar_name</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_node</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span></div>
 
     <span class="nd">@staticmethod</span>
@@ -341,10 +343,20 @@
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="PrimVarApp.go_to_wiki"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.go_to_wiki">[docs]</a>    <span class="k">def</span> <span class="nf">go_to_wiki</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Opens the browser link and direct it to the help page for this tool</span>
+<span class="sd">        Opens the browser link and direct it to the help page on RenderMan.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">url_page</span> <span class="o">=</span> <span class="s2">&quot;https://renderman.pixar.com/view/how-to-primitive-variables&quot;</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_page</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.go_to_doc"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.go_to_doc">[docs]</a>    <span class="k">def</span> <span class="nf">go_to_doc</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens the browser link and direct it to the local documentation page</span>
+<span class="sd">        for this tool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span> <span class="s2">&quot;../&quot;</span><span class="p">)</span>
+        <span class="n">url_page</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="s2">&quot;doc/_build/html/index.html&quot;</span><span class="p">)</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_page</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PrimVarApp.primvar_s"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_s">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_s</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
@@ -363,8 +375,14 @@
                             <span class="s1">&#39;enough information&#39;</span><span class="p">)</span>
             <span class="k">return</span>
 
+        <span class="c1"># Make sure there is a file name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The of the &quot;File&quot; is required.&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
         <span class="c1"># Create the new attribute name</span>
-        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanS&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanS&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> \
+                         <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
 
         <span class="c1"># Pick a random sting from the list and assign it to the shape</span>
         <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
@@ -644,7 +662,7 @@
         <span class="c1"># Connecting the signals to the functions</span>
         <span class="n">rmanc</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
                                                     <span class="n">rmanc</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
-        <span class="n">rmanc</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_primvar_node</span><span class="p">,</span>
+        <span class="n">rmanc</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
                                                   <span class="n">rmanc</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
         <span class="n">rmanc</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanc</span><span class="p">))</span>
 
@@ -666,7 +684,7 @@
         <span class="c1"># Connecting the signals to the functions</span>
         <span class="n">rmanf</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
                                                     <span class="n">rmanf</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
-        <span class="n">rmanf</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_primvar_node</span><span class="p">,</span>
+        <span class="n">rmanf</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
                                                   <span class="n">rmanf</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
         <span class="n">rmanf</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanf</span><span class="p">))</span>
 
@@ -689,6 +707,11 @@
         <span class="n">rmans</span><span class="o">.</span><span class="n">gather_files</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">,</span> <span class="n">rmans</span><span class="p">))</span>
         <span class="n">rmans</span><span class="o">.</span><span class="n">clear_files</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_files</span><span class="p">,</span> <span class="n">rmans</span><span class="p">))</span>
         <span class="n">rmans</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmans</span><span class="p">))</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmans</span><span class="o">.</span><span class="n">file_node_name</span><span class="p">,</span>
+                                                  <span class="s2">&quot;file&quot;</span><span class="p">))</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmans</span><span class="o">.</span><span class="n">file_node_name</span><span class="p">))</span>
 
         <span class="c1"># Adding the newly created widgets to the rmans layout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rmanSLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmans</span><span class="p">)</span>
@@ -708,7 +731,7 @@
         <span class="c1"># Connecting the signals to the functions</span>
         <span class="n">rmanv</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
                                                     <span class="n">rmanv</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
-        <span class="n">rmanv</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_primvar_node</span><span class="p">,</span>
+        <span class="n">rmanv</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
                                                   <span class="n">rmanv</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
         <span class="n">rmanv</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanv</span><span class="p">))</span>
 
@@ -730,7 +753,7 @@
         <span class="c1"># Connecting the signals to the functions</span>
         <span class="n">rmanp</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
                                                     <span class="n">rmanp</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
-        <span class="n">rmanp</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_primvar_node</span><span class="p">,</span>
+        <span class="n">rmanp</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
                                                   <span class="n">rmanp</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
         <span class="n">rmanp</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanp</span><span class="p">))</span>
 
@@ -752,7 +775,7 @@
         <span class="c1"># Connecting the signals to the functions</span>
         <span class="n">rmann</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
                                                     <span class="n">rmann</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
-        <span class="n">rmann</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_primvar_node</span><span class="p">,</span>
+        <span class="n">rmann</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
                                                   <span class="n">rmann</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
         <span class="n">rmann</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmann</span><span class="p">))</span>
 
@@ -959,6 +982,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">type_int</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_integer</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type_float</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_float</span><span class="p">)</span>
 
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
 <div class="viewcode-block" id="PrimVarFWidget.go_integer"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarFWidget.go_integer">[docs]</a>    <span class="k">def</span> <span class="nf">go_integer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change the stepping of the spin box, form 0.1 to 1 when choosing the</span>
@@ -1000,6 +1028,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator1</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="n">attr_validator2</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_node_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator2</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">existing_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1054,6 +1089,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
 
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
 <div class="viewcode-block" id="PrimVarNWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarNWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Connecting signals of the Primvar V widget</span>
@@ -1102,6 +1142,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
 
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
 <div class="viewcode-block" id="PrimVarPWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarPWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Connecting signals of the Primvar P widget</span>
@@ -1149,6 +1194,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_signals</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PrimVarVWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarVWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

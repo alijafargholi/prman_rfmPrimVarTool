@@ -173,8 +173,8 @@ list</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="primVarApp.PrimVarApp.create_primvar_node">
-<em class="property">static </em><code class="descname">create_primvar_node</code><span class="sig-paren">(</span><em>widget_primvar_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/primVarApp.html#PrimVarApp.create_primvar_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#primVarApp.PrimVarApp.create_primvar_node" title="Permalink to this definition">¶</a></dt>
+<dt id="primVarApp.PrimVarApp.create_node">
+<em class="property">static </em><code class="descname">create_node</code><span class="sig-paren">(</span><em>widget_primvar_name</em>, <em>node_type='PxrPrimvar'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/primVarApp.html#PrimVarApp.create_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#primVarApp.PrimVarApp.create_node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new primvar node and set the name of the new node to the
 &#8220;Node Name&#8221; of the widget.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -185,7 +185,8 @@ list</p>
 </tr>
 </tbody>
 </table>
-<p>the new PxrPrimvar is created</p>
+<p>the new PxrPrimvar is created
+:param node_type: (str) Type of nore to be created, ex:</p>
 </dd></dl>
 
 <dl class="method">
@@ -278,9 +279,16 @@ given field.</p>
 </dd></dl>
 
 <dl class="staticmethod">
+<dt id="primVarApp.PrimVarApp.go_to_doc">
+<em class="property">static </em><code class="descname">go_to_doc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/primVarApp.html#PrimVarApp.go_to_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#primVarApp.PrimVarApp.go_to_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the browser link and direct it to the local documentation page
+for this tool.</p>
+</dd></dl>
+
+<dl class="staticmethod">
 <dt id="primVarApp.PrimVarApp.go_to_wiki">
 <em class="property">static </em><code class="descname">go_to_wiki</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/primVarApp.html#PrimVarApp.go_to_wiki"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#primVarApp.PrimVarApp.go_to_wiki" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opens the browser link and direct it to the help page for this tool</p>
+<dd><p>Opens the browser link and direct it to the help page on RenderMan.</p>
 </dd></dl>
 
 <dl class="method">

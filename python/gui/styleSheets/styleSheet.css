@@ -24,6 +24,11 @@ QLineEdit#attr_name {
     color: #66ccff;
     font-weight: bold;
 }
+QLineEdit#file_node_name {
+    background-color: black;
+    color: #66ccff;
+    font-weight: bold;
+}
 QPushButton{
     background-color: rgb(92, 97, 100);
     color: white;

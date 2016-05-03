@@ -163,16 +163,17 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         rmans_widget.existing_labels = []
 
     @staticmethod
-    def create_primvar_node(widget_primvar_name):
+    def create_node(widget_primvar_name, node_type="PxrPrimvar"):
         """
         Create a new primvar node and set the name of the new node to the
         "Node Name" of the widget.
 
         :param widget_primvar_name: (QtGui.QLineEdit) Widget to be set once
         the new PxrPrimvar is created
+        :param node_type: (str) Type of nore to be created, ex:
         """
 
-        new_node = pm.createNode("PxrPrimvar")
+        new_node = pm.createNode(node_type)
         widget_primvar_name.setText(str(new_node.name()))
 
     @staticmethod
@@ -221,9 +222,8 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         Opens the browser link and direct it to the local documentation page
         for this tool.
         """
-        url_page = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                "_build/html/index.html")
-        print url_page
+        src = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../")
+        url_page = os.path.join(src, "doc/_build/html/index.html")
         webbrowser.open_new(url=url_page)
 
     def primvar_s(self, shapes, attr):
@@ -242,8 +242,14 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
                             'enough information')
             return
 
+        # Make sure there is a file name
+        if not attr.file_node_name.text():
+            logging.warning('The of the "File" is required.')
+            return
+
         # Create the new attribute name
-        attribute_name = "rmanS" + attr.attr_name.text()
+        attribute_name = "rmanS" + attr.file_node_name.text() + "_" + \
+                         attr.attr_name.text()
 
         # Pick a random sting from the list and assign it to the shape
         for shape in shapes:
@@ -523,7 +529,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Connecting the signals to the functions
         rmanc.get_node_name.clicked.connect(partial(self.get_selected_name,
                                                     rmanc.primvar_node_name))
-        rmanc.create_node.clicked.connect(partial(self.create_primvar_node,
+        rmanc.create_node.clicked.connect(partial(self.create_node,
                                                   rmanc.primvar_node_name))
         rmanc.delete_this.clicked.connect(partial(self.delete_widget, rmanc))
 
@@ -545,7 +551,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Connecting the signals to the functions
         rmanf.get_node_name.clicked.connect(partial(self.get_selected_name,
                                                     rmanf.primvar_node_name))
-        rmanf.create_node.clicked.connect(partial(self.create_primvar_node,
+        rmanf.create_node.clicked.connect(partial(self.create_node,
                                                   rmanf.primvar_node_name))
         rmanf.delete_this.clicked.connect(partial(self.delete_widget, rmanf))
 
@@ -568,6 +574,11 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         rmans.gather_files.clicked.connect(partial(self.get_files, rmans))
         rmans.clear_files.clicked.connect(partial(self.clear_files, rmans))
         rmans.delete_this.clicked.connect(partial(self.delete_widget, rmans))
+        rmans.create_node.clicked.connect(partial(self.create_node,
+                                                  rmans.file_node_name,
+                                                  "file"))
+        rmans.get_node_name.clicked.connect(partial(self.get_selected_name,
+                                                    rmans.file_node_name))
 
         # Adding the newly created widgets to the rmans layout
         self.rmanSLayout.addWidget(rmans)
@@ -587,7 +598,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Connecting the signals to the functions
         rmanv.get_node_name.clicked.connect(partial(self.get_selected_name,
                                                     rmanv.primvar_node_name))
-        rmanv.create_node.clicked.connect(partial(self.create_primvar_node,
+        rmanv.create_node.clicked.connect(partial(self.create_node,
                                                   rmanv.primvar_node_name))
         rmanv.delete_this.clicked.connect(partial(self.delete_widget, rmanv))
 
@@ -609,7 +620,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Connecting the signals to the functions
         rmanp.get_node_name.clicked.connect(partial(self.get_selected_name,
                                                     rmanp.primvar_node_name))
-        rmanp.create_node.clicked.connect(partial(self.create_primvar_node,
+        rmanp.create_node.clicked.connect(partial(self.create_node,
                                                   rmanp.primvar_node_name))
         rmanp.delete_this.clicked.connect(partial(self.delete_widget, rmanp))
 
@@ -631,7 +642,7 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         # Connecting the signals to the functions
         rmann.get_node_name.clicked.connect(partial(self.get_selected_name,
                                                     rmann.primvar_node_name))
-        rmann.create_node.clicked.connect(partial(self.create_primvar_node,
+        rmann.create_node.clicked.connect(partial(self.create_node,
                                                   rmann.primvar_node_name))
         rmann.delete_this.clicked.connect(partial(self.delete_widget, rmann))
 
@@ -838,6 +849,11 @@ class PrimVarFWidget(QtGui.QFrame, fWidget):
         self.type_int.toggled.connect(self.go_integer)
         self.type_float.toggled.connect(self.go_float)
 
+        # Adding regular expression, making sure no illegal value is entered
+        reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
+        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        self.attr_name.setValidator(attr_validator)
+
     def go_integer(self, enabled):
         """
         Change the stepping of the spin box, form 0.1 to 1 when choosing the
@@ -879,6 +895,13 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
         self.mainLayout.setAlignment(QtCore.Qt.AlignTop)
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
         self.mainLayout.setSpacing(1)
+
+        # Adding regular expression, making sure no illegal value is entered
+        reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
+        attr_validator1 = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        attr_validator2 = QtGui.QRegExpValidator(reg_ex, self.file_node_name)
+        self.attr_name.setValidator(attr_validator1)
+        self.attr_name.setValidator(attr_validator2)
 
     @property
     def existing_labels(self):
@@ -933,6 +956,11 @@ class PrimVarNWidget(QtGui.QFrame, nWidget):
         self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
         self.mainLayout.setAlignment(QtCore.Qt.AlignTop)
 
+        # Adding regular expression, making sure no illegal value is entered
+        reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
+        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        self.attr_name.setValidator(attr_validator)
+
     def setup_signals(self):
         """
         Connecting signals of the Primvar V widget
@@ -981,6 +1009,11 @@ class PrimVarPWidget(QtGui.QFrame, pWidget):
         self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
         self.mainLayout.setAlignment(QtCore.Qt.AlignTop)
 
+        # Adding regular expression, making sure no illegal value is entered
+        reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
+        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        self.attr_name.setValidator(attr_validator)
+
     def setup_signals(self):
         """
         Connecting signals of the Primvar P widget
@@ -1028,6 +1061,11 @@ class PrimVarVWidget(QtGui.QFrame, vWidget):
         self.setup_signals()
         self.setFrameStyle(QtGui.QFrame.Panel | QtGui.QFrame.Raised)
         self.mainLayout.setAlignment(QtCore.Qt.AlignTop)
+
+        # Adding regular expression, making sure no illegal value is entered
+        reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
+        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        self.attr_name.setValidator(attr_validator)
 
     def setup_signals(self):
         """
