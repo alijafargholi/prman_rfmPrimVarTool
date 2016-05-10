@@ -143,20 +143,4 @@ Once they're connected the result is as follow:
 rmanS
 -----
 
-This is rmanS
-
-rmanV
------
-
-This is rmanV
-
-rmanP
------
-
-This is rman P
-
-rmanN
------
-
-This is rmanN
-
+*Coming soon*
