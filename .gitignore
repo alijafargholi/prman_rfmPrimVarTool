@@ -2,3 +2,9 @@
 *TODO*
 *TEST.py
 *.pyc
+doc/*.rst
+doc/conf.py
+doc/Makefile
+doc/images
+doc/_templates
+doc/_static
