@@ -1,5 +1,5 @@
-The primVarApp.py Code
-======================
+primVarApp
+==========
 
 .. automodule:: primVarApp
    :members:

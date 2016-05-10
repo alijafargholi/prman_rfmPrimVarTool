@@ -1,5 +1,5 @@
-The utils.core.py Code
-======================
+utils.core
+==========
 
 .. automodule:: utils.core
    :members:

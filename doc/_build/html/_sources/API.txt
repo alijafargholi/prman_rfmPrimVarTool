@@ -1,5 +1,5 @@
-Primitive Variables Manager's API
-=================================
+Primvar Manager API
+===================
 
 Contents:
 

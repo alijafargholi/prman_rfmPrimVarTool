@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
+    <width>531</width>
     <height>130</height>
    </rect>
   </property>
@@ -124,6 +124,9 @@
      </item>
      <item>
       <widget class="QDoubleSpinBox" name="min_value">
+       <property name="minimum">
+        <double>-10000.000000000000000</double>
+       </property>
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>
@@ -138,6 +141,12 @@
      </item>
      <item>
       <widget class="QDoubleSpinBox" name="max_value">
+       <property name="minimum">
+        <double>-100000000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>99990000.000000000000000</double>
+       </property>
        <property name="singleStep">
         <double>0.100000000000000</double>
        </property>

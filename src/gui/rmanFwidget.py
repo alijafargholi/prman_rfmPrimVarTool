@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
-        Form.resize(498, 130)
+        Form.resize(531, 130)
         Form.setMaximumSize(QtCore.QSize(16777215, 130))
         self.mainLayout = QtGui.QVBoxLayout(Form)
         # self.mainLayout.setMargin(1)
@@ -66,6 +66,7 @@ class Ui_Form(object):
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.horizontalLayout_3.addWidget(self.label_3)
         self.min_value = QtGui.QDoubleSpinBox(Form)
+        self.min_value.setMinimum(-10000.0)
         self.min_value.setSingleStep(0.1)
         self.min_value.setObjectName(_fromUtf8("min_value"))
         self.horizontalLayout_3.addWidget(self.min_value)
@@ -73,6 +74,8 @@ class Ui_Form(object):
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.horizontalLayout_3.addWidget(self.label_4)
         self.max_value = QtGui.QDoubleSpinBox(Form)
+        self.max_value.setMinimum(-100000000.0)
+        self.max_value.setMaximum(99990000.0)
         self.max_value.setSingleStep(0.1)
         self.max_value.setProperty("value", 1.0)
         self.max_value.setObjectName(_fromUtf8("max_value"))

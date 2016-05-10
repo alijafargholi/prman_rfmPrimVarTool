@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How To Use Primvar Variable Manager Tool &mdash; Primitive Variables Manager 0.1.1 documentation</title>
+  <title>How To &mdash; Primitive Variables Manager 0.1.1 documentation</title>
   
 
   
@@ -83,9 +83,9 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="what_is_primvar.html">What is Primvar</a></li>
-<li class="toctree-l1"><a class="reference internal" href="what_is_primvar_manager.html">What is Primvar Variable Manager Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_primvar_manager.html">What is Primvar Manager Tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How To Use Primvar Variable Manager Tool</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How To</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#rmanc">rmanC</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#random-color">Random Color</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#random-shade-of-color">Random Shade of Color</a></li>
@@ -130,7 +130,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>How To Use Primvar Variable Manager Tool</li>
+    <li>How To</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -144,12 +144,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="how-to-use-primvar-variable-manager-tool">
-<h1>How To Use Primvar Variable Manager Tool<a class="headerlink" href="#how-to-use-primvar-variable-manager-tool" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="how-to">
+<h1>How To<a class="headerlink" href="#how-to" title="Permalink to this headline">¶</a></h1>
 <p>In this section I go over how to use each sections to create a unique attribute.</p>
 <div class="section" id="rmanc">
 <h2>rmanC<a class="headerlink" href="#rmanc" title="Permalink to this headline">¶</a></h2>
-<p>This attribute is sutable for adding color variation. Using this UI, you have
+<p>This attribute is suitable for adding color variation. Using this UI, you have
 options to create:</p>
 <ul class="simple">
 <li>random color</li>
@@ -157,13 +157,10 @@ options to create:</p>
 <li>random grayscale</li>
 </ul>
 <a class="reference internal image-reference" href="_images/randomBaseColorManager.png"><img alt="_images/randomBaseColorManager.png" class="align-center" src="_images/randomBaseColorManager.png" style="width: 488.0px; height: 208.0px;" /></a>
-<dl class="docutils">
-<dt>As you can see in above image, you have control over the name of the</dt>
-<dd>attributes, shade of color, value and saturation.</dd>
-</dl>
+<p>As you can see in above image, you have control over the name of the attributes, shade of color, value and saturation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The color system in this UI is HSV.</p>
+<p class="last">All the color system in this UI is HSV.</p>
 </div>
 <p>Here are some examples of using this attribute to generate different results:</p>
 <div class="section" id="random-color">
@@ -218,7 +215,30 @@ attributes on the PxrPrimvar node.</p>
 </div>
 <div class="section" id="rmanf">
 <h2>rmanF<a class="headerlink" href="#rmanf" title="Permalink to this headline">¶</a></h2>
-<p>This is rmanF</p>
+<p>This a useful variable for make variation in any shader attribute that gets floating number as an input, such as <em>Specular</em>, <em>Roughness</em>, <em>Bump, *Metallic</em>, and so on.</p>
+<p>To demonstrate this, I assigned a <em>PxrLMMetal</em> to all the Spheres, and the
+result is as follow.</p>
+<a class="reference internal image-reference" href="_images/metallic_result.png"><img alt="_images/metallic_result.png" class="align-center" src="_images/metallic_result.png" style="width: 400.0px; height: 400.0px;" /></a>
+<p>Then click on a <em>Create</em> button to make a new Primvar attribute UI.</p>
+<p>Make sure to:
+<em>Give it a meaningful name.
+*Choose a appropriate *value</em> <em>type</em> (the float type is more common)
+<em>Adjust the *min/max</em> limit.</p>
+<a class="reference internal image-reference" href="_images/randomRmanF.png"><img alt="_images/randomRmanF.png" class="align-center" src="_images/randomRmanF.png" style="width: 510.0px; height: 203.0px;" /></a>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As previously mentioned, if you specify the <em>PixPrimvar</em> node name,</p>
+</div>
+<p>it&#8217;ll automatically adjust it&#8217;s value.</p>
+<a class="reference internal image-reference" href="_images/rmanFPixrPrimVar.png"><img alt="_images/rmanFPixrPrimVar.png" class="align-center" src="_images/rmanFPixrPrimVar.png" style="width: 627.2px; height: 295.4px;" /></a>
+<p>After assigning the attribute to the <strong>selected objects</strong> you&#8217;ll see newly
+created attribute on the shape node.</p>
+<a class="reference internal image-reference" href="_images/attachedRmanFAttr.png"><img alt="_images/attachedRmanFAttr.png" class="align-center" src="_images/attachedRmanFAttr.png" style="width: 691.2px; height: 36.8px;" /></a>
+<p>Then from <em>PxrPrimvar</em> node, connect the <em>Result F</em> to the any shader&#8217;s attribute that you want to make variation, in this case I&#8217;m going to connect it to the <em>roughness</em>.</p>
+<a class="reference internal image-reference" href="_images/connectPxrPrimvarFloat1.png"><img alt="_images/connectPxrPrimvarFloat1.png" class="align-center" src="_images/connectPxrPrimvarFloat1.png" style="width: 582.5px; height: 266.0px;" /></a>
+<a class="reference internal image-reference" href="_images/connectPxrPrimvarFloat2.png"><img alt="_images/connectPxrPrimvarFloat2.png" class="align-center" src="_images/connectPxrPrimvarFloat2.png" style="width: 582.5px; height: 266.0px;" /></a>
+<p>Once they&#8217;re connected the result is as follow:</p>
+<a class="reference internal image-reference" href="_images/rmanF_result.png"><img alt="_images/rmanF_result.png" class="align-center" src="_images/rmanF_result.png" style="width: 397.6px; height: 399.2px;" /></a>
 </div>
 <div class="section" id="rmans">
 <h2>rmanS<a class="headerlink" href="#rmans" title="Permalink to this headline">¶</a></h2>

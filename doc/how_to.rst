@@ -1,12 +1,12 @@
-How To Use Primvar Variable Manager Tool
-========================================
+How To
+======
 
 In this section I go over how to use each sections to create a unique attribute.
 
 rmanC
 -----
 
-This attribute is sutable for adding color variation. Using this UI, you have
+This attribute is suitable for adding color variation. Using this UI, you have
 options to create:
 
 * random color
@@ -17,10 +17,9 @@ options to create:
     :scale: 50 %
     :align: center
 
-As you can see in above image, you have control over the name of the
-    attributes, shade of color, value and saturation.
+As you can see in above image, you have control over the name of the attributes, shade of color, value and saturation.
 
-.. note:: The color system in this UI is HSV.
+.. note:: All the color system in this UI is HSV.
 
 Here are some examples of using this attribute to generate different results:
 
@@ -91,7 +90,55 @@ And here is the result of using the **Random Grayscale** options.
 rmanF
 -----
 
-This is rmanF
+This a useful variable for make variation in any shader attribute that gets floating number as an input, such as *Specular*, *Roughness*, *Bump, *Metallic*, and so on.
+
+To demonstrate this, I assigned a *PxrLMMetal* to all the Spheres, and the
+result is as follow.
+
+.. image:: images/metallic_result.png
+    :scale: 40 %
+    :align: center
+
+Then click on a *Create* button to make a new Primvar attribute UI.
+
+Make sure to:
+*Give it a meaningful name.
+*Choose a appropriate *value* *type* (the float type is more common)
+*Adjust the *min/max* limit.
+
+.. image:: images/randomRmanF.png
+    :scale: 50 %
+    :align: center
+
+.. note:: As previously mentioned, if you specify the *PixPrimvar* node name,
+it'll automatically adjust it's value.
+
+.. image:: images/rmanFPixrPrimVar.png
+    :scale: 70 %
+    :align: center
+
+After assigning the attribute to the **selected objects** you'll see newly
+created attribute on the shape node.
+
+.. image:: images/attachedRmanFAttr.png
+    :scale: 80 %
+    :align: center
+
+Then from *PxrPrimvar* node, connect the *Result F* to the any shader's attribute that you want to make variation, in this case I'm going to connect it to the *roughness*.
+
+.. image:: images/connectPxrPrimvarFloat1.png
+    :scale:  50 %
+    :align: center
+
+.. image:: images/connectPxrPrimvarFloat2.png
+    :scale:  50 %
+    :align: center
+
+Once they're connected the result is as follow:
+
+.. image:: images/rmanF_result.png
+    :scale: 40 %
+    :align: center
 
 rmanS
 -----
