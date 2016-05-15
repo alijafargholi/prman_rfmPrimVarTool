@@ -143,4 +143,46 @@ Once they're connected the result is as follow:
 rmanS
 -----
 
-*Coming soon*
+This attribute is ideal for use for any texture input, such as *diffuse color*, *specular*, *alpha*.
+
+* Click on the create button.
+* Provide the name of a texture read node. (Either Maya's native File Texture node, or Pixar's PxrTexture Node)
+* Click on the *Gather Files* to select the images that you want to use.
+* Select your geometries and lick on *Assign*.
+
+.. note:: I used some leaves textures from www.textures.com
+
+.. image:: images/createRmanS.png
+    :scale: 50 %
+    :align: center
+
+If you select a shape node, in the *Extra Attributes*, you'll see there's a new string attribute.
+
+.. image:: images/rmanSShapeNode.png
+    :align: center
+
+Next, connect the **Output Color** of the texture file to the **Surface Color** of your shader. (As you can see in the following graph, if the image has alpha channel and you want to use it, connect it to the appropriate inputs)
+
+.. image:: images/rmanSConnection.png
+    :align: center
+
+.. note:: Make sure you leave the *File Path* of the texture node empty.
+
+.. image:: images/rmansFilePath.png
+    :align: center
+
+I applied this few simple planes,
+
+.. image:: images/rmanSMayaScene.png
+    :scale: 70 %
+    :align: center
+
+And here is the result of the:
+
+.. image:: images/textureRGB_result.png
+    :scale: 70 %
+    :align: center
+
+.. image:: images/textureA_result.png
+    :scale: 50 %
+    :align: center

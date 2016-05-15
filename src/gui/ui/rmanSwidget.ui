@@ -55,27 +55,6 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Attribute Name:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="attr_name">
-          <property name="maximumSize">
-           <size>
-            <width>270</width>
-            <height>16777215</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLabel" name="label_5">
@@ -104,7 +83,7 @@
         <item>
          <widget class="QPushButton" name="create_node">
           <property name="text">
-           <string>Create Texture File Node</string>
+           <string>Create Texture File</string>
           </property>
          </widget>
         </item>
@@ -139,7 +118,7 @@
            <x>0</x>
            <y>0</y>
            <width>534</width>
-           <height>134</height>
+           <height>158</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="stringListLayout">

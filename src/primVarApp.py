@@ -55,7 +55,6 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         Setting up some of the UI look and feel
         """
 
-        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         self.setWindowTitle("PrimVar Manager - {}".format(__version__))
 
         layouts_list = [self.rmanCLayout, self.rmanFLayout,
@@ -122,14 +121,19 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
             # Finally close the UI
             close_ui()
 
+        # TODO: Figuring out why this loop fails?!!!!
         # For some reason, when I loop over the list of widgets to create the
-        #  attributes, the loop wouldn't go though all the items. I'm forcing
-        #  here to go through loop as long as it meets the requirements. (I
+        # attributes, the loop wouldn't go though all the items. I'm forcing
+        # here to go through loop as long as it meets the requirements. (I
         # have look into this later) (The problem happens lines 99-112)
         if self.created_attributes:
             for left_over in self.created_attributes:
-                if left_over.attr_name.text():
-                    self.assign_attributes()
+                if type(left_over) == PrimVarSWidget:
+                    if left_over.file_node_name.text():
+                        self.assign_attributes()
+                else:
+                    if left_over.attr_name.text():
+                        self.assign_attributes()
 
     @staticmethod
     def setup_primvar_node(node_name, attr_name, attr_type):
@@ -237,19 +241,29 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
 
         # If there missing information for assigning the attribute, abort the
         #  assignment and warn the user
-        if not attr.attr_name.text() or not attr.new_strings:
+        if not attr.file_node_name.text() or not attr.new_strings:
             logging.warning('An "String PrimVar" failed, because of lack of '
                             'enough information')
             return
 
         # Make sure there is a file name
         if not attr.file_node_name.text():
-            logging.warning('The of the "File" is required.')
+            logging.warning('The "File" is required.')
+            return
+
+        if type(pm.PyNode(attr.file_node_name.text())) == \
+                pm.nodetypes.PxrTexture:
+            texture_attr_name = 'filename'
+        elif type(pm.PyNode(attr.file_node_name.text())) == pm.nodetypes.File:
+            texture_attr_name = 'fileTextureName'
+        else:
+            logging.warning('Selected texture read file node should be either '
+                            'File type or PxrTexture type.')
             return
 
         # Create the new attribute name
         attribute_name = "rmanS" + attr.file_node_name.text() + "_" + \
-                         attr.attr_name.text()
+                         texture_attr_name
 
         # Pick a random sting from the list and assign it to the shape
         for shape in shapes:
@@ -898,10 +912,8 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator1 = QtGui.QRegExpValidator(reg_ex, self.attr_name)
-        attr_validator2 = QtGui.QRegExpValidator(reg_ex, self.file_node_name)
-        self.attr_name.setValidator(attr_validator1)
-        self.attr_name.setValidator(attr_validator2)
+        attr_validator = QtGui.QRegExpValidator(reg_ex, self.file_node_name)
+        self.file_node_name.setValidator(attr_validator)
 
     @property
     def existing_labels(self):

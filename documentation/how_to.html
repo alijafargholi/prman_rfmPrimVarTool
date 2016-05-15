@@ -239,7 +239,32 @@ created attribute on the shape node.</p>
 </div>
 <div class="section" id="rmans">
 <h2>rmanS<a class="headerlink" href="#rmans" title="Permalink to this headline">¶</a></h2>
-<p><em>Coming soon</em></p>
+<p>This attribute is ideal for use for any texture input, such as <em>diffuse color</em>, <em>specular</em>, <em>alpha</em>.</p>
+<ul class="simple">
+<li>Click on the create button.</li>
+<li>Provide the name of a texture read node. (Either Maya&#8217;s native File Texture node, or Pixar&#8217;s PxrTexture Node)</li>
+<li>Click on the <em>Gather Files</em> to select the images that you want to use.</li>
+<li>Select your geometries and lick on <em>Assign</em>.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I used some leaves textures from www.textures.com</p>
+</div>
+<a class="reference internal image-reference" href="_images/createRmanS.png"><img alt="_images/createRmanS.png" class="align-center" src="_images/createRmanS.png" style="width: 508.0px; height: 444.0px;" /></a>
+<p>If you select a shape node, in the <em>Extra Attributes</em>, you&#8217;ll see there&#8217;s a new string attribute.</p>
+<img alt="_images/rmanSShapeNode.png" class="align-center" src="_images/rmanSShapeNode.png" />
+<p>Next, connect the <strong>Output Color</strong> of the texture file to the <strong>Surface Color</strong> of your shader. (As you can see in the following graph, if the image has alpha channel and you want to use it, connect it to the appropriate inputs)</p>
+<img alt="_images/rmanSConnection.png" class="align-center" src="_images/rmanSConnection.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you leave the <em>File Path</em> of the texture node empty.</p>
+</div>
+<img alt="_images/rmansFilePath.png" class="align-center" src="_images/rmansFilePath.png" />
+<p>I applied this few simple planes,</p>
+<a class="reference internal image-reference" href="_images/rmanSMayaScene.png"><img alt="_images/rmanSMayaScene.png" class="align-center" src="_images/rmanSMayaScene.png" style="width: 289.8px; height: 289.1px;" /></a>
+<p>And here is the result of the:</p>
+<a class="reference internal image-reference" href="_images/textureRGB_result.png"><img alt="_images/textureRGB_result.png" class="align-center" src="_images/textureRGB_result.png" style="width: 1400.0px; height: 1400.0px;" /></a>
+<a class="reference internal image-reference" href="_images/textureA_result.png"><img alt="_images/textureA_result.png" class="align-center" src="_images/textureA_result.png" style="width: 779.0px; height: 785.0px;" /></a>
 </div>
 </div>
 
