@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>utils.core &mdash; Primitive Variables Manager 0.1.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Primitive Variables Manager 0.1.1 documentation" href="index.html"/>
+        <link rel="up" title="Primvar Manager API" href="API.html"/>
+        <link rel="prev" title="primVarApp" href="doc_primVarApp.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Primitive Variables Manager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="what_is_primvar.html">What is Primvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_primvar_manager.html">What is Primvar Manager Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to.html">How To</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="API.html">Primvar Manager API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="doc_primVarApp.html">primVarApp</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">utils.core</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Primitive Variables Manager</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="API.html">Primvar Manager API</a> &raquo;</li>
+      
+    <li>utils.core</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/doc_core.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-utils.core">
+<span id="utils-core"></span><h1>utils.core<a class="headerlink" href="#module-utils.core" title="Permalink to this headline">¶</a></h1>
+<p>The core functionality for Primvar tool.</p>
+<span class="target" id="module-`core`"></span><dl class="function">
+<dt id="utils.core.add_attr">
+<code class="descclassname">utils.core.</code><code class="descname">add_attr</code><span class="sig-paren">(</span><em>node</em>, <em>attr_name</em>, <em>debug=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#add_attr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.add_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes to the given object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymel.core</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FOO</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sphere</span><span class="p">()</span>
+<span class="go"># Result: [nt.Transform(u&#39;nurbsSphere1&#39;),</span>
+<span class="go">           t.MakeNurbSphere(u&#39;makeNurbSphere2&#39;)] #</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shapeNode</span> <span class="o">=</span> <span class="n">FOO</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go"># Get the shape of the FOO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_attr</span><span class="p">(</span><span class="n">shapeNode</span><span class="p">,</span> <span class="s2">&quot;newAttributeName&quot;</span><span class="p">,</span> <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+<span class="go"># Create a new attribute called &quot;newAttributeName&quot;, type float</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> &#8211; (PyMel nodes) Object to assign new attributes to.</li>
+<li><strong>attr_name</strong> &#8211; (String) attributes name</li>
+<li><strong>debug</strong> &#8211; (Boolean) Set True if you want to print out the result.</li>
+<li><strong>kwargs</strong> &#8211; attribute keywords. ex:</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.core.get_random_vector">
+<code class="descclassname">utils.core.</code><code class="descname">get_random_vector</code><span class="sig-paren">(</span><em>minimum_x=0</em>, <em>maximum_x=1</em>, <em>minimum_y=0</em>, <em>maximum_y=1</em>, <em>minimum_z=0</em>, <em>maximum_z=1</em>, <em>variation=False</em>, <em>kind='float'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#get_random_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.get_random_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of three numbers, vector, integer of float.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>minimum_x</strong> &#8211; (float or int) Minimum x range</li>
+<li><strong>maximum_x</strong> &#8211; (float or int) Maximum x range</li>
+<li><strong>minimum_y</strong> &#8211; (float or int) Minimum y range</li>
+<li><strong>maximum_y</strong> &#8211; (float or int) Maximum y range</li>
+<li><strong>minimum_z</strong> &#8211; (float or int) Minimum z range</li>
+<li><strong>maximum_z</strong> &#8211; (float or int) Maximum z range</li>
+<li><strong>variation</strong> &#8211; (Boolean) If True, result in uniform result.</li>
+<li><strong>kind</strong> &#8211; (String) Kind of vector, integer or float. Default is float.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.core.get_rman_attr">
+<code class="descclassname">utils.core.</code><code class="descname">get_rman_attr</code><span class="sig-paren">(</span><em>nodes</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#get_rman_attr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.get_rman_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dictionary of primvar attribute found on the given nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nodes</strong> &#8211; (List of PyMel nodes) Nodes to query their primvar attributes.</li>
+<li><strong>debug</strong> &#8211; (Boolean) Set True if you want to print out the result.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.core.get_shapes">
+<code class="descclassname">utils.core.</code><code class="descname">get_shapes</code><span class="sig-paren">(</span><em>nodes</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#get_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.get_shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields the name on shape node for each selected object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodes</strong> &#8211; (List of PyMel node) objects to be check for shape node.</li>
+<li><strong>debug</strong> &#8211; (Boolean) If True, it&#8217;ll output the errors and the process.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yield:</th><td class="field-body"><p class="first last">(PyMel node) shape node of the selected node.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.core.remove_attr">
+<code class="descclassname">utils.core.</code><code class="descname">remove_attr</code><span class="sig-paren">(</span><em>node</em>, <em>attr_name</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#remove_attr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.remove_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the given attribute from the given node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> &#8211; (PyMel Node) The object that needs to be its attribute deleted.</li>
+<li><strong>attr_name</strong> &#8211; (Str) Name of the attribute to be deleted from the object.</li>
+<li><strong>debug</strong> &#8211; (Boolean) Set True if you want to print out the result.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.core.set_attr">
+<code class="descclassname">utils.core.</code><code class="descname">set_attr</code><span class="sig-paren">(</span><em>node</em>, <em>attr_name</em>, <em>value</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#set_attr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.set_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setting the attribute of the object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node</strong> &#8211; (PyMel nodes) Object to set its attribute.</li>
+<li><strong>attr_name</strong> &#8211; (String) Attribute name of the object to be set.</li>
+<li><strong>value</strong> &#8211; (String, Int, Float) Value of the attribute to set.</li>
+<li><strong>debug</strong> &#8211; (Boolean) Print out the process of setting the attribute</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.core.unpack">
+<code class="descclassname">utils.core.</code><code class="descname">unpack</code><span class="sig-paren">(</span><em>nodes</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/core.html#unpack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.core.unpack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the given node is a group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodes</strong> &#8211; (PyMel node) a node to be checked if a group</li>
+<li><strong>debug</strong> &#8211; (Boolean) If True, it&#8217;ll output the errors and the process.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if the node is a group and False otherwise.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="doc_primVarApp.html" class="btn btn-neutral" title="primVarApp" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ali Jafargholi.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

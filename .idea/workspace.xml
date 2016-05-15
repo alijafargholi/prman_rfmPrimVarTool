@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ee835cc9-d9d9-48ba-95bb-0455071a00cd" name="Default" comment="add get_random_color_shade function to _core module, which returns a random color from a specific hue. started working on the UI">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/primVarApp.py" afterPath="$PROJECT_DIR$/src/primVarApp.py" />
+    </list>
+    <ignored path="rfm_primvar.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="rfm_primvar" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="primVarApp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/primVarApp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+              <folding>
+                <element signature="e#8291#8601#1" expanded="false" />
+                <element signature="e#8611#8680#0" expanded="false" />
+                <element signature="e#8816#8914#0" expanded="false" />
+                <element signature="e#9811#9979#0" expanded="false" />
+                <element signature="e#10088#11618#0" expanded="false" />
+                <element signature="e#10088#10398#1" expanded="false" />
+                <element signature="e#10727#11190#0" expanded="false" />
+                <element signature="e#10853#10999#0" expanded="false" />
+                <element signature="e#11034#11180#0" expanded="false" />
+                <element signature="e#11190#11260#0" expanded="false" />
+                <element signature="e#11400#11558#0" expanded="false" />
+                <element signature="e#11667#14822#0" expanded="false" />
+                <element signature="e#11667#11977#1" expanded="false" />
+                <element signature="e#12257#14394#0" expanded="false" />
+                <element signature="e#12941#13363#0" expanded="false" />
+                <element signature="e#13485#13900#0" expanded="false" />
+                <element signature="e#13983#14384#0" expanded="false" />
+                <element signature="e#13983#14001#0" expanded="false" />
+                <element signature="e#14394#14464#0" expanded="false" />
+                <element signature="e#14604#14762#0" expanded="false" />
+                <element signature="e#14871#17160#0" expanded="false" />
+                <element signature="e#14871#15182#1" expanded="false" />
+                <element signature="e#15506#16721#0" expanded="false" />
+                <element signature="e#16731#16801#0" expanded="false" />
+                <element signature="e#16941#17100#0" expanded="false" />
+                <element signature="e#17209#19497#0" expanded="false" />
+                <element signature="e#17209#17520#1" expanded="false" />
+                <element signature="e#17844#19059#0" expanded="false" />
+                <element signature="e#19069#19139#0" expanded="false" />
+                <element signature="e#19279#19437#0" expanded="false" />
+                <element signature="e#19546#21835#0" expanded="false" />
+                <element signature="e#19546#19857#1" expanded="false" />
+                <element signature="e#20181#21396#0" expanded="false" />
+                <element signature="e#21406#21476#0" expanded="false" />
+                <element signature="e#21616#21775#0" expanded="false" />
+                <element signature="e#21874#22734#0" expanded="false" />
+                <element signature="e#21874#22033#1" expanded="false" />
+                <element signature="e#22773#23633#0" expanded="false" />
+                <element signature="e#22773#22932#1" expanded="false" />
+                <element signature="e#23672#23831#1" expanded="false" />
+                <element signature="e#24774#25634#0" expanded="false" />
+                <element signature="e#24774#24933#1" expanded="false" />
+                <element signature="e#25673#26533#0" expanded="false" />
+                <element signature="e#25673#25832#1" expanded="false" />
+                <element signature="e#26572#27432#0" expanded="false" />
+                <element signature="e#26572#26731#1" expanded="false" />
+                <element signature="e#27481#28267#0" expanded="false" />
+                <element signature="e#27481#27640#1" expanded="false" />
+                <element signature="e#28113#28267#0" expanded="false" />
+                <element signature="e#28331#28695#0" expanded="false" />
+                <element signature="e#28331#28515#1" expanded="false" />
+                <element signature="e#28742#29016#0" expanded="false" />
+                <element signature="e#28742#28939#1" expanded="false" />
+                <element signature="e#29047#29283#0" expanded="false" />
+                <element signature="e#29047#29151#1" expanded="false" />
+                <element signature="e#29212#29283#0" expanded="false" />
+                <element signature="e#29325#29876#0" expanded="false" />
+                <element signature="e#29325#29380#1" expanded="false" />
+                <element signature="e#29407#29602#0" expanded="false" />
+                <element signature="e#29644#29876#0" expanded="false" />
+                <element signature="e#29726#29813#0" expanded="false" />
+                <element signature="e#29928#33443#0" expanded="false" />
+                <element signature="e#29928#29970#1" expanded="false" />
+                <element signature="e#30021#30623#0" expanded="false" />
+                <element signature="e#30673#30898#0" expanded="false" />
+                <element signature="e#30673#30865#1" expanded="false" />
+                <element signature="e#30964#31676#0" expanded="false" />
+                <element signature="e#30964#31084#1" expanded="false" />
+                <element signature="e#31259#31387#0" expanded="false" />
+                <element signature="e#31285#31385#0" expanded="false" />
+                <element signature="e#31396#31458#0" expanded="false" />
+                <element signature="e#31715#32086#0" expanded="false" />
+                <element signature="e#31715#31781#1" expanded="false" />
+                <element signature="e#32142#32400#0" expanded="false" />
+                <element signature="e#32142#32235#1" expanded="false" />
+                <element signature="e#32269#32400#0" expanded="false" />
+                <element signature="e#32463#32737#0" expanded="false" />
+                <element signature="e#32463#32571#1" expanded="false" />
+                <element signature="e#32605#32737#0" expanded="false" />
+                <element signature="e#32797#33064#0" expanded="false" />
+                <element signature="e#32797#32901#1" expanded="false" />
+                <element signature="e#32935#33064#0" expanded="false" />
+                <element signature="e#33100#33443#0" expanded="false" />
+                <element signature="e#33100#33254#1" expanded="false" />
+                <element signature="e#33495#34833#0" expanded="false" />
+                <element signature="e#33495#33537#1" expanded="false" />
+                <element signature="e#33588#34157#0" expanded="false" />
+                <element signature="e#34202#34495#0" expanded="false" />
+                <element signature="e#34202#34386#1" expanded="false" />
+                <element signature="e#34420#34495#0" expanded="false" />
+                <element signature="e#34538#34833#0" expanded="false" />
+                <element signature="e#34538#34720#1" expanded="false" />
+                <element signature="e#34754#34833#0" expanded="false" />
+                <element signature="e#34885#36475#0" expanded="false" />
+                <element signature="e#34885#34927#1" expanded="false" />
+                <element signature="e#34978#35607#0" expanded="false" />
+                <element signature="e#35662#35860#0" expanded="false" />
+                <element signature="e#35662#35822#1" expanded="false" />
+                <element signature="e#35936#36089#0" expanded="false" />
+                <element signature="e#35936#36050#1" expanded="false" />
+                <element signature="e#36140#36262#0" expanded="false" />
+                <element signature="e#36140#36229#1" expanded="false" />
+                <element signature="e#36330#36475#0" expanded="false" />
+                <element signature="e#36330#36440#1" expanded="false" />
+                <element signature="e#36527#38140#0" expanded="false" />
+                <element signature="e#36527#36569#1" expanded="false" />
+                <element signature="e#36620#37108#0" expanded="false" />
+                <element signature="e#37147#37338#0" expanded="false" />
+                <element signature="e#37147#37213#1" expanded="false" />
+                <element signature="e#37391#37738#0" expanded="false" />
+                <element signature="e#37391#37529#1" expanded="false" />
+                <element signature="e#37563#37738#0" expanded="false" />
+                <element signature="e#37789#38140#0" expanded="false" />
+                <element signature="e#37789#37927#1" expanded="false" />
+                <element signature="e#37961#38140#0" expanded="false" />
+                <element signature="e#38192#39805#0" expanded="false" />
+                <element signature="e#38192#38234#1" expanded="false" />
+                <element signature="e#38285#38773#0" expanded="false" />
+                <element signature="e#38812#39003#0" expanded="false" />
+                <element signature="e#38812#38878#1" expanded="false" />
+                <element signature="e#39056#39403#0" expanded="false" />
+                <element signature="e#39056#39194#1" expanded="false" />
+                <element signature="e#39228#39403#0" expanded="false" />
+                <element signature="e#39454#39805#0" expanded="false" />
+                <element signature="e#39454#39592#1" expanded="false" />
+                <element signature="e#39626#39805#0" expanded="false" />
+                <element signature="e#39857#41470#0" expanded="false" />
+                <element signature="e#39857#39899#1" expanded="false" />
+                <element signature="e#39950#40438#0" expanded="false" />
+                <element signature="e#40477#40668#0" expanded="false" />
+                <element signature="e#40477#40543#1" expanded="false" />
+                <element signature="e#40721#41068#0" expanded="false" />
+                <element signature="e#40721#40859#1" expanded="false" />
+                <element signature="e#40893#41068#0" expanded="false" />
+                <element signature="e#41119#41470#0" expanded="false" />
+                <element signature="e#41119#41257#1" expanded="false" />
+                <element signature="e#41291#41470#0" expanded="false" />
+                <element signature="e#41494#41689#0" expanded="false" />
+                <element signature="e#41494#41577#1" expanded="false" />
+                <element signature="e#41712#41874#0" expanded="false" />
+                <element signature="e#41712#41765#1" expanded="false" />
+                <element signature="e#41820#41874#0" expanded="false" />
+                <marker date="1463356078000" expanded="false" signature="26:139" placeholder="import ..." />
+                <marker date="1463356078000" expanded="false" signature="665:1018" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="684:943" placeholder="&quot;...&quot;" />
+                <marker date="1463356078000" expanded="false" signature="1142:1213" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="1255:1532" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="1556:2054" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="1565:1628" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="1727:1881" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="1919:2054" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="2084:2845" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="2093:2159" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="2879:5144" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="2888:3005" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="3229:3538" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="3280:3371" placeholder="&quot;...&quot;" />
+                <marker date="1463356078000" expanded="false" signature="3658:4246" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="4358:4416" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="4426:4773" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="4809:5144" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="4863:5144" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="4917:5022" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="5044:5144" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="5224:5769" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="5233:5551" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="5565:5702" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="5823:6129" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="5832:5968" placeholder="&quot;&quot;&quot;Remove all the existing files from the given rmans PrimVar widget....&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="6214:6629" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="6223:6526" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="6674:7022" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="6683:6847" placeholder="&quot;&quot;&quot;Popping up a UI showing the warning message....&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="7072:7696" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="7081:7319" placeholder="&quot;&quot;&quot;It validates whether or not the widgets's attribute's name is set...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="7329:7438" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="7483:7658" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="7512:7632" placeholder="'...'" />
+                <marker date="1463356078000" expanded="false" signature="7737:7961" placeholder="..." />
+                <marker date="1463356078000" expanded="false" signature="7746:7837" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1463356078000" expanded="false" signature="8010:8125" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rmanSwidget.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/rmanSwidget.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="how_to.rst" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/how_to.rst">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="676">
+              <caret line="173" column="18" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conf.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/conf.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="279" column="89" selection-start-line="279" selection-start-column="76" selection-end-line="279" selection-end-column="89" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="35" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/python/gui/styleSheets/widgetStyleSheet.css" />
+        <option value="$PROJECT_DIR$/python/gui/nPrimVarWidgets.py" />
+        <option value="$PROJECT_DIR$/python/gui/sPrimVarWidgets.py" />
+        <option value="$PROJECT_DIR$/python/gui/fPrimVarWidget.py" />
+        <option value="$PROJECT_DIR$/python/gui/nvpmPrimVarWidgets.py" />
+        <option value="$PROJECT_DIR$/python/gui/cPrimVarWidget.py" />
+        <option value="$PROJECT_DIR$/python/mainWindow.py" />
+        <option value="$PROJECT_DIR$/python/primVarUi.py" />
+        <option value="$PROJECT_DIR$/python/app.py" />
+        <option value="$PROJECT_DIR$/python/gui/images/images.qrc" />
+        <option value="$PROJECT_DIR$/python/gui/images/images_rc.py" />
+        <option value="$PROJECT_DIR$/python/gui/rmanVwidget.py" />
+        <option value="$PROJECT_DIR$/python/gui/rmanPwidget.py" />
+        <option value="$PROJECT_DIR$/python/gui/rmanNwidget.py" />
+        <option value="$PROJECT_DIR$/python/TEST.py" />
+        <option value="$PROJECT_DIR$/python/gui/mainWindow.py" />
+        <option value="$PROJECT_DIR$/index.rst" />
+        <option value="$PROJECT_DIR$/doc/TODO" />
+        <option value="$PROJECT_DIR$/documentation/TODO" />
+        <option value="$PROJECT_DIR$/documentation/what_is_primvar_manager.rst" />
+        <option value="$PROJECT_DIR$/documentation/conf.py" />
+        <option value="$PROJECT_DIR$/documentation/primVarApp.rst" />
+        <option value="$PROJECT_DIR$/documentation/what_is_primvar.rst" />
+        <option value="$PROJECT_DIR$/documentation/code.rst" />
+        <option value="$PROJECT_DIR$/documentation/test.rst" />
+        <option value="$PROJECT_DIR$/documentation/how_to.rst" />
+        <option value="$PROJECT_DIR$/documentation/doc_core.rst" />
+        <option value="$PROJECT_DIR$/documentation/index.rst" />
+        <option value="$PROJECT_DIR$/doc/what_is_primvar" />
+        <option value="$PROJECT_DIR$/python/utils/core.py" />
+        <option value="$PROJECT_DIR$/doc/index.rst" />
+        <option value="$PROJECT_DIR$/doc/conf.py" />
+        <option value="$PROJECT_DIR$/doc/what_is_primvar.rst" />
+        <option value="$PROJECT_DIR$/__init__.py" />
+        <option value="$PROJECT_DIR$/python/gui/rmanSwidget.py" />
+        <option value="$PROJECT_DIR$/python/gui/rmanCwidget.py" />
+        <option value="$PROJECT_DIR$/python/primVarApp.py" />
+        <option value="$PROJECT_DIR$/python/gui/styleSheets/styleSheet.css" />
+        <option value="$PROJECT_DIR$/doc/what_is_primvar_manager.rst" />
+        <option value="$PROJECT_DIR$/python/gui/rmanFwidget.py" />
+        <option value="$PROJECT_DIR$/doc/doc_core.rst" />
+        <option value="$PROJECT_DIR$/doc/doc_primVarApp.rst" />
+        <option value="$PROJECT_DIR$/doc/API.rst" />
+        <option value="$PROJECT_DIR$/doc/_build/html/_sources/installation.txt" />
+        <option value="$PROJECT_DIR$/doc/installation.rst" />
+        <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/gui/rmanSwidget.py" />
+        <option value="$PROJECT_DIR$/doc/how_to.rst" />
+        <option value="$PROJECT_DIR$/doc/Makefile" />
+        <option value="$PROJECT_DIR$/src/primVarApp.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1475" />
+    <option name="y" value="24" />
+    <option name="width" value="1737" />
+    <option name="height" value="980" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rfm_primvar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rfm_primvar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rfmPrimvarTool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rfm_primvar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rfmPrimvarTool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/doc/Makefile" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/doc/Makefile" />
+    <property name="ignore_missing_gitignore" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/python/gui" />
+      <recent name="$PROJECT_DIR$/python" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/doc" />
+      <recent name="$PROJECT_DIR$/doc/_build" />
+      <recent name="$PROJECT_DIR$/documentation" />
+      <recent name="$PROJECT_DIR$/python" />
+      <recent name="$PROJECT_DIR$/python/gui" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.TEST (1)">
+    <configuration default="false" name="_ui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../rfm_primvar/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../rfm_primvar/python/_ui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TEST" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../rfm_primvar/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../rfm_primvar/python/TEST.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TEST (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfmPrimvarTool" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/TEST.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="primVarUi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfmPrimvarTool" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/primVarUi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <method />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfmPrimvarTool" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfmPrimvarTool" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rfm_primvar" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Python._ui" />
+      <item index="1" class="java.lang.String" itemvalue="Python.TEST" />
+      <item index="2" class="java.lang.String" itemvalue="Python.TEST (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.primVarUi" />
+    </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.TEST (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.primVarUi" />
+        <item index="2" class="java.lang.String" itemvalue="Python.TEST" />
+        <item index="3" class="java.lang.String" itemvalue="Python._ui" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee835cc9-d9d9-48ba-95bb-0455071a00cd" name="Default" comment="" />
+      <created>1457841638857</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1457841638857</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add get_random_color_shade function to _core module, which returns a random color from a specific hue. started working on the UI">
+      <created>1459704469605</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1459704469605</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1475" y="24" width="1737" height="980" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20524782" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37197453" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738853" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37197453" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15628476" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32866243" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="BEK_SORT_TYPE" value="1" />
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add get_random_color_shade function to _core module, which returns a random color from a specific hue. started working on the UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="add get_random_color_shade function to _core module, which returns a random color from a specific hue. started working on the UI" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="12" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/python/gui/images/shape.png" />
+    <entry file="file://$PROJECT_DIR$/python/gui/images/randomNumber.png" />
+    <entry file="file://$PROJECT_DIR$/src/gui/images/icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/gui/images/help.png" />
+    <entry file="file://$PROJECT_DIR$/python/gui/images/error.png" />
+    <entry file="file://$PROJECT_DIR$/python/gui/images/email.png" />
+    <entry file="file://$PROJECT_DIR$/python/gui/images/3d2.png" />
+    <entry file="file://$PROJECT_DIR$/src/gui/images/images_rc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/images/images.qrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/rmanNwidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/rmanVwidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TEST.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/mainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="281" column="13" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/rmanPwidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="79" column="47" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.rst" />
+    <entry file="file://$PROJECT_DIR$/_build/html/index.html" />
+    <entry file="file://$PROJECT_DIR$/documentation/_build/html/index.html" />
+    <entry file="file://$PROJECT_DIR$/documentation/TODO" />
+    <entry file="file://$PROJECT_DIR$/documentation/what_is_primvar_manager.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/_static/images/origin.png" />
+    <entry file="file://$PROJECT_DIR$/documentation/_static/images/randomColor_grayscale_vari.png" />
+    <entry file="file://$PROJECT_DIR$/documentation/conf.py" />
+    <entry file="file://$PROJECT_DIR$/documentation/what_is_primvar.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/how_to.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/code.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/primVarApp.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/doc_core.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/test.rst" />
+    <entry file="file://$PROJECT_DIR$/documentation/index.rst" />
+    <entry file="file://$PROJECT_DIR$/doc/what_is_primvar" />
+    <entry file="file://$PROJECT_DIR$/src/utils/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="247" column="0" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/rmanCwidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/styleSheets/styleSheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/rmanFwidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/what_is_primvar_manager.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/what_is_primvar.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/API.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/doc_core.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/doc_primVarApp.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/index.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/_build/html/searchindex.js" />
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/_build/html/_sources/installation.txt" />
+    <entry file="file://$PROJECT_DIR$/doc/installation.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile" />
+    <entry file="file://$PROJECT_DIR$/src/gui/rmanSwidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/how_to.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="173" column="18" selection-start-line="173" selection-start-column="18" selection-end-line="173" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="279" column="89" selection-start-line="279" selection-start-column="76" selection-end-line="279" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="35" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primVarApp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+          <folding>
+            <element signature="e#8291#8601#1" expanded="false" />
+            <element signature="e#8611#8680#0" expanded="false" />
+            <element signature="e#8816#8914#0" expanded="false" />
+            <element signature="e#9811#9979#0" expanded="false" />
+            <element signature="e#10088#11618#0" expanded="false" />
+            <element signature="e#10088#10398#1" expanded="false" />
+            <element signature="e#10727#11190#0" expanded="false" />
+            <element signature="e#10853#10999#0" expanded="false" />
+            <element signature="e#11034#11180#0" expanded="false" />
+            <element signature="e#11190#11260#0" expanded="false" />
+            <element signature="e#11400#11558#0" expanded="false" />
+            <element signature="e#11667#14822#0" expanded="false" />
+            <element signature="e#11667#11977#1" expanded="false" />
+            <element signature="e#12257#14394#0" expanded="false" />
+            <element signature="e#12941#13363#0" expanded="false" />
+            <element signature="e#13485#13900#0" expanded="false" />
+            <element signature="e#13983#14384#0" expanded="false" />
+            <element signature="e#13983#14001#0" expanded="false" />
+            <element signature="e#14394#14464#0" expanded="false" />
+            <element signature="e#14604#14762#0" expanded="false" />
+            <element signature="e#14871#17160#0" expanded="false" />
+            <element signature="e#14871#15182#1" expanded="false" />
+            <element signature="e#15506#16721#0" expanded="false" />
+            <element signature="e#16731#16801#0" expanded="false" />
+            <element signature="e#16941#17100#0" expanded="false" />
+            <element signature="e#17209#19497#0" expanded="false" />
+            <element signature="e#17209#17520#1" expanded="false" />
+            <element signature="e#17844#19059#0" expanded="false" />
+            <element signature="e#19069#19139#0" expanded="false" />
+            <element signature="e#19279#19437#0" expanded="false" />
+            <element signature="e#19546#21835#0" expanded="false" />
+            <element signature="e#19546#19857#1" expanded="false" />
+            <element signature="e#20181#21396#0" expanded="false" />
+            <element signature="e#21406#21476#0" expanded="false" />
+            <element signature="e#21616#21775#0" expanded="false" />
+            <element signature="e#21874#22734#0" expanded="false" />
+            <element signature="e#21874#22033#1" expanded="false" />
+            <element signature="e#22773#23633#0" expanded="false" />
+            <element signature="e#22773#22932#1" expanded="false" />
+            <element signature="e#23672#23831#1" expanded="false" />
+            <element signature="e#24774#25634#0" expanded="false" />
+            <element signature="e#24774#24933#1" expanded="false" />
+            <element signature="e#25673#26533#0" expanded="false" />
+            <element signature="e#25673#25832#1" expanded="false" />
+            <element signature="e#26572#27432#0" expanded="false" />
+            <element signature="e#26572#26731#1" expanded="false" />
+            <element signature="e#27481#28267#0" expanded="false" />
+            <element signature="e#27481#27640#1" expanded="false" />
+            <element signature="e#28113#28267#0" expanded="false" />
+            <element signature="e#28331#28695#0" expanded="false" />
+            <element signature="e#28331#28515#1" expanded="false" />
+            <element signature="e#28742#29016#0" expanded="false" />
+            <element signature="e#28742#28939#1" expanded="false" />
+            <element signature="e#29047#29283#0" expanded="false" />
+            <element signature="e#29047#29151#1" expanded="false" />
+            <element signature="e#29212#29283#0" expanded="false" />
+            <element signature="e#29325#29876#0" expanded="false" />
+            <element signature="e#29325#29380#1" expanded="false" />
+            <element signature="e#29407#29602#0" expanded="false" />
+            <element signature="e#29644#29876#0" expanded="false" />
+            <element signature="e#29726#29813#0" expanded="false" />
+            <element signature="e#29928#33443#0" expanded="false" />
+            <element signature="e#29928#29970#1" expanded="false" />
+            <element signature="e#30021#30623#0" expanded="false" />
+            <element signature="e#30673#30898#0" expanded="false" />
+            <element signature="e#30673#30865#1" expanded="false" />
+            <element signature="e#30964#31676#0" expanded="false" />
+            <element signature="e#30964#31084#1" expanded="false" />
+            <element signature="e#31259#31387#0" expanded="false" />
+            <element signature="e#31285#31385#0" expanded="false" />
+            <element signature="e#31396#31458#0" expanded="false" />
+            <element signature="e#31715#32086#0" expanded="false" />
+            <element signature="e#31715#31781#1" expanded="false" />
+            <element signature="e#32142#32400#0" expanded="false" />
+            <element signature="e#32142#32235#1" expanded="false" />
+            <element signature="e#32269#32400#0" expanded="false" />
+            <element signature="e#32463#32737#0" expanded="false" />
+            <element signature="e#32463#32571#1" expanded="false" />
+            <element signature="e#32605#32737#0" expanded="false" />
+            <element signature="e#32797#33064#0" expanded="false" />
+            <element signature="e#32797#32901#1" expanded="false" />
+            <element signature="e#32935#33064#0" expanded="false" />
+            <element signature="e#33100#33443#0" expanded="false" />
+            <element signature="e#33100#33254#1" expanded="false" />
+            <element signature="e#33495#34833#0" expanded="false" />
+            <element signature="e#33495#33537#1" expanded="false" />
+            <element signature="e#33588#34157#0" expanded="false" />
+            <element signature="e#34202#34495#0" expanded="false" />
+            <element signature="e#34202#34386#1" expanded="false" />
+            <element signature="e#34420#34495#0" expanded="false" />
+            <element signature="e#34538#34833#0" expanded="false" />
+            <element signature="e#34538#34720#1" expanded="false" />
+            <element signature="e#34754#34833#0" expanded="false" />
+            <element signature="e#34885#36475#0" expanded="false" />
+            <element signature="e#34885#34927#1" expanded="false" />
+            <element signature="e#34978#35607#0" expanded="false" />
+            <element signature="e#35662#35860#0" expanded="false" />
+            <element signature="e#35662#35822#1" expanded="false" />
+            <element signature="e#35936#36089#0" expanded="false" />
+            <element signature="e#35936#36050#1" expanded="false" />
+            <element signature="e#36140#36262#0" expanded="false" />
+            <element signature="e#36140#36229#1" expanded="false" />
+            <element signature="e#36330#36475#0" expanded="false" />
+            <element signature="e#36330#36440#1" expanded="false" />
+            <element signature="e#36527#38140#0" expanded="false" />
+            <element signature="e#36527#36569#1" expanded="false" />
+            <element signature="e#36620#37108#0" expanded="false" />
+            <element signature="e#37147#37338#0" expanded="false" />
+            <element signature="e#37147#37213#1" expanded="false" />
+            <element signature="e#37391#37738#0" expanded="false" />
+            <element signature="e#37391#37529#1" expanded="false" />
+            <element signature="e#37563#37738#0" expanded="false" />
+            <element signature="e#37789#38140#0" expanded="false" />
+            <element signature="e#37789#37927#1" expanded="false" />
+            <element signature="e#37961#38140#0" expanded="false" />
+            <element signature="e#38192#39805#0" expanded="false" />
+            <element signature="e#38192#38234#1" expanded="false" />
+            <element signature="e#38285#38773#0" expanded="false" />
+            <element signature="e#38812#39003#0" expanded="false" />
+            <element signature="e#38812#38878#1" expanded="false" />
+            <element signature="e#39056#39403#0" expanded="false" />
+            <element signature="e#39056#39194#1" expanded="false" />
+            <element signature="e#39228#39403#0" expanded="false" />
+            <element signature="e#39454#39805#0" expanded="false" />
+            <element signature="e#39454#39592#1" expanded="false" />
+            <element signature="e#39626#39805#0" expanded="false" />
+            <element signature="e#39857#41470#0" expanded="false" />
+            <element signature="e#39857#39899#1" expanded="false" />
+            <element signature="e#39950#40438#0" expanded="false" />
+            <element signature="e#40477#40668#0" expanded="false" />
+            <element signature="e#40477#40543#1" expanded="false" />
+            <element signature="e#40721#41068#0" expanded="false" />
+            <element signature="e#40721#40859#1" expanded="false" />
+            <element signature="e#40893#41068#0" expanded="false" />
+            <element signature="e#41119#41470#0" expanded="false" />
+            <element signature="e#41119#41257#1" expanded="false" />
+            <element signature="e#41291#41470#0" expanded="false" />
+            <element signature="e#41494#41689#0" expanded="false" />
+            <element signature="e#41494#41577#1" expanded="false" />
+            <element signature="e#41712#41874#0" expanded="false" />
+            <element signature="e#41712#41765#1" expanded="false" />
+            <element signature="e#41820#41874#0" expanded="false" />
+            <marker date="1463356078000" expanded="false" signature="26:139" placeholder="import ..." />
+            <marker date="1463356078000" expanded="false" signature="665:1018" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="684:943" placeholder="&quot;...&quot;" />
+            <marker date="1463356078000" expanded="false" signature="1142:1213" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="1255:1532" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="1556:2054" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="1565:1628" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="1727:1881" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="1919:2054" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="2084:2845" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="2093:2159" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="2879:5144" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="2888:3005" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="3229:3538" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="3280:3371" placeholder="&quot;...&quot;" />
+            <marker date="1463356078000" expanded="false" signature="3658:4246" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="4358:4416" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="4426:4773" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="4809:5144" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="4863:5144" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="4917:5022" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="5044:5144" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="5224:5769" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="5233:5551" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="5565:5702" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="5823:6129" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="5832:5968" placeholder="&quot;&quot;&quot;Remove all the existing files from the given rmans PrimVar widget....&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="6214:6629" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="6223:6526" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="6674:7022" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="6683:6847" placeholder="&quot;&quot;&quot;Popping up a UI showing the warning message....&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="7072:7696" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="7081:7319" placeholder="&quot;&quot;&quot;It validates whether or not the widgets's attribute's name is set...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="7329:7438" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="7483:7658" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="7512:7632" placeholder="'...'" />
+            <marker date="1463356078000" expanded="false" signature="7737:7961" placeholder="..." />
+            <marker date="1463356078000" expanded="false" signature="7746:7837" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1463356078000" expanded="false" signature="8010:8125" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

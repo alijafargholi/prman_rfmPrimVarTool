@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How To &mdash; Primitive Variables Manager 0.1.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Primitive Variables Manager 0.1.1 documentation" href="index.html"/>
+        <link rel="next" title="Primvar Manager API" href="API.html"/>
+        <link rel="prev" title="Installation" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Primitive Variables Manager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="what_is_primvar.html">What is Primvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_primvar_manager.html">What is Primvar Manager Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How To</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rmanc">rmanC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#random-color">Random Color</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#random-shade-of-color">Random Shade of Color</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#random-grayscale">Random Grayscale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rmanf">rmanF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rmans">rmanS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="API.html">Primvar Manager API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Primitive Variables Manager</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>How To</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/how_to.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to">
+<h1>How To<a class="headerlink" href="#how-to" title="Permalink to this headline">¶</a></h1>
+<p>In this section I go over how to use each sections to create a unique attribute.</p>
+<div class="section" id="rmanc">
+<h2>rmanC<a class="headerlink" href="#rmanc" title="Permalink to this headline">¶</a></h2>
+<p>This attribute is suitable for adding color variation. Using this UI, you have
+options to create:</p>
+<ul class="simple">
+<li>random color</li>
+<li>random shade of color</li>
+<li>random grayscale</li>
+</ul>
+<a class="reference internal image-reference" href="_images/randomBaseColorManager.png"><img alt="_images/randomBaseColorManager.png" class="align-center" src="_images/randomBaseColorManager.png" style="width: 488.0px; height: 208.0px;" /></a>
+<p>As you can see in above image, you have control over the name of the attributes, shade of color, value and saturation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the color system in this UI is HSV.</p>
+</div>
+<p>Here are some examples of using this attribute to generate different results:</p>
+<div class="section" id="random-color">
+<h3>Random Color<a class="headerlink" href="#random-color" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Choose a new attribute name</li>
+<li>Select a random color option</li>
+<li>Modify the saturation and value as you desire</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">(optional, this apply to all the Primvar attributes) specify the name
+of the PxrPrimvar node. This option will you help to set the correct name and
+attributes on the PxrPrimvar node.</p>
+</div>
+<ol class="arabic simple" start="4">
+<li>Select your objects, and click on the <strong>assign</strong> button to attach the new attribute to them.</li>
+<li>Set the <strong>same</strong> attribute name to the PxrPrimvar node and set type to <strong>color</strong>. If had already specified name of the PxrPrimvar in the UI, it&#8217;ll bee set automatically.</li>
+</ol>
+<a class="reference internal image-reference" href="_images/randomColorPxrPrimvar.png"><img alt="_images/randomColorPxrPrimvar.png" class="align-center" src="_images/randomColorPxrPrimvar.png" style="width: 446.0px; height: 214.0px;" /></a>
+<ol class="arabic simple" start="5">
+<li>Connect the RGB output of the PxrPrimvar to any input color of your shade, in this case baseColor.</li>
+</ol>
+<a class="reference internal image-reference" href="_images/connectPxrPrimvarColor1.png"><img alt="_images/connectPxrPrimvarColor1.png" class="align-center" src="_images/connectPxrPrimvarColor1.png" style="width: 582.5px; height: 266.0px;" /></a>
+<a class="reference internal image-reference" href="_images/connectPxrPrimvarColor2.png"><img alt="_images/connectPxrPrimvarColor2.png" class="align-center" src="_images/connectPxrPrimvarColor2.png" style="width: 582.5px; height: 266.0px;" /></a>
+<p>Here is the result:</p>
+<a class="reference internal image-reference" href="_images/randomColor_result.png"><img alt="_images/randomColor_result.png" class="align-center" src="_images/randomColor_result.png" style="width: 350.0px; height: 350.0px;" /></a>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">If you open the <em>shapeNode</em> attribute editor of any of the objects, you&#8217;ll see the new attribute is added.</p>
+</div>
+<img alt="_images/shapeNodeAttributeaditor.png" src="_images/shapeNodeAttributeaditor.png" />
+</div>
+<div class="section" id="random-shade-of-color">
+<h3>Random Shade of Color<a class="headerlink" href="#random-shade-of-color" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Choose the <strong>Random Shade of Color</strong> option.</li>
+<li>Click on the color picker button next to it an pick a <em>Hue</em>. Remember that you are just picking a hue in HSV color system, meaning that value and saturation will be adjust in the following section.</li>
+</ol>
+<a class="reference internal image-reference" href="_images/selectColor.png"><img alt="_images/selectColor.png" class="align-center" src="_images/selectColor.png" style="width: 1045.8px; height: 554.4px;" /></a>
+<ol class="arabic simple" start="3">
+<li>Set the <em>Max</em> and <em>Min</em> of the <strong>Value</strong> and <strong>Saturation</strong> to add some variation to the <em>Hue</em></li>
+<li>Assign the attribute, and connect the result RGB of the PxrPrimvar to the color input.</li>
+</ol>
+<a class="reference internal image-reference" href="_images/randomBlue_result.png"><img alt="_images/randomBlue_result.png" class="align-center" src="_images/randomBlue_result.png" style="width: 350.0px; height: 350.0px;" /></a>
+</div>
+<div class="section" id="random-grayscale">
+<h3>Random Grayscale<a class="headerlink" href="#random-grayscale" title="Permalink to this headline">¶</a></h3>
+<p>And here is the result of using the <strong>Random Grayscale</strong> options.</p>
+<a class="reference internal image-reference" href="_images/randomGrayscale_result.png"><img alt="_images/randomGrayscale_result.png" class="align-center" src="_images/randomGrayscale_result.png" style="width: 350.0px; height: 350.0px;" /></a>
+</div>
+</div>
+<div class="section" id="rmanf">
+<h2>rmanF<a class="headerlink" href="#rmanf" title="Permalink to this headline">¶</a></h2>
+<p>This a useful variable for make variation in any shader attribute that gets floating number as an input, such as <em>Specular</em>, <em>Roughness</em>, <em>Bump, *Metallic</em>, and so on.</p>
+<p>To demonstrate this, I assigned a <em>PxrLMMetal</em> to all the Spheres, and the
+result is as follow.</p>
+<a class="reference internal image-reference" href="_images/metallic_result.png"><img alt="_images/metallic_result.png" class="align-center" src="_images/metallic_result.png" style="width: 400.0px; height: 400.0px;" /></a>
+<p>Then click on a <em>Create</em> button to make a new Primvar attribute UI.</p>
+<p>Make sure to:
+<em>Give it a meaningful name.
+*Choose a appropriate *value</em> <em>type</em> (the float type is more common)
+<em>Adjust the *min/max</em> limit.</p>
+<a class="reference internal image-reference" href="_images/randomRmanF.png"><img alt="_images/randomRmanF.png" class="align-center" src="_images/randomRmanF.png" style="width: 510.0px; height: 203.0px;" /></a>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As previously mentioned, if you specify the <em>PixPrimvar</em> node name,</p>
+</div>
+<p>it&#8217;ll automatically adjust it&#8217;s value.</p>
+<a class="reference internal image-reference" href="_images/rmanFPixrPrimVar.png"><img alt="_images/rmanFPixrPrimVar.png" class="align-center" src="_images/rmanFPixrPrimVar.png" style="width: 627.2px; height: 295.4px;" /></a>
+<p>After assigning the attribute to the <strong>selected objects</strong> you&#8217;ll see newly
+created attribute on the shape node.</p>
+<a class="reference internal image-reference" href="_images/attachedRmanFAttr.png"><img alt="_images/attachedRmanFAttr.png" class="align-center" src="_images/attachedRmanFAttr.png" style="width: 691.2px; height: 36.8px;" /></a>
+<p>Then from <em>PxrPrimvar</em> node, connect the <em>Result F</em> to the any shader&#8217;s attribute that you want to make variation, in this case I&#8217;m going to connect it to the <em>roughness</em>.</p>
+<a class="reference internal image-reference" href="_images/connectPxrPrimvarFloat1.png"><img alt="_images/connectPxrPrimvarFloat1.png" class="align-center" src="_images/connectPxrPrimvarFloat1.png" style="width: 582.5px; height: 266.0px;" /></a>
+<a class="reference internal image-reference" href="_images/connectPxrPrimvarFloat2.png"><img alt="_images/connectPxrPrimvarFloat2.png" class="align-center" src="_images/connectPxrPrimvarFloat2.png" style="width: 582.5px; height: 266.0px;" /></a>
+<p>Once they&#8217;re connected the result is as follow:</p>
+<a class="reference internal image-reference" href="_images/rmanF_result.png"><img alt="_images/rmanF_result.png" class="align-center" src="_images/rmanF_result.png" style="width: 397.6px; height: 399.2px;" /></a>
+</div>
+<div class="section" id="rmans">
+<h2>rmanS<a class="headerlink" href="#rmans" title="Permalink to this headline">¶</a></h2>
+<p>This attribute is ideal for use for any texture input, such as <em>diffuse color</em>, <em>specular</em>, <em>alpha</em>.</p>
+<ul class="simple">
+<li>Click on the create button.</li>
+<li>Provide the name of a texture read node. (Either Maya&#8217;s native File Texture node, or Pixar&#8217;s PxrTexture Node)</li>
+<li>Click on the <em>Gather Files</em> to select the images that you want to use.</li>
+<li>Select your geometries and lick on <em>Assign</em>.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I used some leaves textures from www.textures.com</p>
+</div>
+<a class="reference internal image-reference" href="_images/createRmanS.png"><img alt="_images/createRmanS.png" class="align-center" src="_images/createRmanS.png" style="width: 508.0px; height: 444.0px;" /></a>
+<p>If you select a shape node, in the <em>Extra Attributes</em>, you&#8217;ll see there&#8217;s a new string attribute.</p>
+<img alt="_images/rmanSShapeNode.png" class="align-center" src="_images/rmanSShapeNode.png" />
+<p>Next, connect the <strong>Output Color</strong> of the texture file to the <strong>Surface Color</strong> of your shader. (As you can see in the following graph, if the image has alpha channel and you want to use it, connect it to the appropriate inputs)</p>
+<img alt="_images/rmanSConnection.png" class="align-center" src="_images/rmanSConnection.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you leave the <em>File Path</em> of the texture node empty.</p>
+</div>
+<img alt="_images/rmansFilePath.png" class="align-center" src="_images/rmansFilePath.png" />
+<p>I applied this to few simple planes,</p>
+<a class="reference internal image-reference" href="_images/rmanSMayaScene.png"><img alt="_images/rmanSMayaScene.png" class="align-center" src="_images/rmanSMayaScene.png" style="width: 289.8px; height: 289.1px;" /></a>
+<p>And here is the result of the:</p>
+<a class="reference internal image-reference" href="_images/textureRGB_result.png"><img alt="_images/textureRGB_result.png" class="align-center" src="_images/textureRGB_result.png" style="width: 1400.0px; height: 1400.0px;" /></a>
+<a class="reference internal image-reference" href="_images/textureA_result.png"><img alt="_images/textureA_result.png" class="align-center" src="_images/textureA_result.png" style="width: 779.0px; height: 785.0px;" /></a>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="API.html" class="btn btn-neutral float-right" title="Primvar Manager API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ali Jafargholi.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
