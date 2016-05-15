@@ -226,8 +226,8 @@ class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
         Opens the browser link and direct it to the local documentation page
         for this tool.
         """
-        src = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../")
-        url_page = os.path.join(src, "doc/_build/html/index.html")
+
+        url_page = "http://alijafargholi.github.io/prman_rfmPrimVarTool/"
         webbrowser.open_new(url=url_page)
 
     def primvar_s(self, shapes, attr):
