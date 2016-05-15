@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>utils.core &mdash; Primitive Variables Manager 0.1.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Primitive Variables Manager 0.1.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Primitive Variables Manager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../what_is_primvar.html">What is Primvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../what_is_primvar_manager.html">What is Primvar Manager Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how_to.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API.html">Primvar Manager API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Primitive Variables Manager</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>utils.core</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for utils.core</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># This free software incorporates by reference the text of the WTFPL, Version 2</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The core functionality for Primvar tool.</span>
+
+<span class="sd">.. module:: `core`</span>
+<span class="sd">   :platform: Unix, Windows</span>
+<span class="sd">   :synopsis: Provides core functionality of PrimVar tool.</span>
+
+<span class="sd">.. moduleauthor:: Ali Jafargholi &lt;ali.jafargholi@gmail.com&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># IMPORT STANDARD MODULES</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">colorsys</span>
+
+<span class="c1"># IMPORT LOCAL MODULES</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n</span><span class="s2">This tool was not able to import the &#39;pymel&#39; &quot;</span>
+                  <span class="s2">&quot;library.</span><span class="se">\n</span><span class="s2">That is required for this tool to &quot;</span>
+                  <span class="s2">&quot;function.</span><span class="se">\n</span><span class="s2">Please contact the developer for assistant.</span><span class="se">\n</span><span class="s2"> &quot;</span>
+                  <span class="s2">&quot;Contact info: ali.jafargholi@gmail.com</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">+</span>
+                  <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Global Variables</span>
+<span class="n">EXISTING_ATTR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;rmanF&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;rmanP&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;rmanV&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;rmanN&quot;</span><span class="p">:</span> <span class="p">{},</span>
+                 <span class="s2">&quot;rmanC&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;rmanS&quot;</span><span class="p">:</span> <span class="p">{}}</span>
+
+
+<div class="viewcode-block" id="add_attr"><a class="viewcode-back" href="../../doc_core.html#utils.core.add_attr">[docs]</a><span class="k">def</span> <span class="nf">add_attr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assign attributes to the given object.</span>
+
+<span class="sd">    &gt;&gt;&gt; import pymel.core as pm</span>
+<span class="sd">    &gt;&gt;&gt; FOO = pm.sphere()</span>
+<span class="sd">    # Result: [nt.Transform(u&#39;nurbsSphere1&#39;),</span>
+<span class="sd">               t.MakeNurbSphere(u&#39;makeNurbSphere2&#39;)] #</span>
+<span class="sd">    &gt;&gt;&gt; shapeNode = FOO[-1]</span>
+<span class="sd">    # Get the shape of the FOO</span>
+<span class="sd">    &gt;&gt;&gt; add_attr(shapeNode, &quot;newAttributeName&quot;, attributeType=&#39;float&#39;)</span>
+<span class="sd">    # Create a new attribute called &quot;newAttributeName&quot;, type float</span>
+
+<span class="sd">    :param node: (PyMel nodes) Object to assign new attributes to.</span>
+<span class="sd">    :param attr_name: (String) attributes name</span>
+<span class="sd">    :param debug: (Boolean) Set True if you want to print out the result.</span>
+<span class="sd">    :param kwargs: attribute keywords. ex:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Add the attribute if it already doesn&#39;t exist</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">hasAttr</span><span class="p">(</span><span class="n">attr_name</span><span class="p">):</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">addAttr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">longName</span><span class="o">=</span><span class="n">attr_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Attribute &#39;{}&#39; is added to {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr_name</span><span class="p">,</span>
+                                                                <span class="n">node</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Attribute &#39;{}&#39; already exists on {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr_name</span><span class="p">,</span>
+                                                                     <span class="n">node</span><span class="p">))</span></div>
+
+
+<span class="k">def</span> <span class="nf">get_random_color_shade</span><span class="p">(</span><span class="n">min_s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_v</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_v</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span>
+                           <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a random shade of the given hue in RGB. The default is a random</span>
+<span class="sd">    shade of color red.</span>
+
+<span class="sd">    :param min_s: (Float) Minimum saturation of the color. Between 0 and 1.</span>
+<span class="sd">    :param max_s: (Float) Maximum saturation of the color. Between 0 and 1.</span>
+<span class="sd">    :param min_v: (Float) Minimum value of the color. Between 0 and 1.</span>
+<span class="sd">    :param max_v: (Float) Maximum value of the color. Between 0 and 1.</span>
+<span class="sd">    :param hue: (Float) Spectrum on the color. Between 1 and 360</span>
+<span class="sd">    :param debug: (Boolean) Set True if you want to print out the result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Since the colorsys library takes value between 0-1, we need to</span>
+    <span class="c1"># normalize this value by dividing it by 360</span>
+    <span class="n">normalized_hue</span> <span class="o">=</span> <span class="n">hue</span> <span class="o">/</span> <span class="mi">360</span>
+    <span class="n">random_color</span> <span class="o">=</span> <span class="n">colorsys</span><span class="o">.</span><span class="n">hsv_to_rgb</span><span class="p">(</span><span class="n">normalized_hue</span><span class="p">,</span>
+                                       <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">min_s</span><span class="p">,</span> <span class="n">max_s</span><span class="p">),</span>
+                                       <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">min_v</span><span class="p">,</span> <span class="n">max_v</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Generated a random color &lt;&lt;{}&gt;&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random_color</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">random_color</span>
+
+
+<div class="viewcode-block" id="get_random_vector"><a class="viewcode-back" href="../../doc_core.html#utils.core.get_random_vector">[docs]</a><span class="k">def</span> <span class="nf">get_random_vector</span><span class="p">(</span><span class="n">minimum_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maximum_x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">minimum_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maximum_y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">minimum_z</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maximum_z</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">variation</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                      <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;float&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns list of three numbers, vector, integer of float.</span>
+
+<span class="sd">    :param minimum_x: (float or int) Minimum x range</span>
+<span class="sd">    :param maximum_x: (float or int) Maximum x range</span>
+<span class="sd">    :param minimum_y: (float or int) Minimum y range</span>
+<span class="sd">    :param maximum_y: (float or int) Maximum y range</span>
+<span class="sd">    :param minimum_z: (float or int) Minimum z range</span>
+<span class="sd">    :param maximum_z: (float or int) Maximum z range</span>
+<span class="sd">    :param variation: (Boolean) If True, result in uniform result.</span>
+<span class="sd">    :param kind: (String) Kind of vector, integer or float. Default is float.</span>
+<span class="sd">    :return: (List) List of vector. ex: [1,0,2] or [1.234, 2.426, 1.64]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">variation</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
+            <span class="n">random_value</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">minimum_x</span><span class="p">,</span> <span class="n">maximum_x</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">random_value</span><span class="p">,</span> <span class="n">random_value</span><span class="p">,</span> <span class="n">random_value</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">random_value</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minimum_x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">maximum_x</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">random_value</span><span class="p">,</span> <span class="n">random_value</span><span class="p">,</span> <span class="n">random_value</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">minimum_x</span><span class="p">,</span> <span class="n">maximum_x</span><span class="p">),</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">minimum_y</span><span class="p">,</span> <span class="n">maximum_y</span><span class="p">),</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">minimum_z</span><span class="p">,</span> <span class="n">maximum_z</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minimum_x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">maximum_x</span><span class="p">)),</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minimum_y</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">maximum_y</span><span class="p">)),</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">minimum_z</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">maximum_z</span><span class="p">))]</span></div>
+
+
+<div class="viewcode-block" id="get_rman_attr"><a class="viewcode-back" href="../../doc_core.html#utils.core.get_rman_attr">[docs]</a><span class="k">def</span> <span class="nf">get_rman_attr</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the dictionary of primvar attribute found on the given nodes.</span>
+
+<span class="sd">    :param nodes: (List of PyMel nodes) Nodes to query their primvar attributes.</span>
+<span class="sd">    :param debug: (Boolean) Set True if you want to print out the result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">EXISTING_ATTR</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="c1"># Go through all attributes of the current node</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">pm</span><span class="o">.</span><span class="n">listAttr</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="c1"># Check for existance of each primvar attributes</span>
+            <span class="k">for</span> <span class="n">attr_type</span> <span class="ow">in</span> <span class="n">EXISTING_ATTR</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">attr_type</span> <span class="ow">in</span> <span class="n">attr</span><span class="p">:</span>
+                    <span class="c1"># If current attribute doesn&#39;t exist in the database</span>
+                    <span class="c1"># create a list for it</span>
+                    <span class="k">if</span> <span class="n">attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">EXISTING_ATTR</span><span class="p">[</span><span class="n">attr_type</span><span class="p">]:</span>
+                        <span class="n">EXISTING_ATTR</span><span class="p">[</span><span class="n">attr_type</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Created the &#39;{}&#39; list on &#39;{}&#39; &quot;</span>
+                                         <span class="s2">&quot;primvar database&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span>
+                                                                   <span class="n">attr_type</span><span class="p">))</span>
+                    <span class="c1"># Add the founded attribute to the list</span>
+                    <span class="n">EXISTING_ATTR</span><span class="p">[</span><span class="n">attr_type</span><span class="p">][</span><span class="n">attr</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Found &#39;{}&#39; on &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">node</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">EXISTING_ATTR</span></div>
+
+
+<div class="viewcode-block" id="get_shapes"><a class="viewcode-back" href="../../doc_core.html#utils.core.get_shapes">[docs]</a><span class="k">def</span> <span class="nf">get_shapes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Yields the name on shape node for each selected object.</span>
+
+<span class="sd">    :param nodes: (List of PyMel node) objects to be check for shape node.</span>
+<span class="sd">    :param debug: (Boolean) If True, it&#39;ll output the errors and the process.</span>
+<span class="sd">    :yield: (PyMel node) shape node of the selected node.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="c1"># If the current selection is a shape node, yield it</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">nodetypes</span><span class="o">.</span><span class="n">Shape</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Try to get the shape node and yield the node</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">node</span><span class="o">.</span><span class="n">getShape</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Found {} node on {} transform node&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">node</span><span class="o">.</span><span class="n">getShape</span><span class="p">(),</span> <span class="n">node</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;can&#39;t find a shape node for {}.</span><span class="se">\n</span><span class="s2">{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">node</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="remove_attr"><a class="viewcode-back" href="../../doc_core.html#utils.core.remove_attr">[docs]</a><span class="k">def</span> <span class="nf">remove_attr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove the given attribute from the given node</span>
+
+<span class="sd">    :param node: (PyMel Node) The object that needs to be its attribute deleted.</span>
+<span class="sd">    :param attr_name: (Str) Name of the attribute to be deleted from the object.</span>
+<span class="sd">    :param debug: (Boolean) Set True if you want to print out the result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">hasAttr</span><span class="p">(</span><span class="n">attr_name</span><span class="p">):</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">deleteAttr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&#39;{}&#39; attribute was deleted from {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">attr_name</span><span class="p">,</span> <span class="n">node</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;&#39;{}&#39; has no attribute called &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">,</span>
+                                                                   <span class="n">attr_name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="set_attr"><a class="viewcode-back" href="../../doc_core.html#utils.core.set_attr">[docs]</a><span class="k">def</span> <span class="nf">set_attr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Setting the attribute of the object</span>
+
+<span class="sd">    :param node: (PyMel nodes) Object to set its attribute.</span>
+<span class="sd">    :param attr_name: (String) Attribute name of the object to be set.</span>
+<span class="sd">    :param value: (String, Int, Float) Value of the attribute to set.</span>
+<span class="sd">    :param debug: (Boolean) Print out the process of setting the attribute</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="s2">&quot;{}.{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;{}.{} is set to &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Can not find {} on {}.</span><span class="se">\n</span><span class="s2">{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="unpack"><a class="viewcode-back" href="../../doc_core.html#utils.core.unpack">[docs]</a><span class="k">def</span> <span class="nf">unpack</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return true if the given node is a group</span>
+
+<span class="sd">    :param nodes: (PyMel node) a node to be checked if a group</span>
+<span class="sd">    :param debug: (Boolean) If True, it&#39;ll output the errors and the process.</span>
+<span class="sd">    :return: True if the node is a group and False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pm</span><span class="o">.</span><span class="n">listRelatives</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">shapes</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Unpacking &#39;{}&#39; group node&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">inside_nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">getChildren</span><span class="p">()))</span>
+                <span class="k">if</span> <span class="n">inside_nodes</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">inside_node</span> <span class="ow">in</span> <span class="n">inside_nodes</span><span class="p">:</span>
+                        <span class="k">yield</span> <span class="n">inside_node</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">errorLog</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Was not able to gather the &#39;Shape&#39; of &quot;</span>
+                              <span class="s2">&quot;&#39;{}&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">node</span></div>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run help if called directly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">__main__</span>
+    <span class="n">help</span><span class="p">(</span><span class="n">__main__</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;add_attr&#39;</span><span class="p">,</span> <span class="s1">&#39;get_random_vector&#39;</span><span class="p">,</span> <span class="s1">&#39;get_rman_attr&#39;</span><span class="p">,</span> <span class="s1">&#39;get_shapes&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;remove_attr&#39;</span><span class="p">,</span> <span class="s1">&#39;set_attr&#39;</span><span class="p">,</span> <span class="s1">&#39;unpack&#39;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ali Jafargholi.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

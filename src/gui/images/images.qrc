@@ -1,0 +1,10 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file alias="exit" >exit.png</file>
+    <file alias="close" >close.png</file>
+    <file alias="windowIcon" >window_icon.png</file>
+    <file alias="logo" >logo.png</file>
+    <file alias="apply" >apply.png</file>
+    <file alias="icon" >icon.png</file>
+</qresource>
+</RCC>

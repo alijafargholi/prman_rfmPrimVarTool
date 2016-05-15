@@ -1,0 +1,57 @@
+* {
+    background-color: rgb(51,51,51);
+}
+
+QLabel {
+    color: rgb(180, 180, 180);
+    font-size: 14px;
+}
+
+QLabel#logo{
+    background-color: transparent;
+    background-image: url(:/icons/logo);
+    border-style: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QLineEdit {
+    background-color: white;
+    color: black;
+}
+QLineEdit#attr_name {
+    background-color: black;
+    color: #66ccff;
+    font-weight: bold;
+}
+QLineEdit#file_node_name {
+    background-color: black;
+    color: #66ccff;
+    font-weight: bold;
+}
+QPushButton{
+    background-color: rgb(92, 97, 100);
+    color: white;
+}
+
+QPushButton:hover{
+    background-color: #33ccff;
+}
+
+QPushButton#delete_this{
+    background-color: transparent;
+    background-image: url(:/icons/close);
+    border-style: none;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+QPushButton#assign{
+    background-color:#248f24;
+    font-size: 22px;
+    font-weight: bold;
+}
+QDoubleSpinBox {
+    background-color: #262626;
+    color:white;
+}

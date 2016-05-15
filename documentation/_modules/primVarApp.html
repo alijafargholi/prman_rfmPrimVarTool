@@ -1,0 +1,1348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>primVarApp &mdash; Primitive Variables Manager 0.1.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Primitive Variables Manager 0.1.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Primitive Variables Manager
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../what_is_primvar.html">What is Primvar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../what_is_primvar_manager.html">What is Primvar Manager Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">Primvar Manager API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Primitive Variables Manager</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>primVarApp</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for primVarApp</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IMPORT STANDARD MODULES</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">colorsys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+
+<span class="c1"># IMPORT LOCAL MODULES</span>
+<span class="kn">import</span> <span class="nn">PySide.QtCore</span> <span class="kn">as</span> <span class="nn">QtCore</span>
+<span class="kn">import</span> <span class="nn">PySide.QtGui</span> <span class="kn">as</span> <span class="nn">QtGui</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="kn">from</span> <span class="nn">gui.mainWindow</span> <span class="kn">import</span> <span class="n">Ui_primvarManager</span>
+<span class="kn">from</span> <span class="nn">gui.rmanCwidget</span> <span class="kn">import</span> <span class="n">Ui_Form</span> <span class="k">as</span> <span class="n">cWidget</span>
+<span class="kn">from</span> <span class="nn">gui.rmanFwidget</span> <span class="kn">import</span> <span class="n">Ui_Form</span> <span class="k">as</span> <span class="n">fWidget</span>
+<span class="kn">from</span> <span class="nn">gui.rmanNwidget</span> <span class="kn">import</span> <span class="n">Ui_Form</span> <span class="k">as</span> <span class="n">nWidget</span>
+<span class="kn">from</span> <span class="nn">gui.rmanSwidget</span> <span class="kn">import</span> <span class="n">Ui_Form</span> <span class="k">as</span> <span class="n">sWidget</span>
+<span class="kn">from</span> <span class="nn">gui.rmanPwidget</span> <span class="kn">import</span> <span class="n">Ui_Form</span> <span class="k">as</span> <span class="n">pWidget</span>
+<span class="kn">from</span> <span class="nn">gui.rmanVwidget</span> <span class="kn">import</span> <span class="n">Ui_Form</span> <span class="k">as</span> <span class="n">vWidget</span>
+<span class="kn">from</span> <span class="nn">gui.images</span> <span class="kn">import</span> <span class="n">images_rc</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pymel.core</span> <span class="kn">as</span> <span class="nn">pm</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n</span><span class="s2">This tool was not able to import the &#39;pymel&#39; &quot;</span>
+                  <span class="s2">&quot;library.</span><span class="se">\n</span><span class="s2">That is required for this tool to &quot;</span>
+                  <span class="s2">&quot;function.</span><span class="se">\n</span><span class="s2">Please contact the developer for assistant.</span><span class="se">\n</span><span class="s2"> &quot;</span>
+                  <span class="s2">&quot;Contact info: ali.jafargholi@gmail.com</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="mi">80</span> <span class="o">*</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">+</span>
+                  <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="mi">80</span> <span class="o">*</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># GLOBAL VARIABLE</span>
+<span class="n">primVarAppUi</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
+
+
+<div class="viewcode-block" id="PrimVarApp"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp">[docs]</a><span class="k">class</span> <span class="nc">PrimVarApp</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">,</span> <span class="n">Ui_primvarManager</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main logic for connecting the UI and core functionality</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarApp</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Creating a list to store the new widgets and corresponding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_ui</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_signals</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_stylesheet</span><span class="p">()</span>
+
+<div class="viewcode-block" id="PrimVarApp.init_ui"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.init_ui">[docs]</a>    <span class="k">def</span> <span class="nf">init_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setting up some of the UI look and feel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;PrimVar Manager - {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">__version__</span><span class="p">))</span>
+
+        <span class="n">layouts_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rmanCLayout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmanFLayout</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rmanSLayout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmanVLayout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rmanPLayout</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">rmanNLayout</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">layout</span> <span class="ow">in</span> <span class="n">layouts_list</span><span class="p">:</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connecting the UI signals to the functions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_close_ui</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">close_ui</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_clear</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_pxar_Documenation</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_to_wiki</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_tool_Documentation</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_to_doc</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assign_attributes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createRmanC</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_c</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createRmanF</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createRmanS</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_s</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createRmanV</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createRmanP</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_p</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createRmanN</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_rman_n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.assign_attributes"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.assign_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">assign_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gathering the selected object(s)&#39;s shape and assigning the PrimVar</span>
+<span class="sd">        attributes to them</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Getting the shape nodes of selected objects</span>
+        <span class="n">shapes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">get_shapes</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">sl</span><span class="o">=</span><span class="bp">True</span><span class="p">))))</span>
+
+        <span class="c1"># If nothing is selected, warn the user and abort the assign process</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="n">warning_message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\t\t\t</span><span class="s2">No Object is &quot;</span> \
+                                                  <span class="s2">&quot;selected.</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span> \
+                              <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">warning_message</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No object is selected.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Go through all the attributes and assign them to the shapes</span>
+        <span class="k">for</span> <span class="n">new_attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarCWidget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">primvar_c</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">new_attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarSWidget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">primvar_s</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">new_attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarFWidget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">primvar_f</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">new_attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarVWidget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">primvar_v</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">new_attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarPWidget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">primvar_p</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">new_attr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_attr</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarNWidget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">primvar_n</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">new_attr</span><span class="p">)</span>
+
+        <span class="c1"># If all not attributes are assigned, abort the window closing</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="p">:</span>
+            <span class="c1"># Finally close the UI</span>
+            <span class="n">close_ui</span><span class="p">()</span>
+
+        <span class="c1"># TODO: Figuring out why this loop fails?!!!!</span>
+        <span class="c1"># For some reason, when I loop over the list of widgets to create the</span>
+        <span class="c1"># attributes, the loop wouldn&#39;t go though all the items. I&#39;m forcing</span>
+        <span class="c1"># here to go through loop as long as it meets the requirements. (I</span>
+        <span class="c1"># have look into this later) (The problem happens lines 99-112)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">left_over</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">left_over</span><span class="p">)</span> <span class="o">==</span> <span class="n">PrimVarSWidget</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">left_over</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">assign_attributes</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">left_over</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">assign_attributes</span><span class="p">()</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.setup_primvar_node"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.setup_primvar_node">[docs]</a>    <span class="k">def</span> <span class="nf">setup_primvar_node</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assign the PrimVar attribute name to the PxrPrimVar node and set its</span>
+<span class="sd">        type to the corresponding type.</span>
+
+<span class="sd">        :param node_name: (str) Name of the PxrPrimVar node</span>
+<span class="sd">        :param attr_name: (str) Attribute&#39;s name</span>
+<span class="sd">        :param attr_type: (str) Type of the attribute. ex: float, color,...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">PyNode</span><span class="p">(</span><span class="n">node_name</span><span class="p">),</span> <span class="s2">&quot;varname&quot;</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">PyNode</span><span class="p">(</span><span class="n">node_name</span><span class="p">),</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">attr_type</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.clear_files"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.clear_files">[docs]</a>    <span class="k">def</span> <span class="nf">clear_files</span><span class="p">(</span><span class="n">rmans_widget</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove all the existing files from the given rmans PrimVar widget.</span>
+
+<span class="sd">        :param rmans_widget: (QtGui.QWidget)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Clear the exiting label</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">rmans_widget</span><span class="o">.</span><span class="n">existing_labels</span><span class="p">:</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+
+        <span class="n">rmans_widget</span><span class="o">.</span><span class="n">existing_labels</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.create_node"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_node">[docs]</a>    <span class="k">def</span> <span class="nf">create_node</span><span class="p">(</span><span class="n">widget_primvar_name</span><span class="p">,</span> <span class="n">node_type</span><span class="o">=</span><span class="s2">&quot;PxrPrimvar&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new primvar node and set the name of the new node to the</span>
+<span class="sd">        &quot;Node Name&quot; of the widget.</span>
+
+<span class="sd">        :param widget_primvar_name: (QtGui.QLineEdit) Widget to be set once</span>
+<span class="sd">        the new PxrPrimvar is created</span>
+<span class="sd">        :param node_type: (str) Type of nore to be created, ex:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="n">node_type</span><span class="p">)</span>
+        <span class="n">widget_primvar_name</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_node</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.warning"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.warning">[docs]</a>    <span class="k">def</span> <span class="nf">warning</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Popping up a UI showing the warning message.</span>
+
+<span class="sd">        :param message: (str) warning message to display.</span>
+<span class="sd">        :return: (QtGui.QMessageBox) QWidget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">warning_box</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">()</span>
+        <span class="n">warning_box</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">warning_box</span><span class="o">.</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowStaysOnTopHint</span><span class="p">)</span>
+        <span class="n">warning_box</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.validate"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">attr_object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It validates whether or not the widgets&#39;s attribute&#39;s name is set</span>
+
+<span class="sd">        :param attr_object: (QtGui.QFrame) The attributes Widget</span>
+<span class="sd">        :return: (boolean) It returns True if the object is valid,</span>
+<span class="sd">        False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># If there missing information for assigning the attribute, abort the</span>
+        <span class="c1">#  assignment and warn the user</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attr_object</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;A &quot;PrimVar&quot;  attribute was failed to be assigned &#39;</span>
+                            <span class="s1">&#39;because of lack of enough information.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.go_to_wiki"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.go_to_wiki">[docs]</a>    <span class="k">def</span> <span class="nf">go_to_wiki</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens the browser link and direct it to the help page on RenderMan.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url_page</span> <span class="o">=</span> <span class="s2">&quot;https://renderman.pixar.com/view/how-to-primitive-variables&quot;</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_page</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="PrimVarApp.go_to_doc"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.go_to_doc">[docs]</a>    <span class="k">def</span> <span class="nf">go_to_doc</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens the browser link and direct it to the local documentation page</span>
+<span class="sd">        for this tool.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span> <span class="s2">&quot;../&quot;</span><span class="p">)</span>
+        <span class="n">url_page</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="s2">&quot;doc/_build/html/index.html&quot;</span><span class="p">)</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_page</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.primvar_s"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_s">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_s</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigning the rmans Primvar attributes to the given shape nodes</span>
+
+<span class="sd">        :param shapes: (list of PyNode shapes) Shape nodes to be assigned.</span>
+<span class="sd">        :param attr: (QtGui.QFrame) The QtGui Frame corresponding to the</span>
+<span class="sd">        &#39;rmans&#39; attribute, for extracting the new attributes information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># If there missing information for assigning the attribute, abort the</span>
+        <span class="c1">#  assignment and warn the user</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">new_strings</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;An &quot;String PrimVar&quot; failed, because of lack of &#39;</span>
+                            <span class="s1">&#39;enough information&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Make sure there is a file name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">():</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;The &quot;File&quot; is required.&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">PyNode</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()))</span> <span class="o">==</span> \
+                <span class="n">pm</span><span class="o">.</span><span class="n">nodetypes</span><span class="o">.</span><span class="n">PxrTexture</span><span class="p">:</span>
+            <span class="n">texture_attr_name</span> <span class="o">=</span> <span class="s1">&#39;filename&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">PyNode</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()))</span> <span class="o">==</span> <span class="n">pm</span><span class="o">.</span><span class="n">nodetypes</span><span class="o">.</span><span class="n">File</span><span class="p">:</span>
+            <span class="n">texture_attr_name</span> <span class="o">=</span> <span class="s1">&#39;fileTextureName&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Selected texture read file node should be either &#39;</span>
+                            <span class="s1">&#39;File type or PxrTexture type.&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Create the new attribute name</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanS&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> \
+                         <span class="n">texture_attr_name</span>
+
+        <span class="c1"># Pick a random sting from the list and assign it to the shape</span>
+        <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span>
+                          <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">new_strings</span><span class="p">)))</span>
+
+        <span class="c1"># Deleting the UI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.primvar_f"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_f">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigning the rmanf Primvar attributes to the given shape nodes</span>
+
+<span class="sd">        :param shapes: (list of PyNode shapes) Shape nodes to be assigned.</span>
+<span class="sd">        :param attr: (QtGui.QFrame) The QtGui Frame corresponding to the</span>
+<span class="sd">        &#39;rmanf&#39; attribute, for extracting the new attributes information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Validating the information</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Creating the new name for the attribute</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanF&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+        <span class="c1"># Assigning a random number to the shapes based on the given attributes</span>
+        <span class="k">for</span> <span class="n">shape_node</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape_node</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;double&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">type_float</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape_node</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span>
+                    <span class="n">attr</span><span class="o">.</span><span class="n">min_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                    <span class="n">attr</span><span class="o">.</span><span class="n">max_value</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape_node</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+                    <span class="n">attr</span><span class="o">.</span><span class="n">min_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                    <span class="n">attr</span><span class="o">.</span><span class="n">max_value</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+
+        <span class="c1"># If a PrimVar node is given and the node exists, setup the values for</span>
+        <span class="c1"># that node</span>
+        <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="n">pm</span><span class="o">.</span><span class="n">objExists</span><span class="p">(</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_primvar_node</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="s2">&quot;float&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Deleting the UI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.primvar_c"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_c">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigning the rmanc Primvar attributes to the given shape nodes</span>
+
+<span class="sd">        :param shapes: (list of PyNode shapes) Shape nodes to be assigned.</span>
+<span class="sd">        :param attr: (QtGui.QFrame) The QtGui Frame corresponding to the</span>
+<span class="sd">        &#39;rmanc&#39; attribute, for extracting the new attributes information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Validating the information</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Creating a new attribute name</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanC&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+        <span class="c1"># Creating the color attribute shapes</span>
+        <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float3&#39;</span><span class="p">,</span>
+                          <span class="n">usedAsColor</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
+                          <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
+                          <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;b&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
+                          <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="c1"># If random color is selected!</span>
+            <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">random_color</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span>
+                              <span class="n">core</span><span class="o">.</span><span class="n">get_random_color_shade</span><span class="p">(</span>
+                                  <span class="n">min_s</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">min_s_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">max_s</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">max_s_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">min_v</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">min_v_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">max_v</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">max_v_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">hue</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)))</span>
+
+            <span class="c1"># If random color shade is selected!</span>
+            <span class="k">elif</span> <span class="n">attr</span><span class="o">.</span><span class="n">random_color_shades</span><span class="o">.</span><span class="n">isChecked</span><span class="p">():</span>
+                <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span>
+                              <span class="n">core</span><span class="o">.</span><span class="n">get_random_color_shade</span><span class="p">(</span>
+                                  <span class="n">min_s</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">min_s_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">max_s</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">max_s_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">min_v</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">min_v_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">max_v</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">max_v_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">hue</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">core_color</span><span class="p">))</span>
+
+            <span class="c1"># If random grayscale is selected!</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Saturation --&gt; 0</span>
+                <span class="c1"># Hue --&gt; doesn&#39;t matter</span>
+                <span class="c1"># Value --&gt; between given min and max</span>
+                <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span>
+                              <span class="n">core</span><span class="o">.</span><span class="n">get_random_color_shade</span><span class="p">(</span>
+                                  <span class="n">max_s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                  <span class="n">min_v</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">min_v_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                  <span class="n">max_v</span><span class="o">=</span><span class="n">attr</span><span class="o">.</span><span class="n">max_v_value</span><span class="o">.</span><span class="n">value</span><span class="p">()))</span>
+
+        <span class="c1"># If a PrimVar node is given and the node exists, setup the values for</span>
+        <span class="c1"># that node</span>
+        <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="n">pm</span><span class="o">.</span><span class="n">objExists</span><span class="p">(</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_primvar_node</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="s2">&quot;color&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Deleting the UI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.primvar_v"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_v">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigning the rmanv Primvar attributes to the given shape nodes.</span>
+
+<span class="sd">        :param shapes: (list of PyNode shapes) Shape nodes to be assigned.</span>
+<span class="sd">        :param attr: (QtGui.QFrame) The QtGui Frame corresponding to the</span>
+<span class="sd">        &#39;rmanv&#39; attribute, for extracting the new attributes information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Validating the information</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Creating the new name for the attribute</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanV&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+        <span class="c1"># Assigning a random vector to the shapes based on the given attributes</span>
+        <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="c1"># Create the attribute</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float3&#39;</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="c1"># Setting the attribute</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span>
+                          <span class="n">attribute_name</span><span class="p">,</span>
+                          <span class="n">core</span><span class="o">.</span><span class="n">get_random_vector</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">min_x_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_x_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+                                                 <span class="nb">str</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">currentText</span><span class="p">())))</span>
+
+        <span class="c1"># If a PrimVar node is given and the node exists, setup the values for</span>
+        <span class="c1"># that node</span>
+        <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="n">pm</span><span class="o">.</span><span class="n">objExists</span><span class="p">(</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_primvar_node</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Deleting the UI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.primvar_p"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_p">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigning the rmanp Primvar attributes to the given shape nodes.</span>
+
+<span class="sd">        :param shapes: (list of PyNode shapes) Shape nodes to be assigned.</span>
+<span class="sd">        :param attr: (QtGui.QFrame) The QtGui Frame corresponding to the</span>
+<span class="sd">        &#39;rmanp&#39; attribute, for extracting the new attributes information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Validating the information</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Creating the new name for the attribute</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmanP&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+        <span class="c1"># Assigning a random vector to the shapes based on the given attributes</span>
+        <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="c1"># Create the attribute</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float3&#39;</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="c1"># Setting the attribute</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span>
+                          <span class="n">attribute_name</span><span class="p">,</span>
+                          <span class="n">core</span><span class="o">.</span><span class="n">get_random_vector</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">min_x_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_x_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+                                                 <span class="nb">str</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">currentText</span><span class="p">())))</span>
+
+        <span class="c1"># If a PrimVar node is given and the node exists, setup the values for</span>
+        <span class="c1"># that node</span>
+        <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="n">pm</span><span class="o">.</span><span class="n">objExists</span><span class="p">(</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_primvar_node</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="s2">&quot;point&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Deleting the UI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.primvar_n"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.primvar_n">[docs]</a>    <span class="k">def</span> <span class="nf">primvar_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapes</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigning the rmann Primvar attributes to the given shape nodes.</span>
+
+<span class="sd">        :param shapes: (list of PyNode shapes) Shape nodes to be assigned.</span>
+<span class="sd">        :param attr: (QtGui.QFrame) The QtGui Frame corresponding to the</span>
+<span class="sd">        &#39;rmann&#39; attribute, for extracting the new attributes information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Validating the information</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Creating the new name for the attribute</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="s2">&quot;rmann&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+        <span class="c1"># Assigning a random vector to the shapes based on the given attributes</span>
+        <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+            <span class="c1"># Create the attribute</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float3&#39;</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span>
+                          <span class="n">attributeType</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">attribute_name</span><span class="p">)</span>
+            <span class="c1"># Setting the attribute</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">set_attr</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span>
+                          <span class="n">attribute_name</span><span class="p">,</span>
+                          <span class="n">core</span><span class="o">.</span><span class="n">get_random_vector</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">min_x_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_x_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+                                                 <span class="n">attr</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">isChecked</span><span class="p">(),</span>
+                                                 <span class="nb">str</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">currentText</span><span class="p">())))</span>
+
+        <span class="c1"># If a PrimVar node is given and the node exists, setup the values for</span>
+        <span class="c1"># that node</span>
+        <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="n">pm</span><span class="o">.</span><span class="n">objExists</span><span class="p">(</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_primvar_node</span><span class="p">(</span><span class="n">attr</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="n">attr</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+                                    <span class="s2">&quot;normal&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Deleting the UI</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.create_rman_c"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_rman_c">[docs]</a>    <span class="k">def</span> <span class="nf">create_rman_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and assigning signals to the corresponding widgets of the newly</span>
+<span class="sd">        created widget, and added to the list of rmanc attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Create a new instance of rmanc widget</span>
+        <span class="n">rmanc</span> <span class="o">=</span> <span class="n">PrimVarCWidget</span><span class="p">()</span>
+
+        <span class="c1"># Connecting the signals to the functions</span>
+        <span class="n">rmanc</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmanc</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanc</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmanc</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanc</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanc</span><span class="p">))</span>
+
+        <span class="c1"># Adding the newly created widgets to the rmanc layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmanCLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmanc</span><span class="p">)</span>
+
+        <span class="c1"># Finally store it to the list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmanc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.create_rman_f"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_rman_f">[docs]</a>    <span class="k">def</span> <span class="nf">create_rman_f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create amd assigning signals to the corresponding widgets of the newly</span>
+<span class="sd">        created widget, and added to the list of rmanf attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Create a new instance of rmanf widget</span>
+        <span class="n">rmanf</span> <span class="o">=</span> <span class="n">PrimVarFWidget</span><span class="p">()</span>
+
+        <span class="c1"># Connecting the signals to the functions</span>
+        <span class="n">rmanf</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmanf</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanf</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmanf</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanf</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanf</span><span class="p">))</span>
+
+        <span class="c1"># Adding the newly created widgets to the rmanf layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmanFLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmanf</span><span class="p">)</span>
+
+        <span class="c1"># Finally store it to the list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmanf</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.create_rman_s"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_rman_s">[docs]</a>    <span class="k">def</span> <span class="nf">create_rman_s</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and assigning signals to the corresponding widgets of the newly</span>
+<span class="sd">        created widget, and added to the list of rmanf attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Create a new instance of rmans widget</span>
+        <span class="n">rmans</span> <span class="o">=</span> <span class="n">PrimVarSWidget</span><span class="p">()</span>
+
+        <span class="c1"># Connecting the signals to the functions</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">gather_files</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">,</span> <span class="n">rmans</span><span class="p">))</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">clear_files</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_files</span><span class="p">,</span> <span class="n">rmans</span><span class="p">))</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmans</span><span class="p">))</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmans</span><span class="o">.</span><span class="n">file_node_name</span><span class="p">,</span>
+                                                  <span class="s2">&quot;file&quot;</span><span class="p">))</span>
+        <span class="n">rmans</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmans</span><span class="o">.</span><span class="n">file_node_name</span><span class="p">))</span>
+
+        <span class="c1"># Adding the newly created widgets to the rmans layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmanSLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmans</span><span class="p">)</span>
+
+        <span class="c1"># Finally store it to the list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmans</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.create_rman_v"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_rman_v">[docs]</a>    <span class="k">def</span> <span class="nf">create_rman_v</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and assigning signals to the corresponding widgets of the newly</span>
+<span class="sd">        created widget, and added to the list of rmanv attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Create a new instance of rmans widget</span>
+        <span class="n">rmanv</span> <span class="o">=</span> <span class="n">PrimVarVWidget</span><span class="p">()</span>
+
+        <span class="c1"># Connecting the signals to the functions</span>
+        <span class="n">rmanv</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmanv</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanv</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmanv</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanv</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanv</span><span class="p">))</span>
+
+        <span class="c1"># Adding the newly created widgets to the rmanv layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmanVLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmanv</span><span class="p">)</span>
+
+        <span class="c1"># Finally store it to the list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmanv</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.create_rman_p"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_rman_p">[docs]</a>    <span class="k">def</span> <span class="nf">create_rman_p</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and assigning signals to the corresponding widgets of the newly</span>
+<span class="sd">        created widget, and added to the list of rmanp attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Create a new instance of rmanp widget</span>
+        <span class="n">rmanp</span> <span class="o">=</span> <span class="n">PrimVarPWidget</span><span class="p">()</span>
+
+        <span class="c1"># Connecting the signals to the functions</span>
+        <span class="n">rmanp</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmanp</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanp</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmanp</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmanp</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmanp</span><span class="p">))</span>
+
+        <span class="c1"># Adding the newly created widgets to the rmanp layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmanPLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmanp</span><span class="p">)</span>
+
+        <span class="c1"># Finally store it to the list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmanp</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.create_rman_n"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.create_rman_n">[docs]</a>    <span class="k">def</span> <span class="nf">create_rman_n</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create and assigning signals to the corresponding widgets of the newly</span>
+<span class="sd">        created widget, and added to the list of rmann attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Create a new instance of rmann widget</span>
+        <span class="n">rmann</span> <span class="o">=</span> <span class="n">PrimVarNWidget</span><span class="p">()</span>
+
+        <span class="c1"># Connecting the signals to the functions</span>
+        <span class="n">rmann</span><span class="o">.</span><span class="n">get_node_name</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_selected_name</span><span class="p">,</span>
+                                                    <span class="n">rmann</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmann</span><span class="o">.</span><span class="n">create_node</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_node</span><span class="p">,</span>
+                                                  <span class="n">rmann</span><span class="o">.</span><span class="n">primvar_node_name</span><span class="p">))</span>
+        <span class="n">rmann</span><span class="o">.</span><span class="n">delete_this</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delete_widget</span><span class="p">,</span> <span class="n">rmann</span><span class="p">))</span>
+
+        <span class="c1"># Adding the newly created widgets to the rmann layout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rmanNLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rmann</span><span class="p">)</span>
+
+        <span class="c1"># Finally store it to the list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmann</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.get_files"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.get_files">[docs]</a>    <span class="k">def</span> <span class="nf">get_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rmans_widget</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It&#39;ll open a QtGui file browser and store the values in a list and</span>
+<span class="sd">        show them on the rmanS widgets</span>
+
+<span class="sd">        :param rmans_widget:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">string_list</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileNames</span><span class="p">()</span>
+        <span class="n">string_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">string_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="n">rmans_widget</span><span class="o">.</span><span class="n">new_strings</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">string_list</span> <span class="o">+</span>
+                                                   <span class="n">rmans_widget</span><span class="o">.</span><span class="n">new_strings</span><span class="p">)))</span>
+
+        <span class="c1"># Clear the exiting label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_files</span><span class="p">(</span><span class="n">rmans_widget</span><span class="p">)</span>
+
+        <span class="c1"># Create a label from each string and add them to the widget</span>
+        <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">rmans_widget</span><span class="o">.</span><span class="n">new_strings</span><span class="p">:</span>
+            <span class="n">new_label</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+            <span class="n">rmans_widget</span><span class="o">.</span><span class="n">existing_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_label</span><span class="p">)</span>
+            <span class="n">rmans_widget</span><span class="o">.</span><span class="n">stringListLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">new_label</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.get_selected_name"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.get_selected_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_selected_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_primvar_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the name of the selected node and set it as a text to the</span>
+<span class="sd">        given field.</span>
+
+<span class="sd">        :widget_primvar_name: the field that the name is going to be set to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">widget_primvar_name</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">sl</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;It seems no node is selected.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.delete_widget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.delete_widget">[docs]</a>    <span class="k">def</span> <span class="nf">delete_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete the given widgets and remove it from the list of existing</span>
+<span class="sd">        widgets.</span>
+
+<span class="sd">        :param widget: (QtGui.QWidget) the widget that needs to be</span>
+<span class="sd">        deleted/removed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">widget</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.clear"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete all the Primvar widgets from the Ui and remove them from the</span>
+<span class="sd">        list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="p">:</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">created_attributes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarApp.setup_stylesheet"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarApp.setup_stylesheet">[docs]</a>    <span class="k">def</span> <span class="nf">setup_stylesheet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assign the stylesheet to the UI</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">style_sheet</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">__file__</span><span class="p">)),</span>
+                <span class="s1">&#39;gui/styleSheets/styleSheet.css&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="n">style_sheet</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> \
+                            <span class="s2">&quot;</span><span class="se">\n\t\t\t</span><span class="s2">Can&#39;t find the CSS file for style &quot;</span> \
+                            <span class="s2">&quot;sheet.</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PrimVarCWidget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarCWidget">[docs]</a><span class="k">class</span> <span class="nc">PrimVarCWidget</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="p">,</span> <span class="n">cWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a Primvar C Widgets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarCWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_signals</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_picker</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
+        <span class="c1"># Initializing the color value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_core_color</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">core_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property of the color value that would be use for random shade of</span>
+<span class="sd">        color option.</span>
+
+<span class="sd">        :return: (int) Integer representing the Hue value of the selected color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_core_color</span>
+
+    <span class="nd">@core_color.setter</span>
+    <span class="k">def</span> <span class="nf">core_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setter for the core_color value</span>
+
+<span class="sd">        :param value: (int) Hue value for shade of color option</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># This is the value coming from QtGui in hex</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+        <span class="n">lv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="c1"># Converting the hex to RGB value (0-1)</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">255.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">lv</span> <span class="o">//</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span>
+                                        <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lv</span><span class="p">,</span> <span class="n">lv</span> <span class="o">//</span> <span class="mi">3</span><span class="p">))]</span>
+        <span class="c1"># Converting the RGB value to hsv. Since we just need the Hue,</span>
+        <span class="c1"># we just return the first element. Since the hue is between 0 and 1,</span>
+        <span class="c1">#  we multiply that by 360 to get the Hue in degree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_core_color</span> <span class="o">=</span> <span class="n">colorsys</span><span class="o">.</span><span class="n">rgb_to_hsv</span><span class="p">(</span><span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rgb</span><span class="p">[</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">360</span>
+
+<div class="viewcode-block" id="PrimVarCWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarCWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connecting signals of the Primvar C widget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_picker</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pick_color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_color</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_color_selected</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_color_shades</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">random_color_shades_selected</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_grayscale</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_grayscale_selected</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarCWidget.random_color_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarCWidget.random_color_selected">[docs]</a>    <span class="k">def</span> <span class="nf">random_color_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the random color selected.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">color_picker</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_s_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_s_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarCWidget.random_color_shades_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarCWidget.random_color_shades_selected">[docs]</a>    <span class="k">def</span> <span class="nf">random_color_shades_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the random shade of color</span>
+<span class="sd">        option.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">color_picker</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_v_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_v_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarCWidget.random_grayscale_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarCWidget.random_grayscale_selected">[docs]</a>    <span class="k">def</span> <span class="nf">random_grayscale_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the random grayscale</span>
+<span class="sd">        options.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">color_picker</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_s_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_s_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarCWidget.pick_color"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarCWidget.pick_color">[docs]</a>    <span class="k">def</span> <span class="nf">pick_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Open up the QtGui.QColorDialog for choosing the color for random</span>
+<span class="sd">        shade of color option, and storing in core_color variable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">new_color</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColorDialog</span><span class="o">.</span><span class="n">getColor</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_picker</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;background-color: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">new_color</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">core_color</span> <span class="o">=</span> <span class="n">new_color</span></div></div>
+
+
+<div class="viewcode-block" id="PrimVarFWidget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarFWidget">[docs]</a><span class="k">class</span> <span class="nc">PrimVarFWidget</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="p">,</span> <span class="n">fWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a Primvar F Widgets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarFWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_int</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_integer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_float</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">go_float</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PrimVarFWidget.go_integer"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarFWidget.go_integer">[docs]</a>    <span class="k">def</span> <span class="nf">go_integer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Change the stepping of the spin box, form 0.1 to 1 when choosing the</span>
+<span class="sd">        integer option.</span>
+
+<span class="sd">        :param enabled: (boolean) if the Integer radio is checked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_value</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_value</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarFWidget.go_float"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarFWidget.go_float">[docs]</a>    <span class="k">def</span> <span class="nf">go_float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Change the stepping of the spin box, form 1 to 0.1, when choosing the</span>
+<span class="sd">        float options.</span>
+
+<span class="sd">        :param enabled: (boolean) if the Float radio is checked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_value</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_value</span><span class="o">.</span><span class="n">setSingleStep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PrimVarSWidget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarSWidget">[docs]</a><span class="k">class</span> <span class="nc">PrimVarSWidget</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="p">,</span> <span class="n">sWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a Primvar S Widgets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarSWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_new_strings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_existing_labels</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_node_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_node_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">existing_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property of the existing_labels that would store the selected strings.</span>
+
+<span class="sd">        :return: (list) returns the value of the existing_labels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_existing_labels</span>
+
+    <span class="nd">@existing_labels.setter</span>
+    <span class="k">def</span> <span class="nf">existing_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setter of the existing_labels variable.</span>
+
+<span class="sd">        :param value: (list) list of new strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_existing_labels</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">new_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Property of the new_strings.</span>
+
+<span class="sd">        :return: (list) new_strings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_strings</span>
+
+    <span class="nd">@new_strings.setter</span>
+    <span class="k">def</span> <span class="nf">new_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setter of the new_strings variable.</span>
+
+<span class="sd">        :param value: (list) list of new strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_new_strings</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="PrimVarNWidget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarNWidget">[docs]</a><span class="k">class</span> <span class="nc">PrimVarNWidget</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="p">,</span> <span class="n">nWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a Primvar N Widgets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarNWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_signals</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PrimVarNWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarNWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connecting signals of the Primvar V widget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform_selected</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variation_selected</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarNWidget.variation_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarNWidget.variation_selected">[docs]</a>    <span class="k">def</span> <span class="nf">variation_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the Variant type.</span>
+
+<span class="sd">        :param enabled: (boolean) Status of the type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarNWidget.uniform_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarNWidget.uniform_selected">[docs]</a>    <span class="k">def</span> <span class="nf">uniform_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the Uniform type.</span>
+
+<span class="sd">        :param enabled: (boolean) Status of the type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PrimVarPWidget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarPWidget">[docs]</a><span class="k">class</span> <span class="nc">PrimVarPWidget</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="p">,</span> <span class="n">pWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a Primvar P Widgets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarPWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_signals</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PrimVarPWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarPWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connecting signals of the Primvar P widget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform_selected</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variation_selected</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarPWidget.variation_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarPWidget.variation_selected">[docs]</a>    <span class="k">def</span> <span class="nf">variation_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the Variant type.</span>
+
+<span class="sd">        :param enabled: (boolean) Status of the type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarPWidget.uniform_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarPWidget.uniform_selected">[docs]</a>    <span class="k">def</span> <span class="nf">uniform_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the Uniform type.</span>
+
+<span class="sd">        :param enabled: (boolean) Status of the type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PrimVarVWidget"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarVWidget">[docs]</a><span class="k">class</span> <span class="nc">PrimVarVWidget</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="p">,</span> <span class="n">vWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a Primvar V Widgets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimVarVWidget</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_signals</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Panel</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Raised</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mainLayout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignTop</span><span class="p">)</span>
+
+        <span class="c1"># Adding regular expression, making sure no illegal value is entered</span>
+        <span class="n">reg_ex</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegExp</span><span class="p">(</span><span class="s2">&quot;[a-z-A-Z_0-9]+&quot;</span><span class="p">)</span>
+        <span class="n">attr_validator</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegExpValidator</span><span class="p">(</span><span class="n">reg_ex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attr_name</span><span class="o">.</span><span class="n">setValidator</span><span class="p">(</span><span class="n">attr_validator</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PrimVarVWidget.setup_signals"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarVWidget.setup_signals">[docs]</a>    <span class="k">def</span> <span class="nf">setup_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connecting signals of the Primvar V widget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">variation</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uniform_selected</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variation_selected</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarVWidget.variation_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarVWidget.variation_selected">[docs]</a>    <span class="k">def</span> <span class="nf">variation_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the Variant type.</span>
+
+<span class="sd">        :param enabled: (boolean) Status of the type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PrimVarVWidget.uniform_selected"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.PrimVarVWidget.uniform_selected">[docs]</a>    <span class="k">def</span> <span class="nf">uniform_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disabling not needed widgets when choosing the Uniform type.</span>
+
+<span class="sd">        :param enabled: (boolean) Status of the type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_y_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_z_value</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="create_ui"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.create_ui">[docs]</a><span class="k">def</span> <span class="nf">create_ui</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an instance of the Primvar Manager GUI</span>
+
+<span class="sd">    :return: QWidget</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">primVarAppUi</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">primVarAppUi</span><span class="p">:</span>
+        <span class="n">primVarAppUi</span> <span class="o">=</span> <span class="n">PrimVarApp</span><span class="p">()</span>
+
+    <span class="n">primVarAppUi</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="close_ui"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.close_ui">[docs]</a><span class="k">def</span> <span class="nf">close_ui</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Close the existing Primvar Manager Ui</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">global</span> <span class="n">primVarAppUi</span>
+    <span class="k">if</span> <span class="n">primVarAppUi</span><span class="p">:</span>
+        <span class="n">primVarAppUi</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+        <span class="n">primVarAppUi</span> <span class="o">=</span> <span class="bp">None</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../doc_primVarApp.html#primVarApp.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    If the application is ran in terminal, show the documentation of the tool</span>
+
+<span class="sd">    :return: (str) help documents of the</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">__main__</span>
+    <span class="k">print</span> <span class="n">help</span><span class="p">(</span><span class="n">__main__</span><span class="p">)</span></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Ali Jafargholi.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
