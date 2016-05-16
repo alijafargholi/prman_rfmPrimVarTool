@@ -21,4 +21,4 @@ Then in a new instance of Maya, open the script editor and run the following in 
 
     from rfmPrimVarTool.src import primVarApp; reload(primVarApp); primVarApp.create_ui()
 
-.. note:: Since probably you don't want to run the script from the python tab everytime you wan to open the tool, you could drag and drop the code from the *python* tab to a *shell*
+.. note:: Since probably you don't want to run the script from the python tab everytime you need to open the tool, you could drag and drop the code from the *python* tab to a *shelf*
