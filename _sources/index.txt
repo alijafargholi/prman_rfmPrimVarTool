@@ -17,6 +17,7 @@ Contents:
    installation
    how_to
    API
+   releasenotes
 
 .. important::
    Beware that this tool is still under development therefore you may see
