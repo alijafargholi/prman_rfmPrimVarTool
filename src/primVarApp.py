@@ -8,8 +8,11 @@ from functools import partial
 import webbrowser
 
 # IMPORT LOCAL MODULES
-import PySide.QtCore as QtCore
-import PySide.QtGui as QtGui
+from gui.Qt import QtWidgets as QtGui
+from gui.Qt.QtGui import QRegExpValidator
+
+from gui.Qt import QtCore
+
 from utils import core
 from gui.mainWindow import Ui_primvarManager
 from gui.rmanCwidget import Ui_Form as cWidget
@@ -18,7 +21,7 @@ from gui.rmanNwidget import Ui_Form as nWidget
 from gui.rmanSwidget import Ui_Form as sWidget
 from gui.rmanPwidget import Ui_Form as pWidget
 from gui.rmanVwidget import Ui_Form as vWidget
-from gui.images import images_rc
+# from gui.images import images_rc
 
 try:
     import pymel.core as pm
@@ -758,7 +761,8 @@ class PrimVarCWidget(QtGui.QFrame, cWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+
+        attr_validator = QRegExpValidator(reg_ex, self.attr_name)
         self.attr_name.setValidator(attr_validator)
 
         # Initializing the color value
@@ -865,7 +869,7 @@ class PrimVarFWidget(QtGui.QFrame, fWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        attr_validator = QRegExpValidator(reg_ex, self.attr_name)
         self.attr_name.setValidator(attr_validator)
 
     def go_integer(self, enabled):
@@ -912,7 +916,7 @@ class PrimVarSWidget(QtGui.QFrame, sWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator = QtGui.QRegExpValidator(reg_ex, self.file_node_name)
+        attr_validator = QRegExpValidator(reg_ex, self.file_node_name)
         self.file_node_name.setValidator(attr_validator)
 
     @property
@@ -970,7 +974,7 @@ class PrimVarNWidget(QtGui.QFrame, nWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        attr_validator = QRegExpValidator(reg_ex, self.attr_name)
         self.attr_name.setValidator(attr_validator)
 
     def setup_signals(self):
@@ -1023,7 +1027,7 @@ class PrimVarPWidget(QtGui.QFrame, pWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        attr_validator = QRegExpValidator(reg_ex, self.attr_name)
         self.attr_name.setValidator(attr_validator)
 
     def setup_signals(self):
@@ -1076,7 +1080,7 @@ class PrimVarVWidget(QtGui.QFrame, vWidget):
 
         # Adding regular expression, making sure no illegal value is entered
         reg_ex = QtCore.QRegExp("[a-z-A-Z_0-9]+")
-        attr_validator = QtGui.QRegExpValidator(reg_ex, self.attr_name)
+        attr_validator = QRegExpValidator(reg_ex, self.attr_name)
         self.attr_name.setValidator(attr_validator)
 
     def setup_signals(self):

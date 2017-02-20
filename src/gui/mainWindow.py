@@ -6,7 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PySide import QtCore, QtGui
+from Qt import QtWidgets as QtGui
+from Qt import QtCore
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -190,9 +191,9 @@ class Ui_primvarManager(object):
         self.verticalLayout.addWidget(self.toolBox)
         self.assign = QtGui.QPushButton(self.create)
         self.assign.setMinimumSize(QtCore.QSize(0, 40))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/apply")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.assign.setIcon(icon)
+        # icon = QtGui.QIcon()
+        # icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/apply")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # self.assign.setIcon(icon)
         self.assign.setIconSize(QtCore.QSize(32, 32))
         self.assign.setObjectName(_fromUtf8("assign"))
         self.verticalLayout.addWidget(self.assign)
@@ -223,14 +224,14 @@ class Ui_primvarManager(object):
         self.action_clear = QtGui.QAction(primvarManager)
         self.action_clear.setObjectName(_fromUtf8("action_clear"))
         self.action_email_suggestion = QtGui.QAction(primvarManager)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/suggestions")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.action_email_suggestion.setIcon(icon1)
+        # icon1 = QtGui.QIcon()
+        # icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/suggestions")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # self.action_email_suggestion.setIcon(icon1)
         self.action_email_suggestion.setObjectName(_fromUtf8("action_email_suggestion"))
         self.action_email_error = QtGui.QAction(primvarManager)
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/error")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.action_email_error.setIcon(icon2)
+        # icon2 = QtGui.QIcon()
+        # icon2.addPixmap(QtGui.QPixmap(_fromUtf8(":/icons/error")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # self.action_email_error.setIcon(icon2)
         self.action_email_error.setObjectName(_fromUtf8("action_email_error"))
         self.actionExit = QtGui.QAction(primvarManager)
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
@@ -279,4 +280,4 @@ class Ui_primvarManager(object):
         self.action_tool_Documentation.setText(_translate("primvarManager", "Tool Documentation", None))
         self.action_close_ui.setText(_translate("primvarManager", "Close", None))
 
-from .images import images_rc
+# from .images import images_rc
