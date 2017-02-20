@@ -1,5 +1,0 @@
-primVarApp
-==========
-
-.. automodule:: primVarApp
-   :members:
