@@ -34,7 +34,7 @@ except ImportError as e:
 
 # GLOBAL VARIABLE
 primVarAppUi = None
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 
 class PrimVarApp(QtGui.QMainWindow, Ui_primvarManager):
