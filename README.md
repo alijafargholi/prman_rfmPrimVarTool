@@ -10,7 +10,7 @@ these attributes could be time consuming and discouraging for an artist.
 To make this process easier, I created a tool that speeds up the process.
 Primvar Manager for Maya.
 
-![ScreenShot](http://alijafargholi.com/wp-content/uploads/2016/05/primVar_manager.png)
+<img src="http://alijafargholi.com/wp-content/uploads/2016/05/primVar_manager.png" alt="Drawing" style="width: 350px;margin: auto;"/>
 
 Installation
 ============
