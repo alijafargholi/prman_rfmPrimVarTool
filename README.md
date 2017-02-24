@@ -42,14 +42,7 @@ In case you don't have access to any of the above location, you can install this
 1. [Download the Package](https://github.com/alijafargholi/prman_rfmPrimVarTool/archive/master.zip)
 2. Unzip the downloaded file and rename it to **rfmPrimVarTool**.
 3. Then move the entire *rfmPrimVarTool* folder to any location you want:
-4. Then in a new instance of Maya, open the script editor and run the following in a *Python* tab: **Make sure you set the PATH_TO_TOOL to where you copied the *rfmPrimVarTool* package**
-
-    > example:
-    > If I the path to *rfmPrimVarTool* is this:
-    > **/Users/Shared/Autodesk/maya/scripts/rfmPrimVarTool**
-
-    > Then I need to set the *PATH_TO_PACKAGE* as follow:
-    > **PATH_TO_TOOL = r"/Users/Shared/Autodesk/maya/scripts"**
+4. Then in a new instance of Maya, open the script editor and run the following in a *Python* tab:
 
     ```python
     import sys, os
@@ -69,8 +62,22 @@ In case you don't have access to any of the above location, you can install this
     primVarApp.create_ui()
     ```
 
+    **Make sure you set the PATH_TO_TOOL to where you copied the *rfmPrimVarTool* package**
+
+    > example:
+
+    > If I the path to *rfmPrimVarTool* is this:
+
+    > **/Users/Shared/Autodesk/maya/scripts/rfmPrimVarTool**
+
+    > Then I need to set the *PATH_TO_PACKAGE* as follow:
+
+    > **PATH_TO_TOOL = r"/Users/Shared/Autodesk/maya/scripts"**
+
+----
+
 > Note:
->> Probably you don't want to run the script from the python tab
+> Probably you don't want to run the script from the python tab
 every time you wan to open the tool, you could drag and drop the code from the *python* tab to a *shell*
 
 
