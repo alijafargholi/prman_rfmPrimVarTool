@@ -66,11 +66,11 @@ In case you don't have access to any of the above location, you can install this
 
     > example:
 
-    > If I the path to *rfmPrimVarTool* is this:
+    > If the path to *rfmPrimVarTool* is this:
 
     > **/Users/Shared/Autodesk/maya/scripts/rfmPrimVarTool**
 
-    > Then I need to set the *PATH_TO_PACKAGE* as follow:
+    > Then you need to set the *PATH_TO_PACKAGE* as follow:
 
     > **PATH_TO_TOOL = r"/Users/Shared/Autodesk/maya/scripts"**
 
