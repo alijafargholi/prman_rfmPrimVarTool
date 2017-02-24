@@ -62,7 +62,7 @@ In case you don't have access to any of the above location, you can install this
     primVarApp.create_ui()
     ```
 
-    **Make sure you set the PATH_TO_TOOL to where you copied the *rfmPrimVarTool* package**
+    **Make sure you set the PATH_TO_PACKAGE to where you copied the *rfmPrimVarTool* package**
 
     > example:
 
@@ -72,7 +72,7 @@ In case you don't have access to any of the above location, you can install this
 
     > Then you need to set the *PATH_TO_PACKAGE* as follow:
 
-    > **PATH_TO_TOOL = r"/Users/Shared/Autodesk/maya/scripts"**
+    > **PATH_TO_PACKAGE = r"/Users/Shared/Autodesk/maya/scripts"**
 
 ----
 
