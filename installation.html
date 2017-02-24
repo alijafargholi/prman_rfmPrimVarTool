@@ -84,7 +84,11 @@
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="what_is_primvar.html">What is Primvar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="what_is_primvar_manager.html">What is Primvar Manager Tool</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#default-installation">Default Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-installation">Custom Installation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="how_to.html">How To</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API.html">Primvar Manager API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releasenotes.html">Release Notes</a></li>
@@ -134,9 +138,17 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://github.com/alijafargholi/prman_rfmPrimVarTool/archive/master.zip">Click here to download</a>:</p>
-<p>Unzip the downloaded file and rename it to <strong>rfmPrimVarTool</strong>. Then move the entire <em>rfmPrimVarTool</em>  folder to the specified path:</p>
-<ul>
+<p>Please follow these instruction to install the package correctly.</p>
+<div class="section" id="default-installation">
+<h2>Default Installation<a class="headerlink" href="#default-installation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first"><a class="reference external" href="https://github.com/alijafargholi/prman_rfmPrimVarTool/archive/master.zip">Click here to download the Package</a>:</p>
+</li>
+<li><p class="first">Unzip the downloaded file and rename it to <strong>rfmPrimVarTool</strong>.</p>
+</li>
+<li><p class="first">Then move the entire <em>rfmPrimVarTool</em>  folder to the specified path:</p>
+<blockquote>
+<div><ul>
 <li><dl class="first docutils">
 <dt>Mac OS X</dt>
 <dd><ul class="first last simple">
@@ -162,13 +174,53 @@
 </dl>
 </li>
 </ul>
-<p>Then in a new instance of Maya, open the script editor and run the following in your <em>Python</em> tab:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="hll"><span class="kn">from</span> <span class="nn">rfmPrimVarTool.src</span> <span class="kn">import</span> <span class="n">primVarApp</span><span class="p">;</span> <span class="nb">reload</span><span class="p">(</span><span class="n">primVarApp</span><span class="p">);</span> <span class="n">primVarApp</span><span class="o">.</span><span class="n">create_ui</span><span class="p">()</span>
-</span></pre></div>
+</div></blockquote>
+</li>
+<li><p class="first">Then in a new instance of Maya, open the script editor and run the following
+in your <em>Python</em> tab:</p>
+</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rfmPrimVarTool.src</span> <span class="kn">import</span> <span class="n">primVarApp</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">primVarApp</span><span class="p">)</span>
+<span class="n">primVarApp</span><span class="o">.</span><span class="n">create_ui</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-installation">
+<h2>Custom Installation<a class="headerlink" href="#custom-installation" title="Permalink to this headline">¶</a></h2>
+<p>In case you don&#8217;t have access to any of the above location, you can install this tool in a custom location. Following steps describe how to do it:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://github.com/alijafargholi/prman_rfmPrimVarTool/archive/master.zip">Click here to download the Package</a>:</li>
+<li>Unzip the downloaded file and rename it to <strong>rfmPrimVarTool</strong>.</li>
+<li>Then move the entire <em>rfmPrimVarTool</em>  folder to any location you want:</li>
+<li>Then in a new instance of Maya, open the script editor and run the following in a <em>Python</em> tab:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+
+<span class="c1"># Update this path to where you copied the package</span>
+<span class="n">PATH_TO_PACKAGE</span> <span class="o">=</span> <span class="s2">r&quot;REPLACE/ME/WITH/PATH/TO/WHERE/YOU/COPIED/THE/PACKAGE&quot;</span>
+
+<span class="n">src_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">PATH_TO_PACKAGE</span><span class="p">)</span>
+
+<span class="c1"># Adding the location to system path</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">src_path</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+   <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
+   <span class="k">print</span> <span class="s2">&quot;added {} to the path</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">rfmPrimVarTool.src</span> <span class="kn">import</span> <span class="n">primVarApp</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">primVarApp</span><span class="p">)</span>
+<span class="n">primVarApp</span><span class="o">.</span><span class="n">create_ui</span><span class="p">()</span>
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Since probably you don&#8217;t want to run the script from the python tab everytime you need to open the tool, you could drag and drop the code from the <em>python</em> tab to a <em>shelf</em></p>
+<p>Make sure you set the PATH_TO_PACKAGE to where you copied the <em>rfmPrimVarTool</em> package</p>
+<p>example:</p>
+<p>If the path to <em>rfmPrimVarTool</em> is this:</p>
+<p><strong>/Users/Shared/Autodesk/maya/scripts/rfmPrimVarTool</strong></p>
+<p>Then you need to set the <em>PATH_TO_PACKAGE</em> as follow:</p>
+<p class="last"><strong>PATH_TO_PACKAGE = r&#8221;/Users/Shared/Autodesk/maya/scripts&#8221;</strong></p>
+</div>
 </div>
 </div>
 
