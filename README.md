@@ -15,7 +15,7 @@ Primvar Manager for Maya.
 Installation
 ============
 
-1. [Download the Package](https://github.com/alijafargholi/prman_camera_projection_setup/archive/master.zip)
+1. [Download the Package](https://github.com/alijafargholi/prman_rfmPrimVarTool/archive/master.zip)
 2. Unzip the downloaded file and rename it to **rfmPrimVarTool**.
 3. Then move the entire *rfmPrimVarTool*  folder to the specified path:
     * Mac OS X
