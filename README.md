@@ -1,6 +1,7 @@
 # PrMan Privmar Tool - v0.2.0
 Artist friendly tool for using RenderMan's Primitive Variables in Maya.
 
+[Documentation](http://alijafargholi.github.io/prman_rfmPrimVarTool/)
 
 When you want variation from your RenderMan shader, you could use Primvar.
 This RenderMan functionality gives you the ability to use only one shader for
